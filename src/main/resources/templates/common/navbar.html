@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!--Double navigation-->
+<header th:fragment="navbar">
+
+    <div sec:authorize="isAuthenticated()" id="slide-out" class="side-nav fixed side-nav-light bg-white">
+        <ul class="custom-scrollbar">
+            <li>
+                <div class="logo-wrapper waves-light">
+                    <a th:href="@{/home}"><img th:src="@{/img/svg/tarjetaza.svg}" class="img-fluid flex-center"></a>
+                </div>
+            </li>
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-mail-bulk"></i> Solicitudes<i
+                            class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul class="list-unstyled">
+                                <li><a th:href="@{/requests}" class="waves-effect">Listado</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <nav sec:authorize="isAuthenticated()" class="navbar navbar-expand-lg p-3 px-md-4 mb-3 navbar-light bg-white border-bottom shadow-sm">
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse light-green-text"><i class="fas fa-bars"></i></a>
+        </div>
+
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item">
+                <a class="nav-link light-green-text"><i class="fas fa-user"></i> <span sec:authentication="principal.name"></span></a>
+            </li>
+        </ul>
+        <a th:href="@{/logout}" class="btn-floating btn-sm btn-amber"><i class="fas fa-power-off"></i></a>
+    </nav>
+
+    <nav sec:authorize="!isAuthenticated()" class="navbar navbar-expand-lg p-3 px-md-4 mb-3 navbar-light bg-white border-bottom shadow-sm">
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item">
+                <a th:href="@{/signin}" class="nav-link light-green-text"><i class="fas fa-sign-in-alt"></i> Ingresá</a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+

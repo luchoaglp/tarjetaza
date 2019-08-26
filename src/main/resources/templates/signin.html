@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/head :: head"/>
+
+<body>
+
+<nav th:replace="common/navbar :: navbar"/>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div sec:authorize="!isAuthenticated()" class="offset-md-4 col-md-4">
+            <div class="card shadow-sm">
+                <h5 class="card-header light-green white-text text-center py-4 mb-3">
+                    <strong>Bienvenid@</strong>
+                </h5>
+                <div class="card-body px-lg-5 pt-0">
+                    <form th:action="@{/login}" class="text-center" method="post">
+                        <div class="md-form">
+                            <input type="text" class="form-control" name="username" id="username" minlength="6" maxlength="15" placeholder="Ingrese su Usuario" autofocus required>
+                            <label for="username">Usuario</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="password" class="form-control" name="password" id="password" minlength="6" maxlength="15" placeholder="Ingrese su Clave" required>
+                            <label for="password">Clave</label>
+                            <div class="invalid-feedback d-block" th:if="${param.error != null}">Usuario o Clave inválidos</div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-light-green waves-effect">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="common/footer :: footer"/>
+
+</div>
+
+<div th:replace="common/bottom :: body-bottom-scripts"/>
+
+</body>
+</html>

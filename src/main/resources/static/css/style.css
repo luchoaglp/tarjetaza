@@ -1,0 +1,23 @@
+.side-nav .logo-wrapper img {
+    height: 79px;
+}
+
+table.dataTable tr td, table.dataTable tr th {
+    padding: .9rem .3rem .7rem .3rem;
+}
+
+.dataTables_scrollHead {
+    max-height: 48px;
+}
+
+@media print, screen and (min-width: 64em) {
+    #logo {
+        width: 180px;
+    }
+}
+
+@media print, screen and (min-width: 40em) {
+    #logo {
+        width: 160px;
+    }
+}

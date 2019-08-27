@@ -28,13 +28,13 @@ public class User {
 
     @NotNull
     @NotBlank(message = "{username.notblank}")
-    @Size(min = 6, max = 15)
+    @Size(min = 5, max = 15)
     @Column(unique = true)
     private String username;
 
     @NotNull
     @NotBlank
-    @Size(min = 6, max = 100)
+    @Size(min = 2, max = 100)
     @Email
     private String email;
 

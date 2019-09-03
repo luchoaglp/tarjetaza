@@ -11,6 +11,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
+import static com.tarjetaza.domain.WebRequestState.SOLICITUD_INGRESADA;
+
 @Getter
 @Setter
 @Entity
@@ -118,9 +120,13 @@ public class WebRequest {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    @Enumerated(EnumType.ORDINAL)
+    private WebRequestState requestState;
+
     public WebRequest() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+        this.requestState = SOLICITUD_INGRESADA;
     }
 
     public String getProvinciaNombre() {

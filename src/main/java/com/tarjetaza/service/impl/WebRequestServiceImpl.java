@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.tarjetaza.domain.WebRequestState.SOLICITUD_ACEPTADA;
+import static com.tarjetaza.domain.WebRequestState.SOLICITUD_RECHAZADA;
+
 @Service
 public class WebRequestServiceImpl implements WebRequestService {
 
@@ -34,5 +37,22 @@ public class WebRequestServiceImpl implements WebRequestService {
     @Override
     public WebRequest save(WebRequest webRequest) {
         return webRequestRepository.save(webRequest);
+    }
+
+    @Override
+    public void changeStatus(Long id, String op) {
+
+        WebRequest request = findById(id);
+
+        switch (op) {
+            case "accept":
+                request.setRequestState(SOLICITUD_ACEPTADA);
+                break;
+            case "reject":
+                request.setRequestState(SOLICITUD_RECHAZADA);
+                break;
+        }
+
+        webRequestRepository.save(request);
     }
 }

@@ -1,14 +1,21 @@
 .side-nav .logo-wrapper img {
     height: 79px;
 }
-
+/*
 table.dataTable tr td, table.dataTable tr th {
     padding: .9rem .3rem .7rem .3rem;
 }
+*/
 
+table.dataTable tr td {
+    vertical-align: baseline;
+}
+
+/*
 .dataTables_scrollHead {
     max-height: 48px;
 }
+*/
 
 @media print, screen and (min-width: 64em) {
     #logo {

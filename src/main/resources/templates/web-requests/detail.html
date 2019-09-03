@@ -9,37 +9,68 @@
 
 <div class="container-fluid">
 
+    <nav class="navbar navbar-expand-md navbar-dark mdb-color mb-3">
+        <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb d-inline-flex pl-0 pt-0">
+                    <li class="breadcrumb-item"><a class="white-text" th:href="@{/requests/}">Solicitudes</a></li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
+
     <div class="row">
         <div class="col-md-12">
 
             <div class="card card-cascade narrower shadow-sm">
 
-                <div class="view view-cascade light-green text-white narrower py-2 mx-4 mb-3 pt-3 d-flex justify-content-between align-items-center">
-                    <h5 href="#" class="white-text mx-3">Solicitud detalle</h5>
+                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-3">Solicitud Detalle</a>
+                    <div>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_INGRESADA}" th:href="@{${'/requests/edit/' + request.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_INGRESADA}" th:href="@{${'/requests/change-status/' + request.id + '/accept' }}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                            <i class="fas fa-check"></i>
+                        </a>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_INGRESADA}" th:href="@{${'/requests/change-status/' + request.id + '/reject' }}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="px-4">
 
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item">ID: <span th:text="${request.id}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Nombre: <span th:text="${request.nombre}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Apellido: <span th:text="${request.apellido}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Calle: <span th:text="${request.calle}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Puerta: <span th:text="${request.puerta}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Piso: <span th:text="${request.piso}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Dpto.: <span th:text="${request.dpto}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Código Postal: <span th:text="${request.cp}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Provincia: <span th:text="${request.getProvinciaNombre()}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Localidad: <span th:text="${request.localidad}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Teléfono: <span th:text="${request.telefono}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Código de documento: <span th:text="${request.getCodigoDocumentoNombre()}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Cuit / Cuil: <span th:text="${request.getCuitCuilFormatted()}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Fecha de nacimiento: <span th:text="${request.getFecNacFormatted()}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Estado Civil: <span th:text="${request.getEstadoCivilNombre()}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Sexo: <span th:text="${request.sexo}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Email: <span th:text="${request.email}" class="font-weight-bold"></span></li>
-                        <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item">ID: <span th:text="${request.id}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Nombre: <span th:text="${request.nombre}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Apellido: <span th:text="${request.apellido}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Calle: <span th:text="${request.calle}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Puerta: <span th:text="${request.puerta}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Piso: <span th:text="${request.piso}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Dpto.: <span th:text="${request.dpto}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Código Postal: <span th:text="${request.cp}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Provincia: <span th:text="${request.getProvinciaNombre()}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Localidad: <span th:text="${request.localidad}" class="font-weight-bold"></span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item">Teléfono: <span th:text="${request.telefono}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Código de documento: <span th:text="${request.getCodigoDocumentoNombre()}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Cuit / Cuil: <span th:text="${request.getCuitCuilFormatted()}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Fecha de nacimiento: <span th:text="${request.getFecNacFormatted()}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Estado Civil: <span th:text="${request.getEstadoCivilNombre()}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Sexo: <span th:text="${request.sexo}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Email: <span th:text="${request.email}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Estado: <span th:text="${request.requestState.displayValue}" class="font-weight-bold"></span></li>
+                            </ul>
+                        </div>
+                    </div>
 
                 </div>
             </div>

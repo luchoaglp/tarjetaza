@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/css/**", "/js/**", "/img/**", "/font/**", "/",
-            "/", "/home", "/signin", "/api/request",
-            //"/requests/**" //DEV
+            "/", "/home", "/signin", "/api/requests",
+            "/requests/**" //DEV
     };
 
     private final CustomUserDetailsService customUserDetailsService;

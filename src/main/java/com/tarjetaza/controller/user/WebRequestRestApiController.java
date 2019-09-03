@@ -25,7 +25,6 @@ public class WebRequestRestApiController {
 
     @PostMapping
     public ResponseEntity<Map<String, String>> create(@Valid WebRequest webRequest,
-
                                                       BindingResult result) {
 
         Map<String, String> response = new HashMap<>();

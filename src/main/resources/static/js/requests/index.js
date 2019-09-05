@@ -30,7 +30,7 @@ $(function() {
             const row = $(this);
 
             const id = parseInt(row.find("td:nth-child(1)").html());
-            const $checkbox = row.children('td:nth-child(8)').children("div.form-check").children("input[type='checkbox']");
+            const $checkbox = row.children('td:nth-child(9)').children("div.form-check").children("input[type='checkbox']");
 
             if($checkbox.length > 0) {
 
@@ -52,14 +52,14 @@ $(function() {
 
             $.ajax({
               type : "POST",
-              url : "/requests/process",
+              url : "/api/requests/process",
               data : {
                 requests: requests
               }
 
             }).done(function(data) {
 
-
+                location.reload();
 
             }).fail(function(jqXHR, textStatus) {
                 console.log(jqXHR, textStatus);

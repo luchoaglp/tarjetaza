@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.tarjetaza.domain.WebRequestState.SOLICITUD_ACEPTADA;
 import static com.tarjetaza.domain.WebRequestState.SOLICITUD_RECHAZADA;
+import static com.tarjetaza.domain.WebRequestState.TARJETA_PEDIDA;
 
 @Service
 public class WebRequestServiceImpl implements WebRequestService {
@@ -46,17 +47,46 @@ public class WebRequestServiceImpl implements WebRequestService {
         WebRequest request = findById(id);
 
         switch (op) {
-            case "accept":
+            case "r_accept":
                 request.setRequestState(SOLICITUD_ACEPTADA);
                 break;
-            case "reject":
+            case "r_reject":
                 request.setRequestState(SOLICITUD_RECHAZADA);
+                break;
+            case "c_requested":
+                request.setRequestState(TARJETA_PEDIDA);
                 break;
         }
 
         request.setLastModifiedDate(LocalDateTime.now());
 
         webRequestRepository.save(request);
+    }
+
+    @Override
+    public void changeStatus(Long[] ids, String op) {
+
+        for(Long id : ids) {
+
+            WebRequest request = findById(id);
+
+            switch (op) {
+                case "r_accept":
+                    request.setRequestState(SOLICITUD_ACEPTADA);
+                    break;
+                case "r_reject":
+                    request.setRequestState(SOLICITUD_RECHAZADA);
+                    break;
+                case "c_requested":
+                    request.setRequestState(TARJETA_PEDIDA);
+                    break;
+            }
+
+            request.setLastModifiedDate(LocalDateTime.now());
+
+            webRequestRepository.save(request);
+
+        }
     }
 
     @Override

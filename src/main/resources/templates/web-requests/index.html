@@ -22,18 +22,18 @@
                 </div>
                 <div class="card-body">
                     <div class="table-wrapper">
-                        <table id="table" class="table table-sm table-striped table-bordered table-hover">
+                        <table id="table" class="table table-sm table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <thead class="light-green text-white">
                                 <tr>
-                                    <th width="3%">ID</th>
+                                    <th width="4%">ID</th>
                                     <th>Nombres</th>
                                     <th>Apellido</th>
                                     <th>Cuit / Cuil</th>
                                     <th>Alta</th>
                                     <th>Actualizado</th>
                                     <th>Estado</th>
-                                    <th width="3%"></th>
-                                    <th width="3%"></th>
+                                    <th width="4%"></th>
+                                    <th width="4%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,25 +46,20 @@
                                     <td th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
                                     <td th:text="${request.requestState.displayValue}"></td>
                                     <td><a th:href="@{${'/requests/detail/' + request.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
-                                    <td>
-                                        <div th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_INGRESADA}" class="form-check">
-                                            <input type="checkbox" class="form-check-input" th:id="${'c' + request.id}">
-                                            <label class="form-check-label" th:for="${'c' + request.id}"></label>
-                                        </div>
-                                    </td>
+                                    <td><div th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_ACEPTADA}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + request.id}"><label class="form-check-label" th:for="${'c' + request.id}"></label></div></td>
                                 </tr>
                             </tbody>
                             <tfoot class="light-green text-white">
                                 <tr>
-                                    <th>ID</th>
+                                    <th width="4%">ID</th>
                                     <th>Nombres</th>
                                     <th>Apellido</th>
                                     <th>Cuit / Cuil</th>
                                     <th>Alta</th>
                                     <th>Actualizado</th>
                                     <th>Estado</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th width="4%"></th>
+                                    <th width="4%"></th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -15,6 +15,7 @@ public interface WebRequestService {
     WebRequest save(WebRequest request);
 
     void changeStatus(Long id, String op);
+    void changeStatus(Long[] ids, String op);
 
     void edit(WebRequest request);
 }

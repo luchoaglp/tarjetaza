@@ -5,6 +5,7 @@ import com.tarjetaza.repository.WebRequestRepository;
 import com.tarjetaza.service.WebRequestService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.tarjetaza.domain.WebRequestState.SOLICITUD_ACEPTADA;
@@ -35,8 +36,8 @@ public class WebRequestServiceImpl implements WebRequestService {
     }
 
     @Override
-    public WebRequest save(WebRequest webRequest) {
-        return webRequestRepository.save(webRequest);
+    public WebRequest save(WebRequest request) {
+        return webRequestRepository.save(request);
     }
 
     @Override
@@ -53,6 +54,34 @@ public class WebRequestServiceImpl implements WebRequestService {
                 break;
         }
 
+        request.setLastModifiedDate(LocalDateTime.now());
+
         webRequestRepository.save(request);
+    }
+
+    @Override
+    public void edit(WebRequest request) {
+
+        WebRequest entity = findById(request.getId());
+
+        entity.setNombre(request.getNombre());
+        entity.setApellido(request.getApellido());
+        entity.setCalle(request.getCalle());
+        entity.setPuerta(request.getPuerta());
+        entity.setPiso(request.getPiso());
+        entity.setDpto(request.getDpto());
+        entity.setCp(request.getCp());
+        entity.setProvincia(request.getProvincia());
+        entity.setLocalidad(request.getLocalidad());
+        entity.setTelefono(request.getTelefono());
+        entity.setCodigoDocumento(request.getCodigoDocumento());
+        entity.setCuitCuil(request.getCuitCuil());
+        entity.setFecNac(request.getFecNac());
+        entity.setEstadoCivil(request.getEstadoCivil());
+        entity.setSexo(request.getSexo());
+        entity.setEmail(request.getEmail());
+        entity.setLastModifiedDate(LocalDateTime.now());
+
+        webRequestRepository.save(entity);
     }
 }

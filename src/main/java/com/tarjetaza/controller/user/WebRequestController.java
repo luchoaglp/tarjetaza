@@ -1,18 +1,20 @@
 package com.tarjetaza.controller.user;
 
+import com.tarjetaza.domain.WebRequest;
 import com.tarjetaza.service.WebRequestService;
 import com.tarjetaza.utils.MailFormat;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -53,6 +55,23 @@ public class WebRequestController {
         model.addAttribute("request", webRequestService.findById(id));
 
         return "web-requests/edit";
+    }
+
+    @PostMapping("/edit")
+    public String update(@Valid @ModelAttribute("request") WebRequest request,
+                         BindingResult result,
+                         Model model) {
+
+        if(result.hasErrors()) {
+
+            model.addAttribute("request", request);
+
+            return "web-requests/edit";
+        }
+
+        webRequestService.edit(request);
+
+        return "redirect:/requests/detail/" + request.getId();
     }
 
     @GetMapping("/detail/{id}")
@@ -107,6 +126,7 @@ public class WebRequestController {
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
             helper.setTo("lucho_aglp@hotmail.com");
+            helper.setBcc("lucho_aglp@hotmail.com");
             helper.setSubject("Solicitudes de Altas");
             helper.setText("Solicitudes");
 
@@ -118,18 +138,6 @@ public class WebRequestController {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
-        /*
-        SimpleMailMessage msg = new SimpleMailMessage();
-
-        msg.setTo("lucho_aglp@hotmail.com");
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-        */
 
         return "web-requests/index";
     }

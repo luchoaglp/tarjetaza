@@ -26,47 +26,47 @@ public class WebRequest {
 
     @NotNull
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(max = 30)
     private String nombre;
 
     @NotNull
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(max = 30)
     private String apellido;
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(max = 40)
     private String calle;
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 20)
+    @Size(max = 5)
     private String puerta;
 
-    @Size(max = 20)
+    @Size(max = 2)
     private String piso;
 
-    @Size(max = 20)
+    @Size(max = 4)
     private String dpto;
 
     @NotNull
     @NotBlank
-    @Size(min = 8, max = 8)
-    @Pattern(regexp = "^[A-Z][0-9]{4}[A-Z]{3}?")
+    @Size(min = 8, max = 8, message = "{cp.size}")
+    @Pattern(regexp = "^[A-Z][0-9]{4}[A-Z]{3}?", message = "{cp.regexp}")
     private String cp;
 
     @NotNull
     @NotBlank
-    @Size(min = 2, max = 2)
+    @Size(max = 2)
     private String provincia;
 
     @NotNull
     @NotBlank
-    @Size(min = 2, max = 100)
+    @Size(max = 25)
     private String localidad;
 
-    @Size(max = 75)
+    @Size(max = 15)
     private String telefono;
 
     @JsonProperty("codigo_documento")
@@ -78,8 +78,8 @@ public class WebRequest {
     @JsonProperty("cuit_cuil")
     @NotNull
     @NotBlank
-    @Size(min = 11, max = 11)
-    @Column(name = "cuit_cuil", nullable = false, length = 11)
+    @Size(min = 11, max = 11, message = "{cuitCuil.size}")
+    @Column(name = "cuit_cuil", length = 11)
     private String cuitCuil;
 
     @JsonProperty("fec_nac")
@@ -103,7 +103,7 @@ public class WebRequest {
 
     @NotNull
     @NotBlank
-    @Size(min = 6, max = 100)
+    @Size(max = 40)
     //@Email
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
     private String email;
@@ -242,4 +242,29 @@ public class WebRequest {
         }
     }
 
+    @Override
+    public String toString() {
+        return "WebRequest{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", calle='" + calle + '\'' +
+                ", puerta='" + puerta + '\'' +
+                ", piso='" + piso + '\'' +
+                ", dpto='" + dpto + '\'' +
+                ", cp='" + cp + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", codigoDocumento='" + codigoDocumento + '\'' +
+                ", cuitCuil='" + cuitCuil + '\'' +
+                ", fecNac='" + fecNac + '\'' +
+                ", estadoCivil='" + estadoCivil + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", email='" + email + '\'' +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", requestState=" + requestState +
+                '}';
+    }
 }

@@ -12,7 +12,9 @@ public interface WebRequestService {
 
     List<WebRequest> findAllByOrderByIdAsc();
 
-    WebRequest save(WebRequest webRequest);
+    WebRequest save(WebRequest request);
 
     void changeStatus(Long id, String op);
+
+    void edit(WebRequest request);
 }

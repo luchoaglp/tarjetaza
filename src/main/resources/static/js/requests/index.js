@@ -50,6 +50,9 @@ $(function() {
 
         if(requests.length > 0) {
 
+            $('#envelope').addClass('d-none');
+            $('#spinner').removeClass('d-none');
+
             $.ajax({
               type : "POST",
               url : "/api/requests/process",

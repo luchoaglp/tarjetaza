@@ -9,6 +9,24 @@
 
 <div class="container-fluid">
 
+    <!--
+    <div id="mdb-preloader" class="flex-center">
+        <div class="preloader-wrapper active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
     <div class="row mb-3">
         <div class="col-md-12">
             <div class="card card-cascade narrower shadow-sm">
@@ -16,7 +34,8 @@
                     <a href="#" class="white-text mx-3">Solicitudes</a>
                     <div>
                         <button type="button" id="submit" class="btn btn-outline-white btn-rounded btn-sm px-2">
-                            <i class="far fa-envelope mt-0"></i>
+                            <i id="envelope" class="far fa-envelope mt-0"></i>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                         </button>
                     </div>
                 </div>

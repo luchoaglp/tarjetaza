@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
 import java.io.File;
@@ -91,7 +92,7 @@ public class WebRequestRestApiController {
             Files.write(file, records, StandardCharsets.UTF_8);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         try {
@@ -100,8 +101,11 @@ public class WebRequestRestApiController {
 
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
+            msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
+
             helper.setTo("info@tarjetaza.com");
             helper.setBcc("lucho_aglp@hotmail.com");
+            //helper.setBcc("it@virtuallinesa.com");
             helper.setSubject("Solicitudes de Altas");
             helper.setText("Solicitudes");
 
@@ -113,14 +117,13 @@ public class WebRequestRestApiController {
             webRequestService.changeStatus(requests, "c_requested");
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         webRequestService.changeStatus(requests, "c_requested");
 
         return new ResponseEntity<>(HttpStatus.OK);
 
-        //return "redirect:/";
     }
 
 }

@@ -1,50 +1,50 @@
 package com.tarjetaza.service.impl;
 
-import com.tarjetaza.domain.WebRequest;
-import com.tarjetaza.repository.WebRequestRepository;
-import com.tarjetaza.service.WebRequestService;
+import com.tarjetaza.domain.Request;
+import com.tarjetaza.repository.RequestRepository;
+import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.tarjetaza.domain.WebRequestState.SOLICITUD_ACEPTADA;
-import static com.tarjetaza.domain.WebRequestState.SOLICITUD_RECHAZADA;
-import static com.tarjetaza.domain.WebRequestState.TARJETA_PEDIDA;
+import static com.tarjetaza.domain.RequestState.SOLICITUD_ACEPTADA;
+import static com.tarjetaza.domain.RequestState.SOLICITUD_RECHAZADA;
+import static com.tarjetaza.domain.RequestState.TARJETA_PEDIDA;
 
 @Service
-public class WebRequestServiceImpl implements WebRequestService {
+public class RequestServiceImpl implements RequestService {
 
-    private final WebRequestRepository webRequestRepository;
+    private final RequestRepository requestRepository;
 
-    public WebRequestServiceImpl(WebRequestRepository webRequestRepository) {
-        this.webRequestRepository = webRequestRepository;
+    public RequestServiceImpl(RequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
     }
 
     @Override
-    public List<WebRequest> findAllByOrderByIdAsc() {
-        return webRequestRepository.findAllByOrderByIdAsc();
+    public List<Request> findAllByOrderByIdAsc() {
+        return requestRepository.findAllByOrderByIdAsc();
     }
 
     @Override
-    public WebRequest findById(Long id) {
-        return webRequestRepository.findById(id).orElse(null);
+    public Request findById(Long id) {
+        return requestRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<WebRequest> findAll() {
-        return webRequestRepository.findAll();
+    public List<Request> findAll() {
+        return requestRepository.findAll();
     }
 
     @Override
-    public WebRequest save(WebRequest request) {
-        return webRequestRepository.save(request);
+    public Request save(Request request) {
+        return requestRepository.save(request);
     }
 
     @Override
     public void changeStatus(Long id, String op) {
 
-        WebRequest request = findById(id);
+        Request request = findById(id);
 
         switch (op) {
             case "r_accept":
@@ -60,7 +60,7 @@ public class WebRequestServiceImpl implements WebRequestService {
 
         request.setLastModifiedDate(LocalDateTime.now());
 
-        webRequestRepository.save(request);
+        requestRepository.save(request);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class WebRequestServiceImpl implements WebRequestService {
 
         for(Long id : ids) {
 
-            WebRequest request = findById(id);
+            Request request = findById(id);
 
             switch (op) {
                 case "r_accept":
@@ -84,15 +84,14 @@ public class WebRequestServiceImpl implements WebRequestService {
 
             request.setLastModifiedDate(LocalDateTime.now());
 
-            webRequestRepository.save(request);
-
+            requestRepository.save(request);
         }
     }
 
     @Override
-    public void edit(WebRequest request) {
+    public void edit(Request request) {
 
-        WebRequest entity = findById(request.getId());
+        Request entity = findById(request.getId());
 
         entity.setNombre(request.getNombre());
         entity.setApellido(request.getApellido());
@@ -112,6 +111,6 @@ public class WebRequestServiceImpl implements WebRequestService {
         entity.setEmail(request.getEmail());
         entity.setLastModifiedDate(LocalDateTime.now());
 
-        webRequestRepository.save(entity);
+        requestRepository.save(entity);
     }
 }

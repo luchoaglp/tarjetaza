@@ -65,7 +65,7 @@
                                     <td th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
                                     <td th:text="${request.requestState.displayValue}"></td>
                                     <td><a th:href="@{${'/requests/detail/' + request.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
-                                    <td><div th:if="${request.requestState == T(com.tarjetaza.domain.WebRequestState).SOLICITUD_ACEPTADA}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + request.id}"><label class="form-check-label" th:for="${'c' + request.id}"></label></div></td>
+                                    <td><div th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + request.id}"><label class="form-check-label" th:for="${'c' + request.id}"></label></div></td>
                                 </tr>
                             </tbody>
                             <tfoot class="light-green text-white">

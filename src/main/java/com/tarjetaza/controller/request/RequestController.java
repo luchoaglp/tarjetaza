@@ -1,7 +1,7 @@
-package com.tarjetaza.controller.user;
+package com.tarjetaza.controller.request;
 
-import com.tarjetaza.domain.WebRequest;
-import com.tarjetaza.service.WebRequestService;
+import com.tarjetaza.domain.Request;
+import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,34 +11,34 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/requests")
-public class WebRequestController {
+public class RequestController {
 
-    private final WebRequestService webRequestService;
+    private final RequestService requestService;
     //private final JavaMailSender javaMailSender;
 
-    public WebRequestController(WebRequestService webRequestService/*, JavaMailSender javaMailSender*/) {
-        this.webRequestService = webRequestService;
+    public RequestController(RequestService requestService/*, JavaMailSender javaMailSender*/) {
+        this.requestService = requestService;
         //this.javaMailSender = javaMailSender;
     }
 
     @GetMapping
     public String requests(Model model) {
 
-        model.addAttribute("requests", webRequestService.findAllByOrderByIdAsc());
+        model.addAttribute("requests", requestService.findAllByOrderByIdAsc());
 
-        return "web-requests/index";
+        return "requests/index";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("request", webRequestService.findById(id));
+        model.addAttribute("request", requestService.findById(id));
 
-        return "web-requests/edit";
+        return "requests/edit";
     }
 
     @PostMapping("/edit")
-    public String update(@Valid @ModelAttribute("request") WebRequest request,
+    public String update(@Valid @ModelAttribute("request") Request request,
                          BindingResult result,
                          Model model) {
 
@@ -46,10 +46,10 @@ public class WebRequestController {
 
             model.addAttribute("request", request);
 
-            return "web-requests/edit";
+            return "requests/edit";
         }
 
-        webRequestService.edit(request);
+        requestService.edit(request);
 
         return "redirect:/requests/detail/" + request.getId();
     }
@@ -57,16 +57,16 @@ public class WebRequestController {
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("request", webRequestService.findById(id));
+        model.addAttribute("request", requestService.findById(id));
 
-        return "web-requests/detail";
+        return "requests/detail";
     }
 
     @GetMapping("/change-status/{id}/{state}")
     public String changeStatus(@PathVariable("id") Long id,
                                @PathVariable("state") String state) {
 
-        webRequestService.changeStatus(id, state);
+        requestService.changeStatus(id, state);
 
         return "redirect:/requests";
     }
@@ -82,7 +82,7 @@ public class WebRequestController {
 
         for(Long id : requests) {
 
-            WebRequest request = webRequestService.findById(id);
+            Request request = requestService.findById(id);
 
             records.add(MailFormat.formattedBody(request));
         }
@@ -114,7 +114,7 @@ public class WebRequestController {
 
                 javaMailSender.send(msg);
 
-                webRequestService.changeStatus(requests, "c_requested");
+                requestService.changeStatus(requests, "c_requested");
 
                 return "redirect:/requests";
 
@@ -126,7 +126,7 @@ public class WebRequestController {
             e.printStackTrace();
         }
 
-        webRequestService.changeStatus(requests, "c_requested");
+        requestService.changeStatus(requests, "c_requested");
 
         //return "redirect:/";
     }

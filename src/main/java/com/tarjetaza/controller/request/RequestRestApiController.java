@@ -1,7 +1,7 @@
-package com.tarjetaza.controller.user;
+package com.tarjetaza.controller.request;
 
-import com.tarjetaza.domain.WebRequest;
-import com.tarjetaza.service.WebRequestService;
+import com.tarjetaza.domain.Request;
+import com.tarjetaza.service.RequestService;
 import com.tarjetaza.utils.MailFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -34,21 +34,21 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/requests")
-public class WebRequestRestApiController {
+public class RequestRestApiController {
 
     @Value("${file.path}")
     private String path;
 
-    private final WebRequestService webRequestService;
+    private final RequestService requestService;
     private final JavaMailSender javaMailSender;
 
-    public WebRequestRestApiController(WebRequestService webRequestService, JavaMailSender javaMailSender) {
-        this.webRequestService = webRequestService;
+    public RequestRestApiController(RequestService requestService, JavaMailSender javaMailSender) {
+        this.requestService = requestService;
         this.javaMailSender = javaMailSender;
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> create(@Valid WebRequest webRequest,
+    public ResponseEntity<Map<String, String>> create(@Valid Request request,
                                                       BindingResult result) {
 
         Map<String, String> response = new HashMap<>();
@@ -57,7 +57,7 @@ public class WebRequestRestApiController {
             response.put("response", "Se ha producido un error en el envío de tus datos. Intentá nuevamente.");
         } else {
 
-            webRequestService.save(webRequest);
+            requestService.save(request);
 
             response.put("response", "Tus datos han sido guardados con éxito, en breve nos estaremos comunicando con vos.");
         }
@@ -75,7 +75,7 @@ public class WebRequestRestApiController {
 
         for(Long id : requests) {
 
-            WebRequest request = webRequestService.findById(id);
+            Request request = requestService.findById(id);
 
             records.add(MailFormat.formattedBody(request));
         }
@@ -114,13 +114,13 @@ public class WebRequestRestApiController {
 
             javaMailSender.send(msg);
 
-            webRequestService.changeStatus(requests, "c_requested");
+            requestService.changeStatus(requests, "c_requested");
 
         } catch (MessagingException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        webRequestService.changeStatus(requests, "c_requested");
+        requestService.changeStatus(requests, "c_requested");
 
         return new ResponseEntity<>(HttpStatus.OK);
 

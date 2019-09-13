@@ -1,6 +1,6 @@
 package com.tarjetaza.utils;
 
-import com.tarjetaza.domain.WebRequest;
+import com.tarjetaza.domain.Request;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
@@ -28,7 +28,7 @@ public class MailFormat {
         return sb.toString();
     }
 
-    public static String formattedBody(WebRequest request) {
+    public static String formattedBody(Request request) {
 
         StringBuilder sb = new StringBuilder();
 

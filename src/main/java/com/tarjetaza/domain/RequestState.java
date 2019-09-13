@@ -1,6 +1,6 @@
 package com.tarjetaza.domain;
 
-public enum WebRequestState {
+public enum RequestState {
 
     SOLICITUD_INGRESADA("Solicitud Ingresada"),
     SOLICITUD_ACEPTADA("Solicitud Aceptada"),
@@ -12,7 +12,7 @@ public enum WebRequestState {
 
     private final String displayValue;
 
-    private WebRequestState(String displayValue) {
+    private RequestState(String displayValue) {
         this.displayValue = displayValue;
     }
 

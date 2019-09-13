@@ -11,13 +11,13 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
-import static com.tarjetaza.domain.WebRequestState.SOLICITUD_INGRESADA;
+import static com.tarjetaza.domain.RequestState.SOLICITUD_INGRESADA;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "web_requests")
-public class WebRequest {
+public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,9 +121,9 @@ public class WebRequest {
     private LocalDateTime lastModifiedDate;
 
     @Enumerated(EnumType.ORDINAL)
-    private WebRequestState requestState;
+    private RequestState requestState;
 
-    public WebRequest() {
+    public Request() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
         this.requestState = SOLICITUD_INGRESADA;
@@ -244,7 +244,7 @@ public class WebRequest {
 
     @Override
     public String toString() {
-        return "WebRequest{" +
+        return "Request{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

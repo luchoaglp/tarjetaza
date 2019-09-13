@@ -1,0 +1,21 @@
+package com.tarjetaza.service;
+
+import com.tarjetaza.domain.Request;
+
+import java.util.List;
+
+public interface RequestService {
+
+    List<Request> findAll();
+
+    Request findById(Long id);
+
+    List<Request> findAllByOrderByIdAsc();
+
+    Request save(Request request);
+
+    void changeStatus(Long id, String op);
+    void changeStatus(Long[] ids, String op);
+
+    void edit(Request request);
+}

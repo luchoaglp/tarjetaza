@@ -18,4 +18,6 @@ public interface RequestService {
     void changeStatus(Long[] ids, String op);
 
     void edit(Request request);
+
+    boolean existsByCuitCuil(String cuitCuil);
 }

@@ -16,7 +16,7 @@ import static com.tarjetaza.domain.RequestState.SOLICITUD_INGRESADA;
 @Getter
 @Setter
 @Entity
-@Table(name = "web_requests")
+@Table(name = "requests")
 public class Request {
 
     @Id

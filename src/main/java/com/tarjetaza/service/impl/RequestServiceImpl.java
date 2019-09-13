@@ -113,4 +113,9 @@ public class RequestServiceImpl implements RequestService {
 
         requestRepository.save(entity);
     }
+
+    @Override
+    public boolean existsByCuitCuil(String cuitCuil) {
+        return requestRepository.existsByCuitCuil(cuitCuil);
+    }
 }

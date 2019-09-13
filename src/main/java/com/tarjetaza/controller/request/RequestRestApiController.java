@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +55,13 @@ public class RequestRestApiController {
         Map<String, String> response = new HashMap<>();
 
         if(result.hasErrors()) {
+
             response.put("response", "Se ha producido un error en el envío de tus datos. Intentá nuevamente.");
+
+        } else if(requestService.existsByCuitCuil(request.getCuitCuil())) {
+
+            response.put("response", "Tus datos ya están siendo verificados. Ante cualquier duda comunicate con nosotros.");
+
         } else {
 
             requestService.save(request);

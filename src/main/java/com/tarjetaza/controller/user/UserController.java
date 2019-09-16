@@ -3,6 +3,7 @@ package com.tarjetaza.controller.user;
 import com.tarjetaza.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -25,6 +26,14 @@ public class UserController {
     public String signin() {
 
         return "signin";
+    }
+
+    @GetMapping("/users")
+    public String users(Model model) {
+
+        model.addAttribute("users", userService.findAllByOrderByIdAsc());
+
+        return "users/index";
     }
 
     /*

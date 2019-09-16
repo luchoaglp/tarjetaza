@@ -5,6 +5,8 @@ import com.tarjetaza.repository.UserRepository;
 import com.tarjetaza.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,6 +23,11 @@ public class UserServiceImpl implements UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAllByOrderByIdAsc() {
+        return userRepository.findAllByOrderByIdAsc();
     }
 
 

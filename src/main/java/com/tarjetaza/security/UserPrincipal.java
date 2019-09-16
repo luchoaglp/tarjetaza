@@ -1,8 +1,9 @@
 package com.tarjetaza.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tarjetaza.domain.User;
+import com.tarjetaza.domain.security.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -46,7 +47,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(User user) {
 
-        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        //List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new UserPrincipal(
                 user.getId(),
@@ -54,9 +55,14 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                getAuthorities(user)
         );
+    }
 
+    private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
+        String[] userRoles = user.getRoles().stream().map(role -> role.getName()).toArray(String[]::new);
+        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
+        return authorities;
     }
 
     public Long getId() {

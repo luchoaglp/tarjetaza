@@ -1,6 +1,6 @@
 package com.tarjetaza.service;
 
-import com.tarjetaza.domain.User;
+import com.tarjetaza.domain.security.User;
 
 public interface UserService {
 

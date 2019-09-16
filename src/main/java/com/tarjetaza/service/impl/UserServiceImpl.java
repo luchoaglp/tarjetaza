@@ -1,6 +1,6 @@
 package com.tarjetaza.service.impl;
 
-import com.tarjetaza.domain.User;
+import com.tarjetaza.domain.security.User;
 import com.tarjetaza.repository.UserRepository;
 import com.tarjetaza.service.UserService;
 import org.springframework.stereotype.Service;

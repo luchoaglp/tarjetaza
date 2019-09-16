@@ -1,4 +1,4 @@
-package com.tarjetaza.utils;
+package com.tarjetaza.utility;
 
 import com.tarjetaza.domain.Request;
 import org.apache.commons.lang3.StringUtils;

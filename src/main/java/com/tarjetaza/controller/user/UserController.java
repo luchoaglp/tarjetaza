@@ -1,17 +1,9 @@
 package com.tarjetaza.controller.user;
 
-import com.tarjetaza.domain.User;
 import com.tarjetaza.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class UserController {

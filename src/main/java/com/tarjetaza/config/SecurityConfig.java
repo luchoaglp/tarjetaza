@@ -22,6 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //"/requests/**", "/api/requests/**" //DEV
     };
 
+    private static final String[] ADMIN_MATCHERS = {
+            "/requests/**", "/api/requests/**",
+            "/users/**"
+    };
+
+    private static final String[] USER_MATCHERS = {
+            "/requests/**", "/api/requests/**",
+    };
+
     private final CustomUserDetailsService customUserDetailsService;
 
     public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
@@ -42,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS)
                 .permitAll()
+                .antMatchers(ADMIN_MATCHERS).access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(USER_MATCHERS).access("hasRole('ROLE_USER')")
                 .anyRequest()
                 .authenticated();
 

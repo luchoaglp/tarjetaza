@@ -1,6 +1,6 @@
 package com.tarjetaza.repository;
 
-import com.tarjetaza.domain.User;
+import com.tarjetaza.domain.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

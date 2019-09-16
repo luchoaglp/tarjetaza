@@ -1,7 +1,7 @@
 package com.tarjetaza.security;
 
 
-import com.tarjetaza.domain.User;
+import com.tarjetaza.domain.security.User;
 import com.tarjetaza.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

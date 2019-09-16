@@ -1,4 +1,4 @@
-package com.tarjetaza.domain;
+package com.tarjetaza.domain.security;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class User {
     @NotNull
     @NotBlank(message = "{username.notblank}")
     @Size(min = 5, max = 15)
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NotNull
@@ -68,6 +69,12 @@ public class User {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name="user_role",
+            joinColumns = { @JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name ="role_id")})
+    private List<Role> roles;
+
     public User() { }
 
     public User(String username, String password) {
@@ -75,6 +82,11 @@ public class User {
         this.password = password;
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
     }
 
     @Override

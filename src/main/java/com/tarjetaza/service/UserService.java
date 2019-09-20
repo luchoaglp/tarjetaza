@@ -11,4 +11,6 @@ public interface UserService {
     User save(User user);
 
     List<User> findAllByOrderByIdAsc();
+
+    User findById(Long id);
 }

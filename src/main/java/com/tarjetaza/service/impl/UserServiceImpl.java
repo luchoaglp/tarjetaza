@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByOrderByIdAsc();
     }
 
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
 
     /*
     public List<Client> getAll() {

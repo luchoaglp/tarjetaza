@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/head :: head"/>
+
+<body>
+
+<header th:replace="common/navbar :: navbar"/>
+
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-md navbar-dark mdb-color mb-3">
+        <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb d-inline-flex pl-0 pt-0">
+                    <li class="breadcrumb-item"><a class="white-text" th:href="@{/users/}">Usuarios</a></li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+
+            <div class="card card-cascade narrower shadow-sm">
+
+                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-3">Usuario Detalle</a>
+                    <div>
+                        <a th:href="@{${'/users/edit/' + user.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{${'/users/delete/' + user.id }}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">ID: <span th:text="${user.id}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Usuario: <span th:text="${user.username}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Nombre: <span th:text="${user.firstName}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Apellido: <span th:text="${user.lastName}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Email: <span th:text="${user.email}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Fecha de la alta: <span th:text="${#temporals.format(user.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(user.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Roles: <span th:text="${user.rolesToString()}" class="font-weight-bold"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common/bottom :: body-bottom-scripts"/>
+<script>
+$(function() {
+    $(".button-collapse").sideNav();
+});
+</script>
+
+</body>
+</html>

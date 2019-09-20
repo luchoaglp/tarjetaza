@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -58,13 +59,13 @@ public class User {
     private String lastName;
 
     @JsonProperty("created_date")
-    @NotNull
+    //@NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @CreatedDate
     private LocalDateTime createdDate;
 
     @JsonProperty("last_modified_date")
-    @NotNull
+    //@NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
@@ -75,7 +76,10 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name ="role_id")})
     private List<Role> roles;
 
-    public User() { }
+    public User() {
+        this.createdDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now();
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -87,6 +91,20 @@ public class User {
     public void addRole(Role role) {
         roles.add(role);
         role.getUsers().add(this);
+    }
+
+    public void addRoles(List<Role> roles) {
+        for(Role role : roles) {
+            roles.add(role);
+            role.getUsers().add(this);
+        }
+    }
+
+    public String rolesToString() {
+        return roles
+                .stream()
+                .map(role -> role.getName().split("_")[1])
+                .collect(Collectors.joining( ", " ));
     }
 
     @Override

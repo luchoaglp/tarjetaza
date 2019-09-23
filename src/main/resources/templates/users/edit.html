@@ -14,7 +14,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb d-inline-flex pl-0 pt-0">
                     <li class="breadcrumb-item"><a class="white-text" th:href="@{/users/}">Usuarios</a></li>
-                    <li class="breadcrumb-item active">Alta</li>
+                    <li class="breadcrumb-item active">Edición</li>
                 </ol>
             </nav>
         </div>
@@ -26,11 +26,12 @@
             <div class="card card-cascade narrower shadow-sm">
 
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-3">Alta de Usuario</a>
+                    <a href="#" class="white-text mx-3">Editar Usuario</a>
                 </div>
 
                 <div class="card-body">
-                    <form th:action="@{/users/save}" th:object="${user}" method="post">
+                    <form th:action="@{/users/update}" th:object="${user}" method="post">
+                        <input type="hidden" th:field="*{id}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="md-form">
@@ -43,6 +44,7 @@
                                     <input type="text" class="form-control" minlength="2" maxlength="75" th:errorclass="is-invalid" th:field="*{lastName}" id="lastName" placeholder="Apellido" required>
                                     <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
                                 </div>
+                                <!--
                                 <div class="md-form">
                                     <label for="username">Usuario <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" minlength="5" maxlength="15" th:errorclass="is-invalid" th:field="*{username}" id="username" placeholder="Usuario" required>
@@ -53,12 +55,12 @@
                                     <input type="password" class="form-control" minlength="5" maxlength="15" th:errorclass="is-invalid" th:field="*{password}" id="password" placeholder="Clave" required>
                                     <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                                 </div>
+                                -->
                                 <div class="md-form">
                                     <label for="email">Email <small class="text-danger">*</small></label>
                                     <input type="email" class="form-control" minlength="2" maxlength="100" th:errorclass="is-invalid" th:field="*{email}" id="email" placeholder="Email" required>
                                     <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                                 </div>
-
                                 <div th:each="role : ${roles}" class="form-check form-check-inline">
                                     <input type="checkbox" th:name="roles" th:value="${role.id}" class="form-check-input" th:id="${'r' + role.id}" th:checked="${#lists.contains(rolesIds, role.id)}">
                                     <label class="form-check-label" th:for="${'r' + role.id}" th:text="${role.getRoleName()}"></label>
@@ -74,7 +76,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-lg btn-outline-light-green waves-effect">Agregar</button>
+                                <button type="submit" class="btn btn-lg btn-outline-amber waves-effect">Editar</button>
                             </div>
                         </div>
                     </form>

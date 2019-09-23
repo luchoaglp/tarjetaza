@@ -13,4 +13,6 @@ public interface UserService {
     List<User> findAllByOrderByIdAsc();
 
     User findById(Long id);
+
+    User update(User user);
 }

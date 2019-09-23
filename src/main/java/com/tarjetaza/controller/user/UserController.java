@@ -1,6 +1,5 @@
 package com.tarjetaza.controller.user;
 
-import com.tarjetaza.domain.security.Role;
 import com.tarjetaza.domain.security.User;
 import com.tarjetaza.service.RoleService;
 import com.tarjetaza.service.UserService;
@@ -12,11 +11,12 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -53,10 +53,8 @@ public class UserController {
     @GetMapping("/users/add")
     public String add(Model model) {
 
-        //User user = new User();
-
         model.addAttribute("user", new User());
-        model.addAttribute("rolesIds", Arrays.asList(new Integer[0]));
+        model.addAttribute("rolesIds", new ArrayList<>());
         model.addAttribute("roles", roleService.findAll());
 
         return "users/add";
@@ -64,24 +62,24 @@ public class UserController {
 
     @PostMapping("/users/save")
     public String save(@Valid User user,
-                       Integer[] roles,
+                       @RequestParam List<Integer> roles,
                        Model model,
                        BindingResult result) {
 
-        if(roles == null) {
-            roles = new Integer[0];
+        if(roles.isEmpty()) {
+            roles = new ArrayList<>();
         }
 
         if(result.hasErrors()) {
 
-            model.addAttribute("rolesIds", Arrays.asList(roles));
+            model.addAttribute("rolesIds", roles);
             model.addAttribute("roles", roleService.findAll());
 
             return "users/add";
 
         } else if(userService.existsByUsername(user.getUsername())) {
 
-            model.addAttribute("rolesIds", Arrays.asList(roles));
+            model.addAttribute("rolesIds", roles);
             model.addAttribute("roles", roleService.findAll());
 
             result.addError(new FieldError(
@@ -100,14 +98,46 @@ public class UserController {
         return "redirect:/users/detail/" + user.getId();
     }
 
+    @GetMapping("/users/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+
+        User user = userService.findById(id);
+
+        List<Integer> rolesIds = user.getRoles()
+                .stream().map(role -> role.getId())
+                .collect(Collectors.toList());
+
+        model.addAttribute("user", user);
+        model.addAttribute("rolesIds", rolesIds);
+        model.addAttribute("roles", roleService.findAll());
+
+        return "users/edit";
+    }
+
     @PostMapping("/users/update")
-    public String update(@Valid User user,
+    public String update(User user,
+                         @RequestParam List<Integer> roles,
+                         Model model,
                          BindingResult result) {
+
+        if(roles.isEmpty()) {
+            roles = new ArrayList<>();
+        }
 
         if(result.hasErrors()) {
 
-            return "users/update";
+            for (FieldError error : result.getFieldErrors()) {
+                if (!error.getField().equals("password") && !error.getField().equals("username")) {
 
+                    model.addAttribute("rolesIds", roles);
+                    model.addAttribute("roles", roleService.findAll());
+
+                    return "users/edit/" + user.getId();
+                }
+            }
+        }
+
+            /*
         } else if(userService.existsByUsername(user.getUsername())) {
 
             result.addError(new FieldError(
@@ -116,16 +146,17 @@ public class UserController {
                     "El usuario ya se encuentra registrado"
             ));
 
-            return "users/update";
+            return "users/edit";
         }
+        */
 
-        userService.save(user);
+        userService.update(user);
 
         return "redirect:/users/detail/" + user.getId();
     }
 
     @GetMapping("/users/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("user", userService.findById(id));
 

@@ -35,6 +35,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public User update(User user) {
+
+        User entity = findById(user.getId());
+
+        entity.setFirstName(user.getFirstName().trim());
+        entity.setLastName(user.getLastName().trim());
+        entity.setEmail(user.getEmail().trim());
+
+        return save(entity);
+    }
+
 
     /*
     public List<Client> getAll() {

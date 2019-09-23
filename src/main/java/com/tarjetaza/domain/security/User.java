@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,7 +75,7 @@ public class User {
     @JoinTable(name="user_role",
             joinColumns = { @JoinColumn(name = "user_id")},
             inverseJoinColumns = { @JoinColumn(name ="role_id")})
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     public User() {
         this.createdDate = LocalDateTime.now();
@@ -88,17 +89,20 @@ public class User {
         this.lastModifiedDate = LocalDateTime.now();
     }
 
+
     public void addRole(Role role) {
         roles.add(role);
         role.getUsers().add(this);
     }
 
+    /*
     public void addRoles(List<Role> roles) {
         for(Role role : roles) {
             roles.add(role);
             role.getUsers().add(this);
         }
     }
+    */
 
     public String rolesToString() {
         return roles

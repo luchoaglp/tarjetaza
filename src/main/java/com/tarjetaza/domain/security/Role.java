@@ -31,4 +31,8 @@ public class Role {
         this.name = name;
     }
 
+    public String getRoleName() {
+        return name.split("_")[1];
+    }
+
 }

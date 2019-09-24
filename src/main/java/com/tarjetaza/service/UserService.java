@@ -15,4 +15,6 @@ public interface UserService {
     User findById(Long id);
 
     User update(User user);
+
+    User deactivate(Long id);
 }

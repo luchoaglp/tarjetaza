@@ -77,6 +77,9 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name ="role_id")})
     private List<Role> roles = new ArrayList<>();
 
+    @NotNull
+    private Boolean active;
+
     public User() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();

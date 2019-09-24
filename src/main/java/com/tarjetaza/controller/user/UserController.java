@@ -137,22 +137,17 @@ public class UserController {
             }
         }
 
-            /*
-        } else if(userService.existsByUsername(user.getUsername())) {
-
-            result.addError(new FieldError(
-                    "user",
-                    "username",
-                    "El usuario ya se encuentra registrado"
-            ));
-
-            return "users/edit";
-        }
-        */
-
         userService.update(user);
 
         return "redirect:/users/detail/" + user.getId();
+    }
+
+    @GetMapping("/users/delete/{id}")
+    public String deactivate(@PathVariable("id") Long id) {
+
+        userService.deactivate(id);
+
+        return "redirect:/users/detail/" + id;
     }
 
     @GetMapping("/users/detail/{id}")

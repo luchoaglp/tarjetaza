@@ -5,8 +5,8 @@ import com.tarjetaza.repository.UserRepository;
 import com.tarjetaza.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,6 +43,18 @@ public class UserServiceImpl implements UserService {
         entity.setFirstName(user.getFirstName().trim());
         entity.setLastName(user.getLastName().trim());
         entity.setEmail(user.getEmail().trim());
+        entity.setLastModifiedDate(LocalDateTime.now());
+
+        return save(entity);
+    }
+
+    @Override
+    public User deactivate(Long id) {
+
+        User entity = findById(id);
+
+        entity.setActive(false);
+        entity.setLastModifiedDate(LocalDateTime.now());
 
         return save(entity);
     }

@@ -14,11 +14,9 @@ import javax.validation.Valid;
 public class RequestController {
 
     private final RequestService requestService;
-    //private final JavaMailSender javaMailSender;
 
-    public RequestController(RequestService requestService/*, JavaMailSender javaMailSender*/) {
+    public RequestController(RequestService requestService) {
         this.requestService = requestService;
-        //this.javaMailSender = javaMailSender;
     }
 
     @GetMapping

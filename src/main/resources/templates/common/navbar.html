@@ -44,7 +44,7 @@
 
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
             <li class="nav-item">
-                <a class="nav-link light-green-text"><i class="fas fa-user"></i> <span sec:authentication="principal.name"></span></a>
+                <a th:href="@{/security/user}" class="nav-link light-green-text"><i class="fas fa-user"></i> <span sec:authentication="principal.name"></span></a>
             </li>
         </ul>
         <a th:href="@{/logout}" class="btn-floating btn-sm btn-amber"><i class="fas fa-power-off"></i></a>

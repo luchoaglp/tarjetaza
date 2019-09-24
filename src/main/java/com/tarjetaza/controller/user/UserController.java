@@ -1,8 +1,10 @@
 package com.tarjetaza.controller.user;
 
 import com.tarjetaza.domain.security.User;
+import com.tarjetaza.security.UserPrincipal;
 import com.tarjetaza.service.RoleService;
 import com.tarjetaza.service.UserService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +43,62 @@ public class UserController {
     public String signin() {
 
         return "signin";
+    }
+
+    @GetMapping("/security/user")
+    public String user(Model model, Principal principal) {
+
+        if(principal == null) {
+            return "redirect:/signin";
+        }
+
+        UserPrincipal user = (UserPrincipal) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+
+        model.addAttribute("user", userService.findByUsernameAndActiveTrue(user.getUsername()));
+
+        return "users/security/user";
+    }
+
+    @GetMapping("/security/change-password")
+    public String changePassword(Principal principal) {
+
+        if(principal == null) {
+            return "redirect:/signin";
+        }
+
+        return "users/security/change-password";
+    }
+
+    @PostMapping("/security/change-password")
+    public String changePassword(@RequestParam String password,
+                                 @RequestParam String passwordRepeat,
+                                 Model model,
+                                 Principal principal) {
+
+        if(principal == null) {
+            return "redirect:/signin";
+        }
+
+        if(!password.trim().equals(passwordRepeat.trim())) {
+
+            model.addAttribute("password", password);
+            model.addAttribute("error", "Las claves no coinciden.");
+
+            return "users/security/change-password";
+        }
+
+        UserPrincipal userPrincipal = (UserPrincipal) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+
+        User user = userService.findByUsernameAndActiveTrue(userPrincipal.getUsername());
+
+        if(user != null) {
+
+            user.setPassword(passwordEncoder.encode(password.trim()));
+
+            userService.updatePassword(user);
+        }
+
+        return "redirect:/logout";
     }
 
     @GetMapping("/users")

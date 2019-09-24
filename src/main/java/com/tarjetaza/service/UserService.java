@@ -17,4 +17,8 @@ public interface UserService {
     User update(User user);
 
     User deactivate(Long id);
+
+    User findByUsernameAndActiveTrue(String username);
+
+    User updatePassword(User user);
 }

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="common/head-tables :: head"/>
+<head>
+    <div th:replace="common/head :: head"/>
+    <title>Tarjetaza | Usuarios</title>
+    <link th:href="@{/css/addons/datatables.min.css}" rel="stylesheet">
+</head>
 
 <body>
 

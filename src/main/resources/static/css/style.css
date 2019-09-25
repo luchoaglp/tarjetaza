@@ -14,6 +14,32 @@
     vertical-align: baseline;
 }
 
+/*
+.mdb-main-label{
+    z-index: 0 !important;
+}
+
+div.mdb-select {
+    margin-bottom: 0;
+}
+
+label.mdb-main-label {
+    margin-top: -20px;
+}
+
+.select-dropdown {
+    margin-bottom: 0;
+}
+*/
+
+.select-wrapper input.select-dropdown {
+    margin: 0;
+}
+
+.select-wrapper+label.active {
+    top: 0;
+}
+
 @media print, screen and (min-width: 64em) {
     #logo {
         width: 180px;

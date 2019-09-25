@@ -32,7 +32,6 @@
                                 <li class="list-group-item">Nombre: <span th:text="${user.firstName}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Apellido: <span th:text="${user.lastName}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Email: <span th:text="${user.email}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Activo: <span th:text="${user.active ? 'Sí' : 'No'}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Fecha de la alta: <span th:text="${#temporals.format(user.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(user.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Roles: <span th:text="${user.rolesToString()}" class="font-weight-bold"></span></li>

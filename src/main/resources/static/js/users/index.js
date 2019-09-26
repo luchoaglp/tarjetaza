@@ -1,10 +1,13 @@
 $(function() {
 
     $(".button-collapse").sideNav();
+    $('[data-toggle="popover-hover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'left'
+    });
 
     const $table = $('#table');
-    //const $tableBody = $table.find('tbody');
-    //const $tableBodyTr = $tableBody.find('tr');
 
     $table.DataTable({
         order: [[ 0, "desc" ]],

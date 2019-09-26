@@ -31,10 +31,10 @@
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
                     <a href="#" class="white-text mx-3">Usuario Detalle</a>
                     <div>
-                        <a th:href="@{${'/users/edit/' + user.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <a th:href="@{${'/users/edit/' + user.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Editar Usuario">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a th:href="@{${'/users/delete/' + user.id }}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                        <a th:href="@{${'/users/delete/' + user.id }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Desactivar Usuario">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
@@ -68,6 +68,11 @@
 <script>
 $(function() {
     $(".button-collapse").sideNav();
+    $('[data-toggle="popover-hover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'left'
+    });
 });
 </script>
 

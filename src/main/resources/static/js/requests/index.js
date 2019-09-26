@@ -1,6 +1,11 @@
 $(function() {
 
     $(".button-collapse").sideNav();
+    $('[data-toggle="popover-hover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'left'
+    });
 
     let requests = [];
 

@@ -20,4 +20,6 @@ public interface RequestService {
     void edit(Request request);
 
     boolean existsByCuitCuil(String cuitCuil);
+
+    Request findByCuitCuil(String cuitCuil);
 }

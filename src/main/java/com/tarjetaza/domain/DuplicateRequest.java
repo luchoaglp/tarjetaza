@@ -8,20 +8,21 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-
-import static com.tarjetaza.domain.RequestState.SOLICITUD_INGRESADA;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "requests")
-public class Request {
+@Table(name = "duplicate_requests")
+public class DuplicateRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "request_id")
+    @Column(name = "duplicate_request_id")
     private Long id;
 
     //@NotNull
@@ -120,13 +121,14 @@ public class Request {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
-    @Enumerated(EnumType.ORDINAL)
-    private RequestState requestState;
+    @OneToOne
+    @NotNull
+    @JoinColumn(name = "request_id")
+    private Request request;
 
-    public Request() {
+    public DuplicateRequest() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
-        this.requestState = SOLICITUD_INGRESADA;
     }
 
     public String getProvinciaNombre() {
@@ -244,7 +246,7 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "DuplicateRequest{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
@@ -264,7 +266,7 @@ public class Request {
                 ", email='" + email + '\'' +
                 ", createdDate=" + createdDate +
                 ", lastModifiedDate=" + lastModifiedDate +
-                ", requestState=" + requestState +
+                ", request=" + request +
                 '}';
     }
 }

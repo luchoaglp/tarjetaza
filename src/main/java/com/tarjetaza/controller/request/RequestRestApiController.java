@@ -1,6 +1,8 @@
 package com.tarjetaza.controller.request;
 
+import com.tarjetaza.domain.DuplicateRequest;
 import com.tarjetaza.domain.Request;
+import com.tarjetaza.service.DuplicateRequestService;
 import com.tarjetaza.service.RequestService;
 import com.tarjetaza.utility.MailFormat;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,10 +42,12 @@ public class RequestRestApiController {
     private String path;
 
     private final RequestService requestService;
+    private final DuplicateRequestService duplicateRequestService;
     private final JavaMailSender javaMailSender;
 
-    public RequestRestApiController(RequestService requestService, JavaMailSender javaMailSender) {
+    public RequestRestApiController(RequestService requestService, DuplicateRequestService duplicateRequestService, JavaMailSender javaMailSender) {
         this.requestService = requestService;
+        this.duplicateRequestService = duplicateRequestService;
         this.javaMailSender = javaMailSender;
     }
 
@@ -58,6 +62,12 @@ public class RequestRestApiController {
             response.put("response", "Se ha producido un error en el envío de tus datos. Intentá nuevamente.");
 
         } else if(requestService.existsByCuitCuil(request.getCuitCuil())) {
+
+            DuplicateRequest duplicateRequest = requestToDuplicateRequest(request);
+
+            duplicateRequest.setRequest(requestService.findByCuitCuil(request.getCuitCuil()));
+
+            duplicateRequestService.save(duplicateRequest);
 
             response.put("response", "Tus datos ya están siendo verificados. Ante cualquier duda comunicate con nosotros.");
 
@@ -85,11 +95,18 @@ public class RequestRestApiController {
 
             records.add(MailFormat.formattedBody(request));
         }
+
         //records.add("620146200100000000000000000000000T0127408691COLUNGA                       LUCIO IRAUL                   37                                      015251 A   B1902AXI03LA PLATA                 00000000000000010002740869100001000000000000000000020274086913000000000000000000000000000000000000        197905151M411D4100N  2740869136NO01SI010101 luciocolunga@cardlinesrl.com                                ");
 
         String fileName = "NU" +
                 LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")) +
                 ".txt";
+
+        /*
+        records
+                .stream()
+                .forEach(record -> System.out.println(record + "; " + record.length()));
+        */
 
         try {
 
@@ -109,9 +126,9 @@ public class RequestRestApiController {
 
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
-            helper.setTo("info@tarjetaza.com");
-            helper.setBcc("lucho_aglp@hotmail.com");
-            //helper.setBcc("it@virtuallinesa.com");
+            helper.setTo("soporte@cfsa.com.ar");
+            helper.setBcc("info@tarjetaza.com");
+            //helper.setBcc("lucho_aglp@hotmail.com");
             helper.setSubject("Solicitudes de Altas");
             helper.setText("Solicitudes");
 
@@ -129,7 +146,29 @@ public class RequestRestApiController {
         requestService.changeStatus(requests, "c_requested");
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    private DuplicateRequest requestToDuplicateRequest(Request request) {
+
+        DuplicateRequest duplicateRequest = new DuplicateRequest();
+
+        duplicateRequest.setNombre(request.getNombre());
+        duplicateRequest.setApellido(request.getApellido());
+        duplicateRequest.setCalle(request.getCalle());
+        duplicateRequest.setPuerta(request.getPuerta());
+        duplicateRequest.setPiso(request.getPiso());
+        duplicateRequest.setDpto(request.getDpto());
+        duplicateRequest.setCp(request.getCp());
+        duplicateRequest.setProvincia(request.getProvincia());
+        duplicateRequest.setLocalidad(request.getLocalidad());
+        duplicateRequest.setCodigoDocumento(request.getCodigoDocumento());
+        duplicateRequest.setCuitCuil(request.getCuitCuil());
+        duplicateRequest.setFecNac(request.getFecNac());
+        duplicateRequest.setEstadoCivil(request.getEstadoCivil());
+        duplicateRequest.setSexo(request.getSexo());
+        duplicateRequest.setEmail(request.getEmail());
+
+        return duplicateRequest;
     }
 
 }

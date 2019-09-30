@@ -40,6 +40,9 @@
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_INGRESADA}" th:href="@{${'/requests/change-status/' + request.id + '/r_reject' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Cambiar estado a Solicitud Rechazada">
                             <i class="fas fa-trash-alt"></i>
                         </a>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA || request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_RECHAZADA}" th:href="@{${'/requests/change-status/' + request.id + '/r_entered' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Reinciar estado a Solicitud Ingresada">
+                            <i class="fas fa-undo"></i>
+                        </a>
                     </div>
                 </div>
 

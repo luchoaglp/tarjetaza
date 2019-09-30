@@ -11,4 +11,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findAllByOrderByIdAsc();
 
     boolean existsByCuitCuil(String cuitCuil);
+
+    Request findByCuitCuil(String cuitCuil);
 }

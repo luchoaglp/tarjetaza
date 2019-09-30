@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.tarjetaza.domain.RequestState.SOLICITUD_ACEPTADA;
-import static com.tarjetaza.domain.RequestState.SOLICITUD_RECHAZADA;
-import static com.tarjetaza.domain.RequestState.TARJETA_PEDIDA;
+import static com.tarjetaza.domain.RequestState.*;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -47,6 +45,9 @@ public class RequestServiceImpl implements RequestService {
         Request request = findById(id);
 
         switch (op) {
+            case "r_entered":
+                request.setRequestState(SOLICITUD_INGRESADA);
+                break;
             case "r_accept":
                 request.setRequestState(SOLICITUD_ACEPTADA);
                 break;
@@ -71,6 +72,9 @@ public class RequestServiceImpl implements RequestService {
             Request request = findById(id);
 
             switch (op) {
+                case "r_entered":
+                    request.setRequestState(SOLICITUD_INGRESADA);
+                    break;
                 case "r_accept":
                     request.setRequestState(SOLICITUD_ACEPTADA);
                     break;
@@ -117,5 +121,10 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public boolean existsByCuitCuil(String cuitCuil) {
         return requestRepository.existsByCuitCuil(cuitCuil);
+    }
+
+    @Override
+    public Request findByCuitCuil(String cuitCuil) {
+        return requestRepository.findByCuitCuil(cuitCuil);
     }
 }

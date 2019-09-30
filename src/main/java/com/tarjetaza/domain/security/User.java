@@ -29,32 +29,32 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @NotNull
+    //@NotNull
     @NotBlank(message = "{username.notblank}")
     @Size(min = 5, max = 15)
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotNull
+    //@NotNull
     @NotBlank
     @Size(min = 2, max = 100)
     @Email
     private String email;
 
     @JsonIgnore
-    @NotNull
+    //@NotNull
     @NotBlank(message = "{password.notblank}")
     @Size(max = 60)
     private String password;
 
     @JsonProperty("first_name")
-    @NotNull
+    //@NotNull
     @NotBlank(message = "{firstName.notblank}")
     @Size(min = 2, max = 75, message =  "{firstName.size}")
     private String firstName;
 
     @JsonProperty("last_name")
-    @NotNull
+    //@NotNull
     @NotBlank(message = "{lastName.notblank}")
     @Size(min = 2, max = 75, message =  "{lastName.size}")
     private String lastName;

@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="md-form">
                                     <label for="fecNac">Fecha de nacimiento <small class="text-danger">*</small></label>
-                                    <input type="text" class="form-control" minlength="11" maxlength="11" th:errorclass="is-invalid" th:field="*{fecNac}" id="fecNac" placeholder="Nacimiento" required>
+                                    <input type="text" class="form-control" minlength="8" maxlength="8" th:errorclass="is-invalid" th:field="*{fecNac}" id="fecNac" placeholder="Nacimiento" required>
                                     <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('fecNac')}" th:errors="*{fecNac}"></div>
                                 </div>
                                 <div class="row">

@@ -2,34 +2,52 @@ package com.tarjetaza.controller.request;
 
 import com.tarjetaza.domain.Card;
 import com.tarjetaza.domain.Request;
+import com.tarjetaza.service.CardService;
 import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+import static com.tarjetaza.domain.RequestState.TARJETA_RECIBIDA;
 
 
 @Controller
 @RequestMapping("/cards")
 public class CardController {
 
+    private final CardService cardService;
     private final RequestService requestService;
 
-    public CardController(RequestService requestService) {
+    public CardController(CardService cardService, RequestService requestService) {
+        this.cardService = cardService;
         this.requestService = requestService;
     }
 
     @GetMapping("/add/{requestId}")
     public String add(@PathVariable("requestId") Long requestId, Model model) {
 
-        Request request = requestService.findById(requestId);
-
-        request.setCard(new Card());
-
-        model.addAttribute("request", request);
+        model.addAttribute("card", new Card());
+        model.addAttribute("requestId", requestId);
 
         return "cards/add";
+    }
+
+    @PostMapping("/save")
+    public String save(@Valid Card card, @RequestParam Long requestId) {
+
+        Request request = requestService.findById(requestId);
+
+        if(request.getCard() == null) {
+
+            request.setRequestState(TARJETA_RECIBIDA);
+            card.setRequest(request);
+
+            cardService.save(card);
+        }
+
+        return "redirect:/requests/detail/" + requestId;
     }
 
 }

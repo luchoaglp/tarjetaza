@@ -56,8 +56,16 @@ public class Card {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    @OneToOne(mappedBy = "card")
+    private Request request;
+
     public Card() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+        request.setCard(this);
     }
 }

@@ -22,4 +22,5 @@ public interface RequestService {
     boolean existsByCuitCuil(String cuitCuil);
 
     Request findByCuitCuil(String cuitCuil);
+
 }

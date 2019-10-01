@@ -1,6 +1,7 @@
 package com.tarjetaza.service.impl;
 
 import com.tarjetaza.domain.Request;
+import com.tarjetaza.domain.RequestState;
 import com.tarjetaza.repository.RequestRepository;
 import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Service;
@@ -44,21 +45,7 @@ public class RequestServiceImpl implements RequestService {
 
         Request request = findById(id);
 
-        switch (op) {
-            case "r_entered":
-                request.setRequestState(SOLICITUD_INGRESADA);
-                break;
-            case "r_accept":
-                request.setRequestState(SOLICITUD_ACEPTADA);
-                break;
-            case "r_reject":
-                request.setRequestState(SOLICITUD_RECHAZADA);
-                break;
-            case "c_requested":
-                request.setRequestState(TARJETA_PEDIDA);
-                break;
-        }
-
+        request.setRequestState(getRequestState(op));
         request.setLastModifiedDate(LocalDateTime.now());
 
         requestRepository.save(request);
@@ -71,21 +58,7 @@ public class RequestServiceImpl implements RequestService {
 
             Request request = findById(id);
 
-            switch (op) {
-                case "r_entered":
-                    request.setRequestState(SOLICITUD_INGRESADA);
-                    break;
-                case "r_accept":
-                    request.setRequestState(SOLICITUD_ACEPTADA);
-                    break;
-                case "r_reject":
-                    request.setRequestState(SOLICITUD_RECHAZADA);
-                    break;
-                case "c_requested":
-                    request.setRequestState(TARJETA_PEDIDA);
-                    break;
-            }
-
+            request.setRequestState(getRequestState(op));
             request.setLastModifiedDate(LocalDateTime.now());
 
             requestRepository.save(request);
@@ -126,5 +99,21 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public Request findByCuitCuil(String cuitCuil) {
         return requestRepository.findByCuitCuil(cuitCuil);
+    }
+
+    private RequestState getRequestState(String op) {
+
+        switch (op) {
+            case "r_entered":
+                return SOLICITUD_INGRESADA;
+            case "r_accept":
+                return SOLICITUD_ACEPTADA;
+            case "r_reject":
+                return SOLICITUD_RECHAZADA;
+            case "c_requested":
+                return TARJETA_PEDIDA;
+        }
+
+        return null;
     }
 }

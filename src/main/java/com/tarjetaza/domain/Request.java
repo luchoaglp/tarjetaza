@@ -24,22 +24,18 @@ public class Request {
     @Column(name = "request_id")
     private Long id;
 
-    //@NotNull
     @NotBlank
     @Size(max = 30)
     private String nombre;
 
-    //@NotNull
     @NotBlank
     @Size(max = 30)
     private String apellido;
 
-    //@NotNull
     @NotBlank
     @Size(max = 40)
     private String calle;
 
-    //@NotNull
     @NotBlank
     @Size(max = 5)
     private String puerta;
@@ -50,18 +46,15 @@ public class Request {
     @Size(max = 4)
     private String dpto;
 
-    //@NotNull
     @NotBlank
-    @Size(min = 8, max = 8, message = "{cp.size}")
-    @Pattern(regexp = "^[A-Z][0-9]{4}[A-Z]{3}?", message = "{cp.regexp}")
+    @Size(min = 8, max = 8, message = "{request.cp.size}")
+    @Pattern(regexp = "^[A-Z][0-9]{4}[A-Z]{3}?", message = "{request.cp.regexp}")
     private String cp;
 
-    //@NotNull
     @NotBlank
     @Size(max = 2)
     private String provincia;
 
-    //@NotNull
     @NotBlank
     @Size(max = 25)
     private String localidad;
@@ -70,41 +63,34 @@ public class Request {
     private String telefono;
 
     @JsonProperty("codigo_documento")
-    //@NotNull
     @NotBlank
     @Size(min = 1, max = 1)
     private String codigoDocumento;
 
     @JsonProperty("cuit_cuil")
-    //@NotNull
     @NotBlank
-    @Size(min = 11, max = 11, message = "{cuitCuil.size}")
+    @Size(min = 11, max = 11, message = "{request.cuitCuil.size}")
     @Column(name = "cuit_cuil", length = 11)
     private String cuitCuil;
 
     @JsonProperty("fec_nac")
-    //@NotNull
     @NotBlank
     @Size(min = 8, max = 8)
     private String fecNac;
 
     @JsonProperty("estado_civil")
-    //@NotNull
     @NotBlank
     @Size(min = 1, max = 1)
     @Column(name = "estado_civil", nullable = false, length = 1)
     private String estadoCivil;
 
-    //@NotNull
     @NotBlank
     @Size(min = 1, max = 1)
     @Column(name = "sexo", nullable = false, length = 1)
     private String sexo;
 
-    //@NotNull
     @NotBlank
     @Size(max = 40)
-    //@Email
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
     private String email;
 
@@ -122,6 +108,10 @@ public class Request {
 
     @Enumerated(EnumType.ORDINAL)
     private RequestState requestState;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id")
+    private Card card;
 
     public Request() {
         this.createdDate = LocalDateTime.now();

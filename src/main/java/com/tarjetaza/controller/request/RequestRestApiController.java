@@ -86,8 +86,8 @@ public class RequestRestApiController {
 
         List<String> records = new ArrayList<>();
 
-        //records.add("620046232        20190521                                                                                                                                                                                                                                                                                                                                                                                       ");
         records.add(MailFormat.formattedHeader());
+        // records.add("620046232        20190521                                                                                                                                                                                                                                                                                                                                                                                       ");
 
         for(Long id : requests) {
 
@@ -101,6 +101,9 @@ public class RequestRestApiController {
         String fileName = "NU" +
                 LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")) +
                 ".txt";
+
+        records.add(MailFormat.formattedFooter(requests.length));
+        // records.add("6299462000000001220190521                                                                                                                                                                                                                                                                                                                                                                                       ");
 
         /*
         records

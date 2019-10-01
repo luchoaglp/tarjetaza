@@ -98,4 +98,20 @@ public class MailFormat {
         return sb.toString();
     }
 
+    public static String formattedFooter(int cantRegistros) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("62"); // Código de Marca (2)
+        sb.append("99"); // Marca de Pie (2)
+        sb.append("462"); // Código Entidad Emisora (3)
+        sb.append(StringUtils.leftPad(String.valueOf(cantRegistros), 10, "0")); // Cantidad de Registros (10)
+        sb.append(
+                LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+        ); // Fecha de Proceso (8)
+        sb.append(StringUtils.rightPad("", 375)); // Filler (375)
+
+        return sb.toString();
+    }
+
 }

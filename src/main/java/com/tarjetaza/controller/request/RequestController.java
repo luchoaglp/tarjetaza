@@ -28,7 +28,7 @@ public class RequestController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable("id") Long id) {
+    public String edit(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("request", requestService.findById(id));
 

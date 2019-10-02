@@ -7,6 +7,7 @@ import java.util.List;
 public interface RequestService {
 
     List<Request> findAll();
+    List<Request> findActiveOrderByIdAsc();
 
     Request findById(Long id);
 

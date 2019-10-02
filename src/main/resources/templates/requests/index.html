@@ -19,6 +19,9 @@
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
                     <a href="#" class="white-text mx-3">Solicitudes</a>
                     <div>
+                        <a th:href="@{/requests?show=all}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Mostrar Todas">
+                            <i class="fas fa-bars"></i>
+                        </a>
                         <button type="button" id="submit" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Enviar emails">
                             <i id="envelope" class="far fa-envelope mt-0"></i>
                             <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>

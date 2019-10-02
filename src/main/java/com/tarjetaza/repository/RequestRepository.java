@@ -2,9 +2,10 @@ package com.tarjetaza.repository;
 
 import com.tarjetaza.domain.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
+
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
@@ -13,4 +14,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     boolean existsByCuitCuil(String cuitCuil);
 
     Request findByCuitCuil(String cuitCuil);
+
+    @Query("FROM Request r WHERE r.requestState != 2 AND r.requestState != 5 AND r.requestState != 6")
+    List<Request> findActiveOrderByIdAsc();
 }

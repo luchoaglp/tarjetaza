@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/requests")
@@ -20,9 +21,18 @@ public class RequestController {
     }
 
     @GetMapping
-    public String requests(Model model) {
+    public String requests(@RequestParam(required = false) String show,
+                           Model model) {
 
-        model.addAttribute("requests", requestService.findAllByOrderByIdAsc());
+        List<Request> requests = null;
+
+        if(show == null) {
+            requests = requestService.findActiveOrderByIdAsc();
+        } else if(show.equals("all")) {
+            requests = requestService.findAllByOrderByIdAsc();
+        }
+
+        model.addAttribute("requests", requests);
 
         return "requests/index";
     }
@@ -66,7 +76,7 @@ public class RequestController {
 
         requestService.changeStatus(id, state);
 
-        return "redirect:/requests";
+        return "redirect:/requests/detail/" + id;
     }
 
 }

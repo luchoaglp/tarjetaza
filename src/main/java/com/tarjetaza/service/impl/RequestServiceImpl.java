@@ -36,6 +36,11 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> findActiveOrderByIdAsc() {
+        return requestRepository.findActiveOrderByIdAsc();
+    }
+
+    @Override
     public Request save(Request request) {
         return requestRepository.save(request);
     }

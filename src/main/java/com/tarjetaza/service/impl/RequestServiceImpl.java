@@ -112,6 +112,10 @@ public class RequestServiceImpl implements RequestService {
                 return SOLICITUD_RECHAZADA;
             case "c_requested":
                 return TARJETA_PEDIDA;
+            case "c_delivered":
+                return TARJETA_ENTREGADA;
+            case "c_reject":
+                return TARJETA_RECHAZADA;
         }
 
         return null;

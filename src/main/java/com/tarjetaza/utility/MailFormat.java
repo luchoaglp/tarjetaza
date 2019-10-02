@@ -55,7 +55,7 @@ public class MailFormat {
         sb.append(request.getCp()); // Código Postal NUEVO Formato (8)
         sb.append(request.getProvincia()); // Código de Provincia (2)
         sb.append(StringUtils.rightPad(request.getLocalidad(), 25)); // Localidad (25)
-        sb.append(StringUtils.rightPad(request.getTelefono(), 15)); // Teléfono (15)
+        sb.append("000000000000000"); // Teléfono (15)
         sb.append(request.getCodigoDocumento()); // Código de Documento (1)
         sb.append(request.getCuitCuil()); // Número de Documento(11)
         sb.append("0"); // Código Forma de Pago (1) "0 | Sin Debito o Credito"

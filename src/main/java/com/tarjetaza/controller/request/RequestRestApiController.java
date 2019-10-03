@@ -86,12 +86,16 @@ public class RequestRestApiController {
 
         List<String> records = new ArrayList<>();
 
+        StringBuilder names = new StringBuilder();
+
         records.add(MailFormat.formattedHeader());
         // records.add("620046232        20190521                                                                                                                                                                                                                                                                                                                                                                                       ");
 
         for(Long id : requests) {
 
             Request request = requestService.findById(id);
+
+            names.append("\n").append(request.getApellido()).append(" ").append(request.getNombre());
 
             records.add(MailFormat.formattedBody(request));
         }
@@ -132,8 +136,8 @@ public class RequestRestApiController {
             helper.setTo("soporte@cfsa.com.ar");
             helper.setBcc("info@tarjetaza.com");
             //helper.setBcc("lucho_aglp@hotmail.com");
-            helper.setSubject("Solicitudes de Altas");
-            helper.setText("Solicitudes");
+            helper.setSubject("Solicitudes de Altas de Tarjeta");
+            helper.setText("Cantidad de solicitudes: " + requests.length + names.toString());
 
             FileSystemResource file = new FileSystemResource(new File(path + fileName));
             helper.addAttachment(fileName, file);

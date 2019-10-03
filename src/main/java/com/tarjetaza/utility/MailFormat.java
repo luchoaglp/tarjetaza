@@ -57,10 +57,10 @@ public class MailFormat {
         sb.append(StringUtils.rightPad(request.getLocalidad(), 25)); // Localidad (25)
         sb.append("000000000000000"); // Teléfono (15)
         sb.append(request.getCodigoDocumento()); // Código de Documento (1)
-        sb.append(request.getCuitCuil()); // Número de Documento(11)
+        sb.append("000").append(request.getCuitCuil().substring(2, 10)); // Número de Documento(11)
         sb.append("0"); // Código Forma de Pago (1) "0 | Sin Debito o Credito"
         sb.append("0"); // Tipo de Modalidad de Pago (1) "0 | NO INFORMADO"
-        sb.append("000"); // Sucursal Cuenta a Debitar (3)
+        sb.append("001"); // Sucursal Cuenta a Debitar (3)
         sb.append("0000000000000"); // N° de Cuenta a Debitar (13)
         sb.append("000"); // Código de Promotor (3)
         sb.append("000"); // Grupo de Afinidad (3)

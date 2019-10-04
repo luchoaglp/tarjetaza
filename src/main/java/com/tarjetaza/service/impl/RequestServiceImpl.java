@@ -75,6 +75,9 @@ public class RequestServiceImpl implements RequestService {
 
         Request entity = findById(request.getId());
 
+        if(request.getVirtualId() != null) {
+            entity.setVirtualId(request.getVirtualId());
+        }
         entity.setNombre(request.getNombre());
         entity.setApellido(request.getApellido());
         entity.setCalle(request.getCalle());
@@ -99,6 +102,11 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public boolean existsByCuitCuil(String cuitCuil) {
         return requestRepository.existsByCuitCuil(cuitCuil);
+    }
+
+    @Override
+    public boolean existsByVirtualId(Long virtualId) {
+        return requestRepository.existsByVirtualId(virtualId);
     }
 
     @Override

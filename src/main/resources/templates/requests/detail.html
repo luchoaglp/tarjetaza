@@ -29,7 +29,7 @@
             <div class="card card-cascade narrower shadow-sm">
 
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-3">Solicitud Detalle</a>
+                    <a href="#" class="white-text mx-1">Solicitud Detalle</a>
                     <div>
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_INGRESADA}" th:href="@{${'/requests/edit/' + request.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Editar Solicitud">
                             <i class="fas fa-edit"></i>
@@ -76,6 +76,7 @@
                         </div>
                         <div class="col-md-6">
                             <ul class="list-group">
+                                <li class="list-group-item">Virtual ID: <span th:text="${request.virtualId}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Teléfono: <span th:text="${request.telefono}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Código de documento: <span th:text="${request.getCodigoDocumentoNombre()}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Cuit / Cuil: <span th:text="${request.getCuitCuilFormatted()}" class="font-weight-bold"></span></li>

@@ -12,9 +12,11 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findAllByOrderByIdAsc();
 
     boolean existsByCuitCuil(String cuitCuil);
+    boolean existsByVirtualId(Long virtualId);
 
     Request findByCuitCuil(String cuitCuil);
 
     @Query("FROM Request r WHERE r.requestState != 2 AND r.requestState != 5 AND r.requestState != 6")
     List<Request> findActiveOrderByIdAsc();
+
 }

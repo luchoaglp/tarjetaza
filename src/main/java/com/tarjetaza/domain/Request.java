@@ -24,6 +24,10 @@ public class Request {
     @Column(name = "request_id")
     private Long id;
 
+    @JsonProperty("virtual_id")
+    @Column(name = "virtual_id")
+    private Long virtualId;
+
     @NotBlank
     @Size(max = 30)
     private String nombre;
@@ -70,7 +74,7 @@ public class Request {
     @JsonProperty("cuit_cuil")
     @NotBlank
     @Size(min = 11, max = 11, message = "{request.cuitCuil.size}")
-    @Column(name = "cuit_cuil", length = 11)
+    @Column(name = "cuit_cuil", length = 11, unique = true)
     private String cuitCuil;
 
     @JsonProperty("fec_nac")
@@ -236,6 +240,7 @@ public class Request {
     public String toString() {
         return "Request{" +
                 "id=" + id +
+                ", virtualId=" + virtualId +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", calle='" + calle + '\'' +
@@ -255,6 +260,7 @@ public class Request {
                 ", createdDate=" + createdDate +
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", requestState=" + requestState +
+                ", card=" + card +
                 '}';
     }
 }

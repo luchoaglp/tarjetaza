@@ -5,6 +5,7 @@ import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -53,6 +54,18 @@ public class RequestController {
         if(result.hasErrors()) {
 
             model.addAttribute("request", request);
+
+            return "requests/edit";
+
+        } else if(request.getVirtualId() != null && requestService.existsByVirtualId(request.getVirtualId())) {
+
+            model.addAttribute("request", request);
+
+            result.addError(new FieldError(
+                    "request",
+                    "virtualId",
+                    "El Virtual ID ya se encuentra registrado"
+            ));
 
             return "requests/edit";
         }

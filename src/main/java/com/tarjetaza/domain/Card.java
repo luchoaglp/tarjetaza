@@ -68,4 +68,17 @@ public class Card {
         this.request = request;
         request.setCard(this);
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", entidad='" + entidad + '\'' +
+                ", sucursal='" + sucursal + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", numero='" + numero + '\'' +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
+    }
 }

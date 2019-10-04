@@ -24,5 +24,6 @@ public interface RequestService {
     boolean existsByVirtualId(Long virtualId);
 
     Request findByCuitCuil(String cuitCuil);
+    Request findByVirtualId(Long virtualId);
 
 }

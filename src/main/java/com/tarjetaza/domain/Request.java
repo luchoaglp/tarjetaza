@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.tarjetaza.domain.RequestState.SOLICITUD_INGRESADA;
 
@@ -116,6 +117,9 @@ public class Request {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
+
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    private List<Credit> credits;
 
     public Request() {
         this.createdDate = LocalDateTime.now();

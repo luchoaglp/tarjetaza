@@ -114,6 +114,11 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findByCuitCuil(cuitCuil);
     }
 
+    @Override
+    public Request findByVirtualId(Long virtualId) {
+        return requestRepository.findByVirtualId(virtualId);
+    }
+
     private RequestState getRequestState(String op) {
 
         switch (op) {

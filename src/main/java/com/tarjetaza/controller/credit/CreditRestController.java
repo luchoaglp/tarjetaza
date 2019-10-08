@@ -32,6 +32,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tarjetaza.domain.RequestState.TARJETA_RECIBIDA;
+
 @RestController
 @RequestMapping("/api/credits")
 public class CreditRestController {
@@ -58,6 +60,8 @@ public class CreditRestController {
 
         if(request == null) {
             return new ResponseEntity<>(new CreditResponse("El cliente no se encuentra registado en Tarjetaza"), HttpStatus.NOT_FOUND);
+        } else if(request.getRequestState() != TARJETA_RECIBIDA) {
+            return new ResponseEntity<>(new CreditResponse("Al cliente no se le entregado su Tarjetaza"), HttpStatus.NOT_FOUND);
         }
 
         Credit credit = creditService.save(new Credit(creditRequest.getAmount(), request));
@@ -127,8 +131,8 @@ public class CreditRestController {
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
             //helper.setTo("lucho_aglp@hotmail.com");
-            helper.setTo("info@tarjetaza.com");
-            //helper.setTo("soporte@cfsa.com.ar");
+            helper.setTo("soporte@cfsa.com.ar");
+            helper.setBcc("info@tarjetaza.com");
 
             helper.setSubject("Entidad: 462 – Proceso: [Cobranzas] – Fecha de Presentación: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             helper.setText("Entidad: 462\nPresentación: " +

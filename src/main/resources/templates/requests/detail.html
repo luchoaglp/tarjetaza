@@ -43,6 +43,9 @@
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA || request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_RECHAZADA}" th:href="@{${'/requests/change-status/' + request.id + '/r_entered' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Reinciar estado a Solicitud Ingresada">
                             <i class="fas fa-undo"></i>
                         </a>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA}" th:href="@{${'/requests/change-status/' + request.id + '/c_requested' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Cambiar estado a Tarjeta Pedida">
+                            <i class="far fa-credit-card"></i>
+                        </a>
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_PEDIDA}" th:href="@{${'/requests/change-status/' + request.id + '/r_accept' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Volver al estado de Solicitud Aceptada">
                             <i class="fas fa-undo"></i>
                         </a>

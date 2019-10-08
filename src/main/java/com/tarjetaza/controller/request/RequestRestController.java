@@ -134,8 +134,8 @@ public class RequestRestController {
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
             //helper.setTo("lucho_aglp@hotmail.com");
-            //helper.setTo("soporte@cfsa.com.ar");
-            helper.setTo("info@tarjetaza.com");
+            helper.setTo("soporte@cfsa.com.ar");
+            helper.setBcc("info@tarjetaza.com");
 
             helper.setSubject("Proceso: [Altas] – Fecha: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 

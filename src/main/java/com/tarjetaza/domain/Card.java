@@ -69,6 +69,10 @@ public class Card {
         request.setCard(this);
     }
 
+    public String getCuenta() {
+        return this.entidad + this.sucursal + this.usuario.replace("-", "");
+    }
+
     @Override
     public String toString() {
         return "Card{" +

@@ -7,7 +7,7 @@ $(function() {
         placement: 'left'
     });
 
-    let requests = [];
+    let credits = [];
 
     const $table = $('#table');
     const $tableBody = $table.find('tbody');
@@ -48,16 +48,16 @@ $(function() {
             const row = $(this);
 
             const id = parseInt(row.find("td:nth-child(1)").html());
-            const $checkbox = row.children('td:nth-child(10)').children("div.form-check").children("input[type='checkbox']");
+            const $checkbox = row.children('td:nth-child(8)').children("div.form-check").children("input[type='checkbox']");
 
             if($checkbox.length > 0) {
 
-                if(!requests.includes(id)) {
+                if(!credits.includes(id)) {
                     $checkbox.prop('checked', true);
-                    requests.push(id);
+                    credits.push(id);
                 } else {
                     $checkbox.prop('checked', false);
-                    requests = requests.filter(request => request !== id);
+                    credits = credits.filter(credit => credit !== id);
                 }
             }
         }
@@ -65,16 +65,16 @@ $(function() {
 
     $('#submit').click(function() {
 
-        if(requests.length > 0) {
+        if(credits.length > 0) {
 
             $('#envelope').addClass('d-none');
             $('#spinner').removeClass('d-none');
 
             $.ajax({
               type : "POST",
-              url : "/api/requests/process",
+              url : "/api/credits/process",
               data : {
-                requests: requests
+                credits: credits
               }
 
             }).done(function(data) {

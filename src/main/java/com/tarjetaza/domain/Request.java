@@ -240,31 +240,8 @@ public class Request {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Request{" +
-                "id=" + id +
-                ", virtualId=" + virtualId +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", calle='" + calle + '\'' +
-                ", puerta='" + puerta + '\'' +
-                ", piso='" + piso + '\'' +
-                ", dpto='" + dpto + '\'' +
-                ", cp='" + cp + '\'' +
-                ", provincia='" + provincia + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", codigoDocumento='" + codigoDocumento + '\'' +
-                ", cuitCuil='" + cuitCuil + '\'' +
-                ", fecNac='" + fecNac + '\'' +
-                ", estadoCivil='" + estadoCivil + '\'' +
-                ", sexo='" + sexo + '\'' +
-                ", email='" + email + '\'' +
-                ", createdDate=" + createdDate +
-                ", lastModifiedDate=" + lastModifiedDate +
-                ", requestState=" + requestState +
-                ", card=" + card +
-                '}';
+    public String getDocumento() {
+        return cuitCuil.substring(2, 10);
     }
+
 }

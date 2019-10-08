@@ -40,6 +40,12 @@ public class Credit {
     @JoinColumn(name = "request_id", nullable = false)
     private Request request;
 
+    @ManyToOne
+    @JoinColumn(name = "batch_id")
+    private Batch batch;
+
+    public Credit() { }
+
     public Credit(Double amount, Request request) {
         this.amount = amount;
         this.createdDate = LocalDateTime.now();
@@ -47,5 +53,12 @@ public class Credit {
         request.getCredits().add(this);
         this.request = request;
     }
+
+    /*
+    public void setBatch(Batch batch) {
+        batch.getCredits().add(this);
+        this.batch = batch;
+    }
+    */
 
 }

@@ -4,7 +4,7 @@ import com.tarjetaza.domain.DuplicateRequest;
 import com.tarjetaza.domain.Request;
 import com.tarjetaza.service.DuplicateRequestService;
 import com.tarjetaza.service.RequestService;
-import com.tarjetaza.utility.MailFormat;
+import com.tarjetaza.utility.RequestMailFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/requests")
-public class RequestRestApiController {
+public class RequestRestController {
 
     @Value("${file.path}")
     private String path;
@@ -45,7 +45,7 @@ public class RequestRestApiController {
     private final DuplicateRequestService duplicateRequestService;
     private final JavaMailSender javaMailSender;
 
-    public RequestRestApiController(RequestService requestService, DuplicateRequestService duplicateRequestService, JavaMailSender javaMailSender) {
+    public RequestRestController(RequestService requestService, DuplicateRequestService duplicateRequestService, JavaMailSender javaMailSender) {
         this.requestService = requestService;
         this.duplicateRequestService = duplicateRequestService;
         this.javaMailSender = javaMailSender;
@@ -86,18 +86,18 @@ public class RequestRestApiController {
 
         List<String> records = new ArrayList<>();
 
-        StringBuilder names = new StringBuilder();
+        StringBuilder clientData = new StringBuilder();
 
-        records.add(MailFormat.formattedHeader());
+        records.add(RequestMailFormat.formattedHeader());
         // records.add("620046232        20190521                                                                                                                                                                                                                                                                                                                                                                                       ");
 
         for(Long id : requests) {
 
             Request request = requestService.findById(id);
 
-            names.append("\n").append(request.getApellido()).append(" ").append(request.getNombre());
+            clientData.append("\n").append(request.getApellido()).append(" ").append(request.getNombre() + " " + request.getDocumento());
 
-            records.add(MailFormat.formattedBody(request));
+            records.add(RequestMailFormat.formattedBody(request));
         }
 
         // records.add("620146200100000000000000000000000T0127408691COLUNGA                       LUCIO IRAUL                   37                                      015251 A   B1902AXI03LA PLATA                 00000000000000010002740869100001000000000000000000020274086913000000000000000000000000000000000000        197905151M411D4100N  2740869136NO01SI010101 luciocolunga@cardlinesrl.com                                ");
@@ -106,7 +106,7 @@ public class RequestRestApiController {
                 LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")) +
                 ".txt";
 
-        records.add(MailFormat.formattedFooter(requests.length));
+        records.add(RequestMailFormat.formattedFooter(requests.length));
         // records.add("6299462000000001220190521                                                                                                                                                                                                                                                                                                                                                                                       ");
 
         /*
@@ -133,11 +133,13 @@ public class RequestRestApiController {
 
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
-            helper.setTo("soporte@cfsa.com.ar");
-            helper.setBcc("info@tarjetaza.com");
-            //helper.setBcc("lucho_aglp@hotmail.com");
-            helper.setSubject("Solicitudes de Altas de Tarjeta");
-            helper.setText("Cantidad de solicitudes: " + requests.length + names.toString());
+            //helper.setTo("lucho_aglp@hotmail.com");
+            //helper.setTo("soporte@cfsa.com.ar");
+            helper.setTo("info@tarjetaza.com");
+
+            helper.setSubject("Proceso: [Altas] – Fecha: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+            helper.setText("Cantidad de solicitudes: " + requests.length + clientData.toString());
 
             FileSystemResource file = new FileSystemResource(new File(path + fileName));
             helper.addAttachment(fileName, file);

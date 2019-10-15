@@ -1,6 +1,7 @@
 package com.tarjetaza.controller.credit;
 
 import com.tarjetaza.domain.Batch;
+import com.tarjetaza.domain.Card;
 import com.tarjetaza.domain.Credit;
 import com.tarjetaza.domain.Request;
 import com.tarjetaza.payload.CreditRequest;
@@ -51,7 +52,6 @@ public class CreditRestController {
         this.javaMailSender = javaMailSender;
     }
 
-    /*
     @PostMapping
     public ResponseEntity<CreditResponse> create(@Valid @RequestBody CreditRequest creditRequest) {
 
@@ -65,7 +65,6 @@ public class CreditRestController {
 
         return new ResponseEntity<>(new CreditResponse(credit.getId(), "OK"), HttpStatus.OK);
     }
-    */
 
     @PostMapping("/process")
     public ResponseEntity<Void> process(@RequestParam(value="credits[]") Long[] credits) {

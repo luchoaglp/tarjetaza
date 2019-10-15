@@ -1,6 +1,7 @@
 package com.tarjetaza.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -57,6 +57,7 @@ public class Card {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "card")
     private Request request;
 

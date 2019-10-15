@@ -5,6 +5,8 @@ import com.tarjetaza.repository.CardRepository;
 import com.tarjetaza.service.CardService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CardServiceImpl implements CardService {
 
@@ -17,5 +19,10 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card save(Card card) {
         return cardRepository.save(card);
+    }
+
+    @Override
+    public List<Card> findByRequestVirtualId(Long virtualId) {
+        return cardRepository.findByRequestVirtualId(virtualId);
     }
 }

@@ -56,7 +56,9 @@ public class RequestController {
             model.addAttribute("request", request);
 
             return "requests/edit";
+        }
 
+        /*
         } else if(request.getVirtualId() != null && requestService.existsByVirtualId(request.getVirtualId())) {
 
             model.addAttribute("request", request);
@@ -69,6 +71,7 @@ public class RequestController {
 
             return "requests/edit";
         }
+        */
 
         requestService.edit(request);
 

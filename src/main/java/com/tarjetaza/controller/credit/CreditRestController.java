@@ -32,8 +32,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tarjetaza.domain.RequestState.TARJETA_RECIBIDA;
-
 @RestController
 @RequestMapping("/api/credits")
 public class CreditRestController {
@@ -53,6 +51,7 @@ public class CreditRestController {
         this.javaMailSender = javaMailSender;
     }
 
+    /*
     @PostMapping
     public ResponseEntity<CreditResponse> create(@Valid @RequestBody CreditRequest creditRequest) {
 
@@ -60,14 +59,13 @@ public class CreditRestController {
 
         if(request == null) {
             return new ResponseEntity<>(new CreditResponse("El cliente no se encuentra registado en Tarjetaza"), HttpStatus.NOT_FOUND);
-        } else if(request.getRequestState() != TARJETA_RECIBIDA) {
-            return new ResponseEntity<>(new CreditResponse("Al cliente no se le entregado su Tarjetaza"), HttpStatus.NOT_FOUND);
         }
 
         Credit credit = creditService.save(new Credit(creditRequest.getAmount(), request));
 
         return new ResponseEntity<>(new CreditResponse(credit.getId(), "OK"), HttpStatus.OK);
     }
+    */
 
     @PostMapping("/process")
     public ResponseEntity<Void> process(@RequestParam(value="credits[]") Long[] credits) {
@@ -84,8 +82,6 @@ public class CreditRestController {
         for(int i = 0; i < credits.length; i++) {
 
             Credit credit = creditService.findById(credits[i]);
-
-            //names.append("\n").append(request.getApellido()).append(" ").append(request.getNombre());
 
             total += credit.getAmount();
 
@@ -150,8 +146,6 @@ public class CreditRestController {
         } catch (MessagingException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
-        //requestService.changeStatus(requests, "c_requested");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

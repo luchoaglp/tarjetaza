@@ -59,7 +59,7 @@ public class RequestRestController {
 
         if(result.hasErrors()) {
 
-            response.put("response", "Se ha producido un error en el envío de tus datos. Intentá nuevamente.");
+            response.put("response", "Se ha el envío de tus datos. Intentá nuevamente.");
 
         } else if(requestService.existsByCuitCuil(request.getCuitCuil())) {
 
@@ -152,7 +152,7 @@ public class RequestRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        requestService.changeStatus(requests, "c_requested");
+        requestService.changeStatus(requests, "r_sent");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -161,6 +161,7 @@ public class RequestRestController {
 
         DuplicateRequest duplicateRequest = new DuplicateRequest();
 
+        duplicateRequest.setVirtualId(request.getVirtualId());
         duplicateRequest.setNombre(request.getNombre());
         duplicateRequest.setApellido(request.getApellido());
         duplicateRequest.setCalle(request.getCalle());
@@ -176,6 +177,7 @@ public class RequestRestController {
         duplicateRequest.setEstadoCivil(request.getEstadoCivil());
         duplicateRequest.setSexo(request.getSexo());
         duplicateRequest.setEmail(request.getEmail());
+        duplicateRequest.setObservaciones(request.getObservaciones());
 
         return duplicateRequest;
     }

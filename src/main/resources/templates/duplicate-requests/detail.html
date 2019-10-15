@@ -47,10 +47,12 @@
                                 <li class="list-group-item">Código Postal: <span th:text="${duplicateRequest.cp}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Provincia: <span th:text="${duplicateRequest.getProvinciaNombre()}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Localidad: <span th:text="${duplicateRequest.localidad}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Observaciones: <span th:text="${duplicateRequest.observaciones}" class="font-weight-bold"></span></li>
                             </ul>
                         </div>
                         <div class="col-md-6 mb-3">
                             <ul class="list-group">
+                                <li class="list-group-item">Virtual ID: <span th:text="${duplicateRequest.virtualId}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Teléfono: <span th:text="${duplicateRequest.telefono}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Código de documento: <span th:text="${duplicateRequest.getCodigoDocumentoNombre()}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Cuit / Cuil: <span th:text="${duplicateRequest.getCuitCuilFormatted()}" class="font-weight-bold"></span></li>

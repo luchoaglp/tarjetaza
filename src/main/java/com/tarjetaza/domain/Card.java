@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -58,6 +59,17 @@ public class Card {
 
     @OneToOne(mappedBy = "card")
     private Request request;
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "request_id")
+    private Request request;
+    */
+
+    /*
+    @OneToMany(mappedBy = "card", fetch = FetchType.LAZY)
+    private List<Credit> credits;
+    */
 
     public Card() {
         this.createdDate = LocalDateTime.now();

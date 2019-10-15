@@ -29,6 +29,10 @@ public class DuplicateRequest {
     @Size(max = 30)
     private String nombre;
 
+    @JsonProperty("virtual_id")
+    @Column(name = "virtual_id")
+    private Long virtualId;
+
     @NotBlank
     @Size(max = 30)
     private String apellido;
@@ -94,6 +98,10 @@ public class DuplicateRequest {
     @Size(max = 40)
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
     private String email;
+
+    @Size(max = 255)
+    @Column(name = "observaciones")
+    private String observaciones;
 
     @JsonProperty("created_date")
     @NotNull

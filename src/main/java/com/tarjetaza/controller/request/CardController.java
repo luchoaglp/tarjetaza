@@ -28,7 +28,12 @@ public class CardController {
     @GetMapping("/add/{requestId}")
     public String add(@PathVariable("requestId") Long requestId, Model model) {
 
-        model.addAttribute("card", new Card());
+        Card card = new Card();
+
+        card.setEntidad("462");
+        card.setSucursal("001");
+
+        model.addAttribute("card", card);
         model.addAttribute("requestId", requestId);
 
         return "cards/add";

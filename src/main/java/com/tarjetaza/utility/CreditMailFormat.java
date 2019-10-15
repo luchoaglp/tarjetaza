@@ -38,14 +38,15 @@ public class CreditMailFormat {
                 LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
         ); // Fecha Cobro (8)
         sb.append(credit.getRequest().getCard().getCuenta()); // Cuenta (13)
+        // sb.append(credit.getCard().getCuenta()); // Cuenta (13)
         sb.append("   "); // Cód. de Cajero (3)
         sb.append("01"); // Moneda (2)
         sb.append("0000"); // Uso Interno (4)
         sb.append(
                 StringUtils.leftPad(String.valueOf(credit.getAmount().intValue()), 10, "0")
         ).append("00"); // Importe (12)
-        sb.append("   "); // Sucursal Cobradora (3)
-        sb.append("   "); // Entidad Cobradora (3)
+        sb.append("001"); // Sucursal Cobradora (3) // Posible error
+        sb.append("462"); // Entidad Cobradora (3) // Posible error
         sb.append("63"); // Código de Operación (2)
         sb.append("00"); // SubCódigo de Operación (2)
         sb.append("        "); // Número de Terminal (8)

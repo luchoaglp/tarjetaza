@@ -40,6 +40,12 @@ public class Credit {
     @JoinColumn(name = "request_id", nullable = false)
     private Request request;
 
+    /*
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = false)
+    private Card card;
+    */
+
     @ManyToOne
     @JoinColumn(name = "batch_id")
     private Batch batch;

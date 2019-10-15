@@ -99,6 +99,10 @@ public class Request {
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
     private String email;
 
+    @Size(max = 255)
+    @Column(name = "observaciones")
+    private String observaciones;
+
     @JsonProperty("created_date")
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
@@ -117,6 +121,11 @@ public class Request {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
+
+    /*
+    @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
+    private List<Card> cards;
+    */
 
     @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
     private List<Credit> credits;

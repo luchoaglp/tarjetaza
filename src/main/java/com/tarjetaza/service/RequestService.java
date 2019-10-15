@@ -26,4 +26,5 @@ public interface RequestService {
     Request findByCuitCuil(String cuitCuil);
     Request findByVirtualId(Long virtualId);
 
+    Request findByCardNumero(String numero);
 }

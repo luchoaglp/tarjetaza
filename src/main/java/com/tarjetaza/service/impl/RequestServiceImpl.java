@@ -119,6 +119,11 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findByVirtualId(virtualId);
     }
 
+    @Override
+    public Request findByCardNumero(String numero) {
+        return requestRepository.findByCardNumero(numero);
+    }
+
     private RequestState getRequestState(String op) {
 
         switch (op) {

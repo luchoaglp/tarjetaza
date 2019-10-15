@@ -20,8 +20,4 @@ public class CardsResponse {
         this.message = message;
     }
 
-    public CardsResponse(List<Card> cards, String message) {
-        this.cards = cards;
-        this.message = message;
-    }
 }

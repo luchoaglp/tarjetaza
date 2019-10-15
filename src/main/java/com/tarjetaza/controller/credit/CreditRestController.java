@@ -1,7 +1,6 @@
 package com.tarjetaza.controller.credit;
 
 import com.tarjetaza.domain.Batch;
-import com.tarjetaza.domain.Card;
 import com.tarjetaza.domain.Credit;
 import com.tarjetaza.domain.Request;
 import com.tarjetaza.payload.CreditRequest;
@@ -55,10 +54,10 @@ public class CreditRestController {
     @PostMapping
     public ResponseEntity<CreditResponse> create(@Valid @RequestBody CreditRequest creditRequest) {
 
-        Request request = requestService.findByVirtualId(creditRequest.getId());
+        Request request = requestService.findByCardNumero(creditRequest.getNumero());
 
         if(request == null) {
-            return new ResponseEntity<>(new CreditResponse("El cliente no se encuentra registado en Tarjetaza"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CreditResponse("Tarjeta inexistente"), HttpStatus.NOT_FOUND);
         }
 
         Credit credit = creditService.save(new Credit(creditRequest.getAmount(), request));

@@ -19,4 +19,5 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     @Query("FROM Request r WHERE r.requestState != 2 AND r.requestState != 5 AND r.requestState != 6")
     List<Request> findActiveOrderByIdAsc();
 
+    Request findByCardNumero(String numero);
 }

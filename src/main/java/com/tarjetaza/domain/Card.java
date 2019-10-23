@@ -1,8 +1,6 @@
 package com.tarjetaza.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,16 +23,19 @@ public class Card {
     @Column(name = "card_id")
     private Long id;
 
+    @JsonIgnore
     @NotBlank
     @Size(min = 3, max = 3, message = "{card.entidad.size}")
     @Column(length = 3)
     private String entidad;
 
+    @JsonIgnore
     @NotBlank
     @Size(min = 3, max = 3, message = "{card.sucursal.size}")
     @Column(length = 3)
     private String sucursal;
 
+    @JsonIgnore
     @NotBlank
     @Size(min = 8, max = 8, message = "{card.usuario.size}")
     @Column(length = 8)
@@ -45,15 +46,17 @@ public class Card {
     @Column(length = 19)
     private String numero;
 
-    @JsonProperty("created_date")
+    @JsonIgnore
+    //@JsonProperty("created_date")
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @CreatedDate
     private LocalDateTime createdDate;
 
-    @JsonProperty("last_modified_date")
+    @JsonIgnore
+    //@JsonProperty("last_modified_date")
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
@@ -82,6 +85,7 @@ public class Card {
         request.setCard(this);
     }
 
+    @JsonIgnore
     public String getCuenta() {
         return this.entidad + this.sucursal + this.usuario.replace("-", "");
     }

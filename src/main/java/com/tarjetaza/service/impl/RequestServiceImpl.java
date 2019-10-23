@@ -1,5 +1,6 @@
 package com.tarjetaza.service.impl;
 
+import com.tarjetaza.domain.Card;
 import com.tarjetaza.domain.Request;
 import com.tarjetaza.domain.RequestState;
 import com.tarjetaza.repository.RequestRepository;
@@ -95,6 +96,18 @@ public class RequestServiceImpl implements RequestService {
         entity.setSexo(request.getSexo());
         entity.setEmail(request.getEmail());
         entity.setLastModifiedDate(LocalDateTime.now());
+
+        Card entityCard = entity.getCard();
+
+        if(entityCard != null) {
+
+            Card requestCard = request.getCard();
+
+            entityCard.setEntidad(requestCard.getEntidad());
+            entityCard.setSucursal(requestCard.getSucursal());
+            entityCard.setUsuario(requestCard.getUsuario());
+            entityCard.setNumero(requestCard.getNumero());
+        }
 
         requestRepository.save(entity);
     }

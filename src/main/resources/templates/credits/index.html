@@ -39,12 +39,9 @@
                                     <th width="6%">Monto</th>
                                     <th>Alta</th>
                                     <th>Actualizado</th>
-                                    <th width="4%"></th>
-                                    <th width="4%"></th>
-                                    <!--
-                                    <th>Cuit / Cuil</th>
                                     <th>Estado</th>
-                                    -->
+                                    <th width="4%"></th>
+                                    <th width="4%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,8 +52,9 @@
                                     <td class="text-right" th:text="${#numbers.formatDecimal(credit.amount, 0, 2, 'POINT')}"></td>
                                     <td th:text="${#temporals.format(credit.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
                                     <td th:text="${#temporals.format(credit.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
+                                    <td th:text="${credit.creditState.displayValue}"></td>
                                     <td><a th:href="@{${'/credits/detail/' + credit.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
-                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + credit.id}"><label class="form-check-label" th:for="${'c' + credit.id}"></label></div></td>
+                                    <td><div th:if="${credit.creditState == T(com.tarjetaza.domain.CreditState).SOLICITADO}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + credit.id}"><label class="form-check-label" th:for="${'c' + credit.id}"></label></div></td>
                                 </tr>
                             </tbody>
                             <tfoot class="light-green text-white">
@@ -69,10 +67,6 @@
                                     <th>Estado</th>
                                     <th width="4%"></th>
                                     <th width="4%"></th>
-                                    <!--
-                                    <th>Cuit / Cuil</th>
-                                    <th>Alta</th>
-                                    -->
                                 </tr>
                             </tfoot>
                         </table>

@@ -16,7 +16,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     Request findByCuitCuil(String cuitCuil);
     Request findByVirtualId(Long virtualId);
 
-    @Query("FROM Request r WHERE r.requestState != 2 AND r.requestState != 5 AND r.requestState != 6")
+    @Query("FROM Request r WHERE r.requestState != 2 AND r.requestState != 5 AND r.requestState != 6 AND r.requestState != 7")
     List<Request> findActiveOrderByIdAsc();
 
     Request findByCardNumero(String numero);

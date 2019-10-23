@@ -40,4 +40,9 @@ public class CreditServiceImpl implements CreditService {
         return save(credit);
     }
 
+    @Override
+    public List<Credit> findActiveOrderByIdAsc() {
+        return creditRepository.findActiveOrderByIdAsc();
+    }
+
 }

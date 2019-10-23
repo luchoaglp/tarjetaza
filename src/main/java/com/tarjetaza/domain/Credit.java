@@ -11,6 +11,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import static com.tarjetaza.domain.CreditState.SOLICITADO;
+
 @Getter
 @Setter
 @Entity
@@ -40,11 +42,8 @@ public class Credit {
     @JoinColumn(name = "request_id", nullable = false)
     private Request request;
 
-    /*
-    @ManyToOne
-    @JoinColumn(name = "card_id", nullable = false)
-    private Card card;
-    */
+    @Enumerated(EnumType.ORDINAL)
+    private CreditState creditState;
 
     @ManyToOne
     @JoinColumn(name = "batch_id")
@@ -58,6 +57,7 @@ public class Credit {
         this.lastModifiedDate = LocalDateTime.now();
         request.getCredits().add(this);
         this.request = request;
+        this.creditState = SOLICITADO;
     }
 
     /*

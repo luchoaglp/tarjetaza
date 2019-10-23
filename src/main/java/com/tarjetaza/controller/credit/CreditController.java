@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,9 +21,16 @@ public class CreditController {
     }
 
     @GetMapping
-    public String credits(Model model) {
+    public String credits(@RequestParam(required = false) String show,
+                          Model model) {
 
-        List<Credit> credits  = creditService.findAllByOrderByIdAsc();;
+        List<Credit> credits = null;
+
+        if(show == null) {
+            credits = creditService.findActiveOrderByIdAsc();
+        } else if(show.equals("all")) {
+            credits = creditService.findAllByOrderByIdAsc();
+        }
 
         model.addAttribute("credits", credits);
 

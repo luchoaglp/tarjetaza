@@ -48,7 +48,7 @@ $(function() {
             const row = $(this);
 
             const id = parseInt(row.find("td:nth-child(1)").html());
-            const $checkbox = row.children('td:nth-child(8)').children("div.form-check").children("input[type='checkbox']");
+            const $checkbox = row.children('td:nth-child(9)').children("div.form-check").children("input[type='checkbox']");
 
             if($checkbox.length > 0) {
 

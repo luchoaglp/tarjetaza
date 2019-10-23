@@ -14,4 +14,5 @@ public interface CreditService {
 
     Credit update(Credit credit);
 
+    List<Credit> findActiveOrderByIdAsc();
 }

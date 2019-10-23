@@ -139,7 +139,7 @@ public class CreditRestController {
 
             javaMailSender.send(msg);
 
-            //requestService.changeStatus(requests, "c_requested");
+            creditService.changeStatus(credits, "accredited");
 
         } catch (MessagingException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

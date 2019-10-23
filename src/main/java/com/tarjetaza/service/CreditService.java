@@ -15,4 +15,6 @@ public interface CreditService {
     Credit update(Credit credit);
 
     List<Credit> findActiveOrderByIdAsc();
+
+    void changeStatus(Long[] ids, String op);
 }

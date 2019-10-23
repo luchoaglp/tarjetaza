@@ -107,6 +107,7 @@ public class RequestServiceImpl implements RequestService {
             entityCard.setSucursal(requestCard.getSucursal());
             entityCard.setUsuario(requestCard.getUsuario());
             entityCard.setNumero(requestCard.getNumero());
+            entityCard.setLastModifiedDate(LocalDateTime.now());
         }
 
         requestRepository.save(entity);
@@ -152,6 +153,8 @@ public class RequestServiceImpl implements RequestService {
                 return TARJETA_ENTREGADA;
             case "c_reject":
                 return TARJETA_RECHAZADA;
+            case "drop":
+                return BAJA;
         }
 
         return null;

@@ -58,6 +58,9 @@
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_RECIBIDA}" th:href="@{${'/requests/change-status/' + request.id + '/c_reject' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Cambiar estado a Tarjeta Rechazada">
                             <i class="fas fa-trash-alt"></i>
                         </a>
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_ENTREGADA}" th:href="@{${'/requests/change-status/' + request.id + '/drop' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Baja de Cliente">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </div>
                 </div>
 

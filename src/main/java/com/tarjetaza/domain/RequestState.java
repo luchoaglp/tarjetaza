@@ -8,7 +8,8 @@ public enum RequestState {
     TARJETA_PEDIDA("Tarjeta Pedida"),
     TARJETA_RECIBIDA("Tarjeta Recibida"),
     TARJETA_ENTREGADA("Tarjeta Entregada"),
-    TARJETA_RECHAZADA("Tarjeta Rechazada");
+    TARJETA_RECHAZADA("Tarjeta Rechazada"),
+    BAJA("Baja");
 
     private final String displayValue;
 

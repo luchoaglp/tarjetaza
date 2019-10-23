@@ -2,7 +2,6 @@ package com.tarjetaza.service.impl;
 
 import com.tarjetaza.domain.Credit;
 import com.tarjetaza.domain.CreditState;
-import com.tarjetaza.domain.Request;
 import com.tarjetaza.repository.CreditRepository;
 import com.tarjetaza.service.CreditService;
 import org.springframework.stereotype.Service;

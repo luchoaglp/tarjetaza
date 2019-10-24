@@ -60,7 +60,7 @@ public class ParamController {
 
             model.addAttribute("param", param);
 
-            return "requests/edit";
+            return "params/edit";
         }
 
         paramService.edit(param);

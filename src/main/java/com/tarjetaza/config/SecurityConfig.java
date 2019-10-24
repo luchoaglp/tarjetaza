@@ -27,14 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/requests/**", "/api/requests/**",
             "/duplicate-requests/**",
             "/users/**", "/user/**",
-            "/params/**"
+            "/params/**", "/certificates/**"
     };
 
     private static final String[] USER_MATCHERS = {
             "/requests/**", "/api/requests/**",
             "/duplicate-requests/**",
             "/user/**",
-            "/params/**"
+            "/params/**", "/certificates/**"
     };
 
     private final CustomUserDetailsService customUserDetailsService;

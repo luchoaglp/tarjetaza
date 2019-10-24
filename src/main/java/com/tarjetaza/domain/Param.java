@@ -56,8 +56,10 @@ public class Param {
         this.lastModifiedDate = LocalDateTime.now();
     }
 
+    /*
     public Param(String description, String value) {
         this.description = description;
         this.value = value;
     }
+    */
 }

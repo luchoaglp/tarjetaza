@@ -11,4 +11,6 @@ public interface ParamService {
     Param save(Param param);
 
     Param findById(Long id);
+
+    Param edit(Param param);
 }

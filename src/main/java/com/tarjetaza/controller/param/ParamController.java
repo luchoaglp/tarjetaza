@@ -4,10 +4,8 @@ import com.tarjetaza.domain.Param;
 import com.tarjetaza.service.ParamService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,6 +49,23 @@ public class ParamController {
         model.addAttribute("param", paramService.findById(id));
 
         return "params/edit";
+    }
+
+    @PostMapping("/edit")
+    public String update(@Valid @ModelAttribute("param") Param param,
+                         BindingResult result,
+                         Model model) {
+
+        if(result.hasErrors()) {
+
+            model.addAttribute("param", param);
+
+            return "requests/edit";
+        }
+
+        paramService.edit(param);
+
+        return "redirect:/params";
     }
 
 }

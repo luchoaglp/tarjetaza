@@ -79,8 +79,8 @@ public class RequestServiceImpl implements RequestService {
         if(request.getVirtualId() != null) {
             entity.setVirtualId(request.getVirtualId());
         }
-        entity.setNombre(request.getNombre());
-        entity.setApellido(request.getApellido());
+        entity.setNombre(request.getNombre().trim());
+        entity.setApellido(request.getApellido().trim());
         entity.setCalle(request.getCalle());
         entity.setPuerta(request.getPuerta());
         entity.setPiso(request.getPiso());

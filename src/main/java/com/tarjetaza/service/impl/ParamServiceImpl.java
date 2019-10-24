@@ -25,4 +25,9 @@ public class ParamServiceImpl implements ParamService {
     public Param save(Param param) {
         return paramRepository.save(param);
     }
+
+    @Override
+    public Param findById(Long id) {
+        return paramRepository.findById(id).orElse(null);
+    }
 }

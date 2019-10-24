@@ -9,4 +9,6 @@ public interface ParamService {
     List<Param> findAll();
 
     Param save(Param param);
+
+    Param findById(Long id);
 }

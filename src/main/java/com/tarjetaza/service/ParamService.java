@@ -8,4 +8,5 @@ public interface ParamService {
 
     List<Param> findAll();
 
+    Param save(Param param);
 }

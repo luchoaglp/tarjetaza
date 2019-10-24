@@ -20,4 +20,9 @@ public class ParamServiceImpl implements ParamService {
     public List<Param> findAll() {
         return paramRepository.findAll();
     }
+
+    @Override
+    public Param save(Param param) {
+        return paramRepository.save(param);
+    }
 }

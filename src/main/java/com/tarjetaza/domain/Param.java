@@ -1,14 +1,18 @@
 package com.tarjetaza.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -30,6 +34,12 @@ public class Param {
     @Column(name = "value")
     private String value;
 
+
+    @JsonProperty("param_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate paramDate;
+
     @JsonIgnore
     @NotNull
     @CreatedDate
@@ -41,6 +51,7 @@ public class Param {
     private LocalDateTime lastModifiedDate;
 
     public Param() {
+        this.paramDate  = LocalDate.now();
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
     }

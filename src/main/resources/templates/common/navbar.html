@@ -13,7 +13,7 @@
                 </div>
             </li>
             <li>
-                <ul class="collapsible collapsible-accordion">
+                <ul sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-mail-bulk"></i> Solicitudes<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul class="list-unstyled">
@@ -27,7 +27,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="collapsible collapsible-accordion">
+                <ul sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-dollar-sign"></i> Créditos<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul class="list-unstyled">
@@ -36,7 +36,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="collapsible collapsible-accordion">
+                <ul sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-certificate"></i> Partidas<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul class="list-unstyled">
@@ -45,11 +45,20 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="collapsible collapsible-accordion">
+                <ul sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Parámetros<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul class="list-unstyled">
                                 <li><a th:href="@{/params}" class="waves-effect">Parámetros</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="collapsible collapsible-accordion">
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-exclamation-triangle"></i> Reclamos<i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul class="list-unstyled">
+                                <li><a th:href="@{/claims}" class="waves-effect">Reclamos</a></li>
                             </ul>
                         </div>
                     </li>

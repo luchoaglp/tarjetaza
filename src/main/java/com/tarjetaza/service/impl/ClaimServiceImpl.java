@@ -20,4 +20,9 @@ public class ClaimServiceImpl implements ClaimService {
     public List<Claim> findAll() {
         return claimRepository.findAll();
     }
+
+    @Override
+    public Claim findById(Long id) {
+        return claimRepository.findById(id).orElse(null);
+    }
 }

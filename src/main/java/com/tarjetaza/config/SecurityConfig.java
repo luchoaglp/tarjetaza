@@ -21,21 +21,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/", "/home", "/signin",
             "/api/requests", "/api/cards/**", "/api/credits",
             //"/requests/**", "/api/requests/**", "/users/**" //DEV
-            "/claims/**"
+            //"/claims/**" //DEV
     };
 
     private static final String[] ADMIN_MATCHERS = {
             "/requests/**", "/api/requests/**",
             "/duplicate-requests/**",
             "/users/**", "/user/**",
-            "/params/**", "/certificates/**"
+            "/params/**", "/certificates/**",
+            "/claims/**"
     };
 
     private static final String[] USER_MATCHERS = {
             "/requests/**", "/api/requests/**",
             "/duplicate-requests/**",
             "/user/**",
-            "/params/**", "/certificates/**"
+            "/params/**", "/certificates/**",
+            "/claims/**"
+    };
+
+    private static final String[] OPERATOR_MATCHERS = {
+            "/claims/**"
     };
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -57,8 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers(ADMIN_MATCHERS).access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers(USER_MATCHERS).access("hasRole('ROLE_USER')")
+                .antMatchers(ADMIN_MATCHERS).access("hasRole('ROLE_OPERATOR') and hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers(USER_MATCHERS).access("hasRole('ROLE_OPERATOR') and hasRole('ROLE_USER')")
+                .antMatchers(OPERATOR_MATCHERS).access("hasRole('ROLE_OPERATOR')")
                 .anyRequest()
                 .authenticated();
 

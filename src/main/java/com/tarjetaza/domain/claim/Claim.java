@@ -22,6 +22,9 @@ public class Claim {
     @Column(name = "claim_id")
     private Long id;
 
+    @Column(length = 255)
+    private String observations;
+
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "claim_subject_concept_id")

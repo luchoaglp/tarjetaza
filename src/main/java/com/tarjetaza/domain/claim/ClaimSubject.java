@@ -23,7 +23,7 @@ public class ClaimSubject {
 
     private String subject;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "claimSubject", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<SubjectConcept> subjectConcepts = new ArrayList<>();
 

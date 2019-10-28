@@ -33,15 +33,15 @@
                                 <th>Cliente</th>
                                 <th>Concepto</th>
                                 <th width="13%">Alta</th>
-                                <th width="13%">Actualizada</th>
+                                <th width="13%">Actualizado</th>
                                 <th width="4%"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="claim : ${claims}">
                                 <td th:text="${claim.id}"></td>
-                                <td th:text="${claim.request.nombre + ' ' + claim.request.apellido}"></td>
-                                <td th:text="${claim.subjectConcept.concept + ' (' + claim.subjectConcept.code + ')'}"></td>
+                                <td th:text="${claim.request.apellido + ' ' + claim.request.nombre}"></td>
+                                <td th:text="${claim.subjectConcept.code + ' - ' + claim.subjectConcept.concept}"></td>
                                 <td th:text="${#temporals.format(claim.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
                                 <td th:text="${#temporals.format(claim.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
                                 <td><a th:href="@{${'/claims/detail/' + claim.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
@@ -53,7 +53,7 @@
                                 <th>Cliente</th>
                                 <th>Concepto</th>
                                 <th width="13%">Alta</th>
-                                <th width="13%">Actualizada</th>
+                                <th width="13%">Actualizado</th>
                                 <th width="4%"></th>
                             </tr>
                             </tfoot>

@@ -20,7 +20,6 @@ public class UserPrincipal implements UserDetails {
 
     private String username;
 
-    //@JsonIgnore
     private String email;
 
     @JsonIgnore
@@ -38,17 +37,6 @@ public class UserPrincipal implements UserDetails {
         this.password = password;
     }
 
-    /*
-    public UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
-    */
-
     public UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities, boolean enabled) {
         this.id = id;
         this.name = name;
@@ -60,8 +48,6 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-
-        //List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new UserPrincipal(
                 user.getId(),

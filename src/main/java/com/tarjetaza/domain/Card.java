@@ -47,16 +47,12 @@ public class Card {
     private String numero;
 
     @JsonIgnore
-    //@JsonProperty("created_date")
     @NotNull
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @CreatedDate
     private LocalDateTime createdDate;
 
     @JsonIgnore
-    //@JsonProperty("last_modified_date")
     @NotNull
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-03:00")
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 

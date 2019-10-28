@@ -41,21 +41,6 @@
                                 <li class="list-group-item">Tarjeta: <span th:text="${credit.request.card.numero}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Lote: <span th:if="${credit.batch}" th:text="${credit.batch.id}" class="font-weight-bold"></span></li>
                             </ul>
-                            <!--
-                            <ul class="list-group">
-                                <li class="list-group-item">ID: <span th:text="${request.id}" class="font-weight-bold"></span><span th:text="${request.requestState.displayValue}" class="font-weight-bold light-green-text float-right"></span></li>
-                                <li class="list-group-item">Nombre: <span th:text="${request.nombre}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Apellido: <span th:text="${request.apellido}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Calle: <span th:text="${request.calle}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Puerta: <span th:text="${request.puerta}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Piso: <span th:text="${request.piso}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Dpto.: <span th:text="${request.dpto}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Código Postal: <span th:text="${request.cp}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Provincia: <span th:text="${request.getProvinciaNombre()}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Localidad: <span th:text="${request.localidad}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Observaciones: <span th:text="${request.observaciones}" class="font-weight-bold"></span></li>
-                            </ul>
-                            -->
                         </div>
                         <div class="col-md-6">
                             <ul class="list-group">
@@ -64,20 +49,6 @@
                                 <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(credit.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(credit.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                             </ul>
-                            <!--
-                            <ul class="list-group">
-                                <li class="list-group-item">Virtual ID: <span th:text="${request.virtualId}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Teléfono: <span th:text="${request.telefono}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Código de documento: <span th:text="${request.getCodigoDocumentoNombre()}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Cuit / Cuil: <span th:text="${request.getCuitCuilFormatted()}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Fecha de nacimiento: <span th:text="${request.getFecNacFormatted()}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Estado Civil: <span th:text="${request.getEstadoCivilNombre()}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Sexo: <span th:text="${request.sexo}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Email: <span th:text="${request.email}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
-                            </ul>
-                            -->
                         </div>
                     </div>
                 </div>
@@ -85,36 +56,6 @@
 
         </div>
     </div>
-
-    <!--
-    <div th:if="${request.card}" class="row mb-3">
-        <div class="col-md-6">
-
-            <div class="card card-cascade narrower shadow-sm">
-
-                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-3">Datos de la Tarjeta</a>
-                </div>
-
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="list-group">
-                                <li class="list-group-item">Entidad: <span th:text="${request.card.entidad}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Sucursal: <span th:text="${request.card.sucursal}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Usuario: <span th:text="${request.card.usuario}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Número: <span th:text="${request.card.numero}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Fecha de Alta: <span th:text="${#temporals.format(request.card.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(request.card.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    -->
 
 </div>
 

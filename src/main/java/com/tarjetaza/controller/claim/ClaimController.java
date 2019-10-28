@@ -4,6 +4,7 @@ import com.tarjetaza.service.ClaimService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,6 +23,14 @@ public class ClaimController {
         model.addAttribute("claims", claimService.findAll());
 
         return "claims/index";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id, Model model) {
+
+        model.addAttribute("claim", claimService.findById(id));
+
+        return "claims/detail";
     }
 
 }

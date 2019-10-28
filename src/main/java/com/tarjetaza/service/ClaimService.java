@@ -8,4 +8,5 @@ public interface ClaimService {
 
     List<Claim> findAll();
 
+    Claim findById(Long id);
 }

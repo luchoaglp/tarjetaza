@@ -35,11 +35,12 @@
                                 <tr>
                                     <th width="4%">ID</th>
                                     <th width="8%">Virtual ID</th>
+                                    <th width="5%">Lote</th>
                                     <th>Cliente</th>
-                                    <th width="6%">Monto</th>
-                                    <th>Alta</th>
-                                    <th>Actualizado</th>
-                                    <th>Estado</th>
+                                    <th width="5%">Monto</th>
+                                    <th width="13%">Alta</th>
+                                    <th width="13%">Actualizado</th>
+                                    <th width="6%">Estado</th>
                                     <th width="4%"></th>
                                     <th width="4%"></th>
                                 </tr>
@@ -48,6 +49,7 @@
                                 <tr th:each="credit : ${credits}">
                                     <td th:text="${credit.id}"></td>
                                     <td th:text="${credit.request.virtualId}"></td>
+                                    <td th:text="${credit.batch?.id}"></td>
                                     <td th:text="${credit.request.apellido + ' ' + credit.request.nombre}"></td>
                                     <td class="text-right" th:text="${#numbers.formatDecimal(credit.amount, 0, 2, 'POINT')}"></td>
                                     <td th:text="${#temporals.format(credit.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
@@ -58,16 +60,18 @@
                                 </tr>
                             </tbody>
                             <tfoot class="light-green text-white">
-                                <tr>
-                                    <th width="4%">ID</th>
-                                    <th width="8%">Virtual ID</th>
-                                    <th>Cliente</th>
-                                    <th width="6%">Monto</th>
-                                    <th>Actualizado</th>
-                                    <th>Estado</th>
-                                    <th width="4%"></th>
-                                    <th width="4%"></th>
-                                </tr>
+                            <tr>
+                                <th width="4%">ID</th>
+                                <th width="8%">Virtual ID</th>
+                                <th width="5%">Lote</th>
+                                <th>Cliente</th>
+                                <th width="5%">Monto</th>
+                                <th width="13%">Alta</th>
+                                <th width="13%">Actualizado</th>
+                                <th width="6%">Estado</th>
+                                <th width="4%"></th>
+                                <th width="4%"></th>
+                            </tr>
                             </tfoot>
                         </table>
                     </div>

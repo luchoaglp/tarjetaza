@@ -60,11 +60,9 @@ public class Credit {
         this.creditState = SOLICITADO;
     }
 
-    /*
     public void setBatch(Batch batch) {
         batch.getCredits().add(this);
         this.batch = batch;
     }
-    */
 
 }

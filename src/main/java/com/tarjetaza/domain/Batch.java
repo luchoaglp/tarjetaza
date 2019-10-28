@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,7 +31,7 @@ public class Batch {
     private LocalDateTime createdDate;
 
     @OneToMany(mappedBy = "batch", fetch = FetchType.LAZY)
-    private List<Credit> credits;
+    private List<Credit> credits = new ArrayList<>();
 
     public Batch() {
         this.createdDate = LocalDateTime.now();

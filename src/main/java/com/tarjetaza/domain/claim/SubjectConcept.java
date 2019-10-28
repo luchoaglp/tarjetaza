@@ -24,6 +24,8 @@ public class SubjectConcept {
     @JoinColumn(name = "claim_subject_id", nullable = false)
     private ClaimSubject claimSubject;
 
+    public SubjectConcept() { }
+
     public SubjectConcept(Integer code, String concept) {
         this.code = code;
         this.concept = concept;

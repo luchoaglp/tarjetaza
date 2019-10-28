@@ -27,6 +27,8 @@ public class ClaimSubject {
     @OneToMany(mappedBy = "claimSubject", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<SubjectConcept> subjectConcepts = new ArrayList<>();
 
+    public ClaimSubject() { }
+
     public ClaimSubject(Integer code, String subject) {
         this.code = code;
         this.subject = subject;

@@ -1,20 +1,27 @@
 package com.tarjetaza.controller.claim;
 
+import com.tarjetaza.domain.claim.Claim;
 import com.tarjetaza.service.ClaimService;
+import com.tarjetaza.service.ClaimSubjectService;
+import com.tarjetaza.service.RequestService;
+import com.tarjetaza.service.SubjectConceptService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/claims")
 public class ClaimController {
 
     private final ClaimService claimService;
+    private final RequestService requestService;
+    private final ClaimSubjectService claimSubjectService;
+    private final SubjectConceptService subjectConceptService;
 
-    public ClaimController(ClaimService claimService) {
+    public ClaimController(ClaimService claimService, RequestService requestService, ClaimSubjectService claimSubjectService) {
         this.claimService = claimService;
+        this.requestService = requestService;
+        this.claimSubjectService = claimSubjectService;
     }
 
     @GetMapping
@@ -31,6 +38,44 @@ public class ClaimController {
         model.addAttribute("claim", claimService.findById(id));
 
         return "claims/detail";
+    }
+
+    @GetMapping("/client")
+    public String selectClient(Model model) {
+
+        model.addAttribute("requests", requestService.findWithCardOrderByIdAsc());
+
+        return "claims/client";
+    }
+
+    @GetMapping("/add/{requestId}/{subjectId}")
+    public String add(@PathVariable("requestId") Long requestId,
+                      @PathVariable(value = "subjectId") Integer subjectId,
+                      Model model) {
+
+        model.addAttribute("subjects", claimSubjectService.findAll());
+        model.addAttribute("concepts", claimSubjectService.findById(subjectId).getSubjectConcepts());
+        model.addAttribute("request", requestService.findById(requestId));
+        model.addAttribute("claim", new Claim());
+
+        return "claims/add";
+    }
+
+    @PostMapping("/save")
+    public String save(Claim claim,
+                       @RequestParam Long requestId,
+                       @RequestParam Integer concept) {
+
+        System.out.println("CLAIM: " + claim.getObservations() + " " +
+            requestId + " " + concept);
+
+        claim.setRequest(requestService.findById(requestId));
+        claim.setSubjectConcept(claimSubjectService.findById(concept));
+
+        claim = claimService.save(claim);
+
+
+        return "redirect:/claims/detail/" + requestId;
     }
 
 }

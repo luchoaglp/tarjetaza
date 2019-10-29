@@ -27,6 +27,11 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> findWithCardOrderByIdAsc() {
+        return requestRepository.findWithCardOrderByIdAsc();
+    }
+
+    @Override
     public Request findById(Long id) {
         return requestRepository.findById(id).orElse(null);
     }
@@ -37,8 +42,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> findActiveOrderByIdAsc() {
-        return requestRepository.findActiveOrderByIdAsc();
+    public List<Request> findInProcessOrderByIdAsc() {
+        return requestRepository.findInProcessOrderByIdAsc();
     }
 
     @Override

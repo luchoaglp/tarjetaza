@@ -19,7 +19,7 @@
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
                     <a href="#" class="white-text mx-1">Reclamos</a>
                     <div>
-                        <a th:href="@{/claims/add}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Agregar Reclamo">
+                        <a th:href="@{/claims/client}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Agregar Reclamo">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -68,7 +68,7 @@
 
 <div th:replace="common/bottom :: body-bottom-scripts"/>
 <script th:src="@{/js/addons/datatables.min.js}"></script>
-<script th:src="@{/js/params/index.js}"></script>
+<script th:src="@{/js/claims/index.js}"></script>
 
 </body>
 </html>

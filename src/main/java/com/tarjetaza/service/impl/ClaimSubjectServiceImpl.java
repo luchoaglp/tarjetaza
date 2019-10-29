@@ -19,4 +19,14 @@ public class ClaimSubjectServiceImpl implements ClaimSubjectService {
     public void addAll(List<ClaimSubject> claimSubjects) {
         claimSubjects.addAll(claimSubjects);
     }
+
+    @Override
+    public ClaimSubject findById(Integer subjectId) {
+        return claimSubjectRepository.findById(subjectId).orElse(null);
+    }
+
+    @Override
+    public List<ClaimSubject> findAll() {
+        return claimSubjectRepository.findAll();
+    }
 }

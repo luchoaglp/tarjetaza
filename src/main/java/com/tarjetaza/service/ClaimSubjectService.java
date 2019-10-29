@@ -8,4 +8,7 @@ public interface ClaimSubjectService {
 
     void addAll(List<ClaimSubject> claimSubjects);
 
+    ClaimSubject findById(Integer subjectId);
+
+    List<ClaimSubject> findAll();
 }

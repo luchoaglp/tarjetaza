@@ -7,11 +7,11 @@ import java.util.List;
 public interface RequestService {
 
     List<Request> findAll();
-    List<Request> findActiveOrderByIdAsc();
+    List<Request> findInProcessOrderByIdAsc();
+    List<Request> findAllByOrderByIdAsc();
+    List<Request> findWithCardOrderByIdAsc();
 
     Request findById(Long id);
-
-    List<Request> findAllByOrderByIdAsc();
 
     Request save(Request request);
 

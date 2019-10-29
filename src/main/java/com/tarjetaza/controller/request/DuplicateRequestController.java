@@ -25,7 +25,7 @@ public class DuplicateRequestController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("duplicateRequest", duplicateRequestService.findById(id));
 

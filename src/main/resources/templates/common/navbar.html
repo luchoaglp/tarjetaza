@@ -61,6 +61,11 @@
                                 <li><a th:href="@{/claims}" class="waves-effect">Reclamos</a></li>
                             </ul>
                         </div>
+                        <div class="collapsible-body">
+                            <ul class="list-unstyled">
+                                <li><a th:href="@{/claims/client}" class="waves-effect">Agregar</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
                 <ul sec:authorize="hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">

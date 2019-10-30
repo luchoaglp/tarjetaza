@@ -5,7 +5,10 @@ import com.tarjetaza.repository.ClaimRepository;
 import com.tarjetaza.service.ClaimService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.tarjetaza.domain.claim.ClaimState.CERRADO;
 
 @Service
 public class ClaimServiceImpl implements ClaimService {
@@ -39,5 +42,19 @@ public class ClaimServiceImpl implements ClaimService {
     @Override
     public List<Claim> findOpenOrderByIdAsc() {
         return claimRepository.findOpenOrderByIdAsc();
+    }
+
+    @Override
+    public Claim close(Claim claim) {
+
+        Claim entity = findById(claim.getId());
+
+        entity.setClaimDate(claim.getClaimDate());
+        entity.setObservations(claim.getObservations().trim());
+        entity.setClaimInFavorOf(claim.getClaimInFavorOf());
+        entity.setClaimState(CERRADO);
+        entity.setLastModifiedDate(LocalDateTime.now());
+
+        return save(entity);
     }
 }

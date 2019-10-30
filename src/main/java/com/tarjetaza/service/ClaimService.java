@@ -15,4 +15,6 @@ public interface ClaimService {
     List<Claim> findAllByOrderByIdAsc();
 
     List<Claim> findOpenOrderByIdAsc();
+
+    Claim close(Claim claim);
 }

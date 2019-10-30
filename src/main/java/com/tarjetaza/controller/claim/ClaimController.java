@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -82,6 +83,26 @@ public class ClaimController {
         claim.setSubjectConcept(subjectConceptService.findById(conceptId));
 
         claim = claimService.save(claim);
+
+        return "redirect:/claims/detail/" + claim.getId();
+    }
+
+    @GetMapping("/close/{id}")
+    public String close(@PathVariable("id") Long id, Model model) {
+
+        Claim claim = claimService.findById(id);
+
+        claim.setClaimDate(LocalDate.now());
+
+        model.addAttribute("claim", claim);
+
+        return "claims/close";
+    }
+
+    @PostMapping("/close")
+    public String close(@Valid Claim claim) {
+
+        claim = claimService.close(claim);
 
         return "redirect:/claims/detail/" + claim.getId();
     }

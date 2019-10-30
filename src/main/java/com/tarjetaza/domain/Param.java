@@ -34,7 +34,6 @@ public class Param {
     @Column(name = "value")
     private String value;
 
-
     @JsonProperty("param_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

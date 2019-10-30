@@ -28,7 +28,7 @@
 
             <div class="card card-cascade narrower shadow-sm">
 
-                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
+                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-4 d-flex justify-content-between align-items-center">
                     <a href="#" class="white-text mx-1">Reclamo Detalle</a>
                 </div>
 
@@ -46,8 +46,11 @@
                         <div class="col-md-6">
                             <ul class="list-group">
                                 <li class="list-group-item">Virtual ID: <span th:text="${claim.request.virtualId}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Tarjeta: <span th:text="${claim.request.card.numero}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(claim.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(claim.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Fecha: <span th:text="${#temporals.format(claim.claimDate, 'yyyy/MM/dd')}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">En favor de: <span th:text="${claim.claimInFavorOf?.displayValue}" class="font-weight-bold"></span></li>
                             </ul>
                         </div>
                     </div>

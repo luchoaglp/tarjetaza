@@ -18,10 +18,11 @@ public class ClaimController {
     private final ClaimSubjectService claimSubjectService;
     private final SubjectConceptService subjectConceptService;
 
-    public ClaimController(ClaimService claimService, RequestService requestService, ClaimSubjectService claimSubjectService) {
+    public ClaimController(ClaimService claimService, RequestService requestService, ClaimSubjectService claimSubjectService, SubjectConceptService subjectConceptService) {
         this.claimService = claimService;
         this.requestService = requestService;
         this.claimSubjectService = claimSubjectService;
+        this.subjectConceptService = subjectConceptService;
     }
 
     @GetMapping
@@ -64,18 +65,17 @@ public class ClaimController {
     @PostMapping("/save")
     public String save(Claim claim,
                        @RequestParam Long requestId,
-                       @RequestParam Integer concept) {
+                       @RequestParam Integer conceptId) {
 
         System.out.println("CLAIM: " + claim.getObservations() + " " +
-            requestId + " " + concept);
+            requestId + " " + conceptId);
 
         claim.setRequest(requestService.findById(requestId));
-        claim.setSubjectConcept(claimSubjectService.findById(concept));
+        claim.setSubjectConcept(subjectConceptService.findById(conceptId));
 
         claim = claimService.save(claim);
 
-
-        return "redirect:/claims/detail/" + requestId;
+        return "redirect:/claims/detail/" + claim.getId();
     }
 
 }

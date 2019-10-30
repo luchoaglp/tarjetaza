@@ -152,8 +152,6 @@ public class RequestRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        requestService.changeStatus(requests, "r_sent");
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

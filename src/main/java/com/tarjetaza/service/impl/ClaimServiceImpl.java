@@ -25,4 +25,9 @@ public class ClaimServiceImpl implements ClaimService {
     public Claim findById(Long id) {
         return claimRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Claim save(Claim claim) {
+        return claimRepository.save(claim);
+    }
 }

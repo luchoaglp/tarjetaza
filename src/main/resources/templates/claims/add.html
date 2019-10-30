@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <select name="concept" id="concept"  class="mdb-select colorful-select dropdown-info md-form">
+                                        <select name="conceptId" id="concept" class="mdb-select colorful-select dropdown-info md-form">
                                             <option th:each="concept : ${concepts}"
                                                     th:value="${concept.id}"
                                                     th:text="${concept.code + ' - ' + concept.concept}"></option>

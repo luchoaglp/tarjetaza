@@ -70,7 +70,7 @@ $(function() {
         if(credits.length > 0) {
 
             $(this).prop("disabled", true);
-            $(this).removeClass('btn-outline-white').addClass('btn-outline-blue-grey')
+            //$(this).removeClass('btn-outline-white').addClass('btn-outline-blue-grey')
 
             $('#envelope').addClass('d-none');
             $('#spinner').removeClass('d-none');

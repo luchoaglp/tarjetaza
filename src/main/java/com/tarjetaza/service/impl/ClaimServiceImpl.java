@@ -30,4 +30,14 @@ public class ClaimServiceImpl implements ClaimService {
     public Claim save(Claim claim) {
         return claimRepository.save(claim);
     }
+
+    @Override
+    public List<Claim> findAllByOrderByIdAsc() {
+        return claimRepository.findAllByOrderByIdAsc();
+    }
+
+    @Override
+    public List<Claim> findOpenOrderByIdAsc() {
+        return claimRepository.findOpenOrderByIdAsc();
+    }
 }

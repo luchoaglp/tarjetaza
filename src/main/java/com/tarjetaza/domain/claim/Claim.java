@@ -11,6 +11,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import static com.tarjetaza.domain.claim.ClaimState.ABIERTO;
+
 @Getter
 @Setter
 @Entity
@@ -24,6 +26,9 @@ public class Claim {
 
     @Column(length = 255)
     private String observations;
+
+    @Enumerated(EnumType.ORDINAL)
+    private ClaimState claimState;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
@@ -48,6 +53,7 @@ public class Claim {
     public Claim() {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+        this.claimState = ABIERTO;
     }
 
     public Claim(SubjectConcept subjectConcept, Request request) {
@@ -55,5 +61,6 @@ public class Claim {
         this.request = request;
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+        this.claimState = ABIERTO;
     }
 }

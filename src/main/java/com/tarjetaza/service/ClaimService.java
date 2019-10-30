@@ -11,4 +11,8 @@ public interface ClaimService {
     Claim findById(Long id);
 
     Claim save(Claim claim);
+
+    List<Claim> findAllByOrderByIdAsc();
+
+    List<Claim> findOpenOrderByIdAsc();
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @Controller
 @RequestMapping("/claims")
 public class ClaimController {
@@ -26,9 +29,17 @@ public class ClaimController {
     }
 
     @GetMapping
-    public String users(Model model) {
+    public String users(@RequestParam(required = false) String show, Model model) {
 
-        model.addAttribute("claims", claimService.findAll());
+        List<Claim> claims = null;
+
+        if(show == null) {
+            claims = claimService.findOpenOrderByIdAsc();
+        } else if(show.equals("all")) {
+            claims = claimService.findAllByOrderByIdAsc();
+        }
+
+        model.addAttribute("claims", claims);
 
         return "claims/index";
     }
@@ -63,12 +74,9 @@ public class ClaimController {
     }
 
     @PostMapping("/save")
-    public String save(Claim claim,
+    public String save(@Valid Claim claim,
                        @RequestParam Long requestId,
                        @RequestParam Integer conceptId) {
-
-        System.out.println("CLAIM: " + claim.getObservations() + " " +
-            requestId + " " + conceptId);
 
         claim.setRequest(requestService.findById(requestId));
         claim.setSubjectConcept(subjectConceptService.findById(conceptId));

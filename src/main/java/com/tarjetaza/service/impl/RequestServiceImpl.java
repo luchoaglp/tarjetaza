@@ -143,6 +143,11 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findByCardNumero(numero);
     }
 
+    @Override
+    public Integer findCountDeliveredCards() {
+        return requestRepository.findCountDeliveredCards();
+    }
+
     private RequestState getRequestState(String op) {
 
         switch (op) {

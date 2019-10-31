@@ -74,11 +74,13 @@ public class User {
     private Boolean active;
 
     public User() {
+        this.active = true;
         this.createdDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
     }
 
     public User(String username, String password) {
+        this.active = true;
         this.username = username;
         this.password = password;
         this.createdDate = LocalDateTime.now();

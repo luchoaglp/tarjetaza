@@ -30,4 +30,8 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findWithCardOrderByIdAsc();
 
     Request findByCardNumero(String numero);
+
+    @Query("SELECT COUNT(r) FROM Request r " +
+            "WHERE r.requestState = 5")
+    Integer findCountDeliveredCards();
 }

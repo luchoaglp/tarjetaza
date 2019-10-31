@@ -27,4 +27,6 @@ public interface RequestService {
     Request findByVirtualId(Long virtualId);
 
     Request findByCardNumero(String numero);
+
+    Integer findCountDeliveredCards();
 }

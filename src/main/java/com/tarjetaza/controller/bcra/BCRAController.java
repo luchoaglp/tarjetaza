@@ -39,11 +39,13 @@ public class BCRAController {
 
         List<String> list = BCRAFile.RITxx1xxxx(cantTarjetas);
 
+        /*
         System.out.println("*** FILE ***");
         System.out.println(sample + "; " + sample.length() + " (Example)");
         for (String RITxx1xxxx : list) {
             System.out.println(RITxx1xxxx + "; " + RITxx1xxxx.length());
         }
+        */
 
         String fileName = "TARJCRED.txt";
 

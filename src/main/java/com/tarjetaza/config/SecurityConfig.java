@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/requests", "/api/cards/**", "/api/credits",
             //"/requests/**", "/api/requests/**", "/users/**" //DEV
             //"/claims/**" //DEV
+            "/consumption/**" //DEV
     };
 
     private static final String[] ADMIN_MATCHERS = {

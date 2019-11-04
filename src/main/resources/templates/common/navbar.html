@@ -77,6 +77,15 @@
                         </div>
                     </li>
                 </ul>
+                <ul sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-file-invoice-dollar"></i> Consumos<i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul class="list-unstyled">
+                                <li><a th:href="@{/consumption/upload}" class="waves-effect">Subir Archivo</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
                 <ul sec:authorize="hasRole('ROLE_ADMIN')" class="collapsible collapsible-accordion">
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-users"></i> Usuarios<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">

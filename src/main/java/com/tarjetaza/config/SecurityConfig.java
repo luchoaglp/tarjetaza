@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/requests", "/api/cards/**", "/api/credits",
             //"/requests/**", "/api/requests/**", "/users/**" //DEV
             //"/claims/**" //DEV
-            "/consumption/**" //DEV
+            // "/consumption/**" //DEV
     };
 
     private static final String[] ADMIN_MATCHERS = {
@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/duplicate-requests/**",
             "/users/**", "/user/**",
             "/params/**", "/certificates/**",
-            "/claims/**"
+            "/claims/**",
+            "/consumption/**"
     };
 
     private static final String[] USER_MATCHERS = {
@@ -38,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/duplicate-requests/**",
             "/user/**",
             "/params/**", "/certificates/**",
-            "/claims/**"
+            "/claims/**",
+            "/consumption/**"
     };
 
     private static final String[] OPERATOR_MATCHERS = {

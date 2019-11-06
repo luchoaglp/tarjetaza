@@ -78,7 +78,7 @@ public class RequestController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("request", requestService.findById(id));
 

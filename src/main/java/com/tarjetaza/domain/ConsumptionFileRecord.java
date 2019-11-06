@@ -44,20 +44,13 @@ public class ConsumptionFileRecord {
 
     public ConsumptionFileRecord() { }
 
-    /*
-
-    Integer trxId = Integer.valueOf(body.substring(1, 11)); // ID de Transacción (10)
-            Integer coupon = Integer.valueOf(body.substring(26, 32)); // Número de Cupón (6)
-
-            LocalDateTime trxDateTime = LocalDateTime.parse(
-                    body.substring(37, 51), dateTimeFormatter
-            ); // Fecha-Hora de Operación (AAAAMMDD)(HHMMSS)
-
-            Double amount = Double.valueOf(body.substring(77, 86) + '.' + body.substring(86, 88)); // Importe de la Transacción 9(9)v99
-
-            String sign = body.substring(88, 89); // Signo Importe de la Transacción (1 - Pos. / 2 - Neg.)
-            String card = body.substring(136); // Filler / Primeros 12 dígitos de Número de Tarjeta // Últimos 4 dígitos de Número de Tarjeta
-
-     */
+    public String getStrSign() {
+        if(sign.equals("1")) {
+            return "";
+        } else if(sign.equals("2")) {
+            return "-";
+        }
+        return null;
+    }
 
 }

@@ -38,6 +38,9 @@ public class ConsumptionFile {
     @Column(name = "number_of_records", nullable = false)
     private Integer numberOfRecords;
 
+    @Column(name = "amount", nullable = false)
+    private Double amount;
+
     @JsonIgnore
     @OneToMany(mappedBy = "consumptionFile", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<ConsumptionFileRecord> consumptionFileRecords = new ArrayList<>();

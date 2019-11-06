@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="common/head :: head"/>
+    <title>Tarjetaza | Consumos</title>
+    <link th:href="@{/css/addons/datatables.min.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:replace="common/navbar :: navbar"/>
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card card-cascade narrower shadow-sm">
+                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-4 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-1">Consumos</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table id="table" class="table table-sm table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead class="light-green text-white">
+                            <tr>
+                                <th width="4%">ID</th>
+                                <th>Archivo</th>
+                                <th width="13%">Subido</th>
+                                <th width="8%">Proceso</th>
+                                <th width="8%">Monto</th>
+                                <th width="5%">Registros</th>
+                                <th width="4%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="c : ${consumption}">
+                                <td th:text="${c.id}"></td>
+                                <td th:text="${c.fileName}"></td>
+                                <td th:text="${#temporals.format(c.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
+                                <td th:text="${#temporals.format(c.processDate, 'yyyy/MM/dd')}"></td>
+                                <td class="text-right" th:text="${#numbers.formatDecimal(c.amount, 0, 2, 'POINT')}"></td>
+                                <td th:text="${c.numberOfRecords}"></td>
+                                <td><a th:href="@{${'/consumption/detail/' + c.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="light-green text-white">
+                            <tr>
+                                <th width="4%">ID</th>
+                                <th>Archivo</th>
+                                <th width="13%">Subido</th>
+                                <th width="8%">Proceso</th>
+                                <th width="8%">Monto</th>
+                                <th width="5%">Registros</th>
+                                <th width="4%"></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common/bottom :: body-bottom-scripts"/>
+<script th:src="@{/js/addons/datatables.min.js}"></script>
+<script th:src="@{/js/consumption/index.js}"></script>
+
+</body>
+</html>

@@ -5,10 +5,8 @@ import com.tarjetaza.service.ConsumptionFileService;
 import com.tarjetaza.utility.ConsumptionFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,6 +26,22 @@ public class ConsumptionFileController {
 
     public ConsumptionFileController(ConsumptionFileService consumptionFileService) {
         this.consumptionFileService = consumptionFileService;
+    }
+
+    @GetMapping
+    public String credits(Model model) {
+
+        model.addAttribute("consumption", consumptionFileService.findAllByOrderByIdAsc());
+
+        return "consumption/index";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id, Model model) {
+
+        model.addAttribute("records", consumptionFileService.findById(id).getConsumptionFileRecords());
+
+        return "consumption/detail";
     }
 
     @GetMapping("/upload")
@@ -60,7 +74,6 @@ public class ConsumptionFileController {
 
             consumptionFileService.save(consumptionFile);
 
-            System.out.println(consumptionFile);
             /*
             try (Stream<String> stream = Files.lines(file)) {
 

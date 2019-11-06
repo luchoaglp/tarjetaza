@@ -22,6 +22,8 @@ public class ConsumptionFormat {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
+        double total = 0;
+
         for(int i = 1; i < list.size() - 1; i++) {
             String body = list.get(i);
 
@@ -37,12 +39,20 @@ public class ConsumptionFormat {
             String sign = body.substring(88, 89); // Signo Importe de la Transacción (1 - Pos. / 2 - Neg.)
             String card = body.substring(136); // Filler / Primeros 12 dígitos de Número de Tarjeta // Últimos 4 dígitos de Número de Tarjeta
 
+            /*
             System.out.println(trxId);
             System.out.println(coupon);
             System.out.println(trxDateTime);
             System.out.println(amount);
             System.out.println(sign);
             System.out.println(card);
+            */
+
+            if(sign.equals("1")) {
+                total += amount;
+            } else if(sign.equals("2")) {
+                total -= amount;
+            }
 
             ConsumptionFileRecord record = new ConsumptionFileRecord();
 
@@ -67,6 +77,7 @@ public class ConsumptionFormat {
         consumptionFile.setFileName(file.getFileName().toString());
         consumptionFile.setProcessDate(processDate);
         consumptionFile.setNumberOfRecords(numberOfRecords);
+        consumptionFile.setAmount(total);
 
         return consumptionFile;
     }

@@ -5,6 +5,8 @@ import com.tarjetaza.repository.ConsumptionFileRepository;
 import com.tarjetaza.service.ConsumptionFileService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConsumptionFileServiceImpl implements ConsumptionFileService {
 
@@ -17,5 +19,15 @@ public class ConsumptionFileServiceImpl implements ConsumptionFileService {
     @Override
     public ConsumptionFile save(ConsumptionFile consumptionFile) {
         return consumptionFileRepository.save(consumptionFile);
+    }
+
+    @Override
+    public List<ConsumptionFile> findAllByOrderByIdAsc() {
+        return consumptionFileRepository.findAllByOrderByIdAsc();
+    }
+
+    @Override
+    public ConsumptionFile findById(Long id) {
+        return consumptionFileRepository.findById(id).orElse(null);
     }
 }

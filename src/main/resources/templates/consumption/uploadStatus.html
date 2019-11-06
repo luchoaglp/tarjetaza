@@ -21,23 +21,21 @@
                     <a href="#" class="white-text mx-3">Archivo de Consumo</a>
                 </div>
 
-                <div class="card text-white bg-success m-3 px-3 mb-3">
+                <div class="card text-white bg-success m-4 px-3">
                     <div class="card-body">
                         <div th:if="${message}">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3 class="card-text text-white" th:text="${message}"/>
+                                    <h2 class="card-text text-white" th:text="${message}"/>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-
 </div>
 
 <div th:replace="common/bottom :: body-bottom-scripts"/>

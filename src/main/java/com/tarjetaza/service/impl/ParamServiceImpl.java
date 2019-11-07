@@ -38,7 +38,7 @@ public class ParamServiceImpl implements ParamService {
         Param entity = findById(param.getId());
 
         entity.setDescription(param.getDescription().trim());
-        entity.setValue(param.getDescription().trim());
+        entity.setValue(param.getValue().trim());
         entity.setParamDate(param.getParamDate());
         entity.setLastModifiedDate(LocalDateTime.now());
 

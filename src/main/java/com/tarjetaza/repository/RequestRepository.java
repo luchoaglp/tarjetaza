@@ -3,7 +3,9 @@ package com.tarjetaza.repository;
 import com.tarjetaza.domain.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
@@ -32,6 +34,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     Request findByCardNumero(String numero);
 
     @Query("SELECT COUNT(r) FROM Request r " +
-            "WHERE r.requestState = 5")
-    Integer findCountDeliveredCards();
+            "WHERE r.requestState = 5 " +
+            "AND r.requestedCardDate < :dateTo")
+    Integer findCountDeliveredCards(@Param("dateTo") LocalDate dateTo);
 }

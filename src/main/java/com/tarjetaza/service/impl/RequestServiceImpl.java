@@ -7,6 +7,7 @@ import com.tarjetaza.repository.RequestRepository;
 import com.tarjetaza.service.RequestService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,6 +60,10 @@ public class RequestServiceImpl implements RequestService {
         request.setRequestState(getRequestState(op));
         request.setLastModifiedDate(LocalDateTime.now());
 
+        if(op.equals("c_requested")) {
+            request.setRequestedCardDate(LocalDate.now());
+        }
+
         requestRepository.save(request);
     }
 
@@ -71,6 +76,10 @@ public class RequestServiceImpl implements RequestService {
 
             request.setRequestState(getRequestState(op));
             request.setLastModifiedDate(LocalDateTime.now());
+
+            if(op.equals("c_requested")) {
+                request.setRequestedCardDate(LocalDate.now());
+            }
 
             requestRepository.save(request);
         }
@@ -144,8 +153,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Integer findCountDeliveredCards() {
-        return requestRepository.findCountDeliveredCards();
+    public Integer findCountDeliveredCards(LocalDate dateTo) {
+        return requestRepository.findCountDeliveredCards(dateTo);
     }
 
     private RequestState getRequestState(String op) {

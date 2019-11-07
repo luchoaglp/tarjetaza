@@ -91,6 +91,7 @@
                                 <li class="list-group-item">Estado Civil: <span th:text="${request.getEstadoCivilNombre()}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Sexo: <span th:text="${request.sexo}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Email: <span th:text="${request.email}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Fecha de tarjeta pedida: <span th:text="${#temporals.format(request.requestedCardDate, 'yyyy/MM/dd')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                             </ul>

@@ -2,6 +2,7 @@ package com.tarjetaza.service;
 
 import com.tarjetaza.domain.Request;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RequestService {
@@ -28,5 +29,5 @@ public interface RequestService {
 
     Request findByCardNumero(String numero);
 
-    Integer findCountDeliveredCards();
+    Integer findCountDeliveredCards(LocalDate dateTo);
 }

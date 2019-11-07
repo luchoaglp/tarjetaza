@@ -8,13 +8,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @Controller
@@ -30,22 +37,35 @@ public class BCRAController {
         this.requestService = requestService;
     }
 
-    @RequestMapping("/download")
-    public ResponseEntity<ByteArrayResource> download() throws IOException {
+    @GetMapping("/select-date")
+    public String users(Model model) {
 
-        Integer cantTarjetas = requestService.findCountDeliveredCards();
+        model.addAttribute("dateTo", LocalDate.now());
 
-        String sample = "320870271201911RIT006211000nnnnnnnnnnNbbbbbbbbbb";
+        return "bcra/select-date";
+    }
 
-        List<String> list = BCRAFile.RITxx1xxxx(cantTarjetas);
+    @GetMapping("/download")
+    public ResponseEntity<ByteArrayResource> download(@RequestParam("dateTo") String dateToStr) throws IOException {
 
-        /*
-        System.out.println("*** FILE ***");
-        System.out.println(sample + "; " + sample.length() + " (Example)");
-        for (String RITxx1xxxx : list) {
-            System.out.println(RITxx1xxxx + "; " + RITxx1xxxx.length());
-        }
-        */
+
+        LocalDate dateTo = LocalDate.parse(dateToStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        //date.with(TemporalAdjusters.firstDayOfMonth());
+
+        //System.out.println("FECHA HASTA: " + dateTo);
+
+        Integer cantTarjetas = requestService.findCountDeliveredCards(dateTo);
+
+        //String sample = "320870271201911RIT006211000nnnnnnnnnnNbbbbbbbbbb";
+
+        List<String> list = BCRAFile.RITxx1xxxx(cantTarjetas, dateTo);
+
+        // System.out.println("*** FILE ***");
+        // System.out.println(sample + "; " + sample.length() + " (Example)");
+        // for (String RITxx1xxxx : list) {
+        //    System.out.println(RITxx1xxxx + "; " + RITxx1xxxx.length());
+        // }
 
         String fileName = "TARJCRED.txt";
 

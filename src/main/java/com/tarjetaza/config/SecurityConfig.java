@@ -20,8 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/css/**", "/js/**", "/img/**", "/font/**", "/",
             "/", "/home", "/signin",
             "/api/requests", "/api/cards/**", "/api/credits",
-            //"/requests/**", "/api/requests/**", "/users/**" //DEV
-            //"/claims/**" //DEV
+            // "/requests/**", "/api/requests/**", "/users/**" //DEV
+            // "/claims/**" //DEV
             // "/consumption/**" //DEV
     };
 

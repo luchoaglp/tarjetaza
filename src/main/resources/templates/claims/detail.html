@@ -46,7 +46,6 @@
                         <div class="col-md-6">
                             <ul class="list-group">
                                 <li class="list-group-item">Virtual ID: <span th:text="${claim.request.virtualId}" class="font-weight-bold"></span></li>
-                                <li class="list-group-item">Tarjeta: <span th:text="${claim.request.card.numero}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Fecha de la solicitud: <span th:text="${#temporals.format(claim.createdDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Ultima modificación: <span th:text="${#temporals.format(claim.lastModifiedDate, 'yyyy/MM/dd HH:mm:ss')}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Fecha: <span th:text="${#temporals.format(claim.claimDate, 'yyyy/MM/dd')}" class="font-weight-bold"></span></li>

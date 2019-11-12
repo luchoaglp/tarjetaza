@@ -28,7 +28,7 @@
 
             <div class="card card-cascade narrower shadow-sm">
 
-                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
+                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-2 d-flex justify-content-between align-items-center">
                     <a href="#" class="white-text mx-1">Solicitud Detalle</a>
                     <div>
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_INGRESADA || request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA || request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_PEDIDA || request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_RECIBIDA || request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_ENTREGADA}" th:href="@{${'/requests/edit/' + request.id}}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Editar Solicitud">
@@ -49,7 +49,7 @@
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_PEDIDA}" th:href="@{${'/requests/change-status/' + request.id + '/r_accept' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Volver al estado de Solicitud Aceptada">
                             <i class="fas fa-undo"></i>
                         </a>
-                        <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_PEDIDA}" th:href="@{${'/cards/add/' + request.id }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Completar los Datos de la Tarjeta">
+                        <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_PEDIDA}" th:href="@{${'/cards/add/' + request.id }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Editar los Datos de la Cuenta">
                             <i class="far fa-credit-card"></i>
                         </a>
                         <a th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).TARJETA_RECIBIDA}" th:href="@{${'/requests/change-status/' + request.id + '/c_delivered' }}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Cambiar estado a Tarjeta Entregada">

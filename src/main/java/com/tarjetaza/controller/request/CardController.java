@@ -46,7 +46,10 @@ public class CardController {
 
         if(request.getCard() == null) {
 
-            request.setRequestState(TARJETA_RECIBIDA);
+            if(!card.getNumero().isEmpty()) {
+                request.setRequestState(TARJETA_RECIBIDA);
+            }
+
             card.setRequest(request);
 
             cardService.save(card);

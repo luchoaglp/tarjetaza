@@ -41,8 +41,9 @@ public class Card {
     @Column(length = 8)
     private String usuario;
 
-    @NotBlank
-    @Size(min = 19, max = 19, message = "{card.numero.size}")
+    //@NotBlank
+    @NotNull
+    @Size(max = 19, message = "{card.numero.size}")
     @Column(length = 19)
     private String numero;
 

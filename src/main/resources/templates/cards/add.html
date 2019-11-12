@@ -29,8 +29,8 @@
 
             <div class="card card-cascade narrower shadow-sm">
 
-                <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-4 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-3">Alta de Tarjeta</a>
+                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-2 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-1">Alta de Tarjeta</a>
                 </div>
 
                 <div class="card-body">
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="md-form">
                                     <label for="numero">Número <small class="text-danger">*</small></label>
-                                    <input type="text" class="form-control" minlength="19" maxlength="19" th:errorclass="is-invalid" th:field="*{numero}" id="numero" placeholder="Número" required>
+                                    <input type="text" class="form-control" minlength="19" maxlength="19" th:errorclass="is-invalid" th:field="*{numero}" id="numero" placeholder="Número">
                                     <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"></div>
                                 </div>
                             </div>

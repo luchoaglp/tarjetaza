@@ -3,11 +3,8 @@ package com.tarjetaza.controller.request;
 import com.tarjetaza.domain.Card;
 import com.tarjetaza.domain.Request;
 import com.tarjetaza.service.RequestService;
-import com.tarjetaza.utility.RequestMailFormat;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -23,18 +20,17 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 @Controller
 @RequestMapping("/requests")
 public class RequestController {
+
+    @Value("${file.path}")
+    private String path;
 
     private final RequestService requestService;
     private final JavaMailSender javaMailSender;
@@ -121,6 +117,7 @@ public class RequestController {
 
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
+            //helper.setTo("lucho_aglp@hotmail.com");
             helper.setTo(request.getEmail());
             helper.setBcc("info@tarjetaza.com");
             //helper.setTo("soporte@cfsa.com.ar");
@@ -129,7 +126,9 @@ public class RequestController {
 
             helper.setSubject("Bienvenido " + request.getNombre() + " a Tarjetaza!");
 
-            helper.addAttachment("mail-banner.jpg", ResourceUtils.getFile("classpath:static/img/mail-banner.jpg"));
+            FileSystemResource file = new FileSystemResource(new File(path + "/img/mail-banner.jpg"));
+
+            helper.addAttachment("mail-banner.jpg", file);
 
             helper.setText("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" +
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
@@ -141,7 +140,7 @@ public class RequestController {
                     "<body style=\"margin:0;padding:10px;\">" +
                     " <table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"font-family:Arial, Helvetica,sans-serif;font-size:16px;color:#263238;border:7px solid #90C74B; border-radius:25px;\">" +
                     "<tr>" +
-                    "<td style=\"padding:10px 10px 0 10px;text-align: center;\"><img src=\"cid:mail-banner.jpg\"></td>" +
+                    "<td style=\"padding:10px 10px 0 10px;text-align: center;\"><img src=\"cid:mail-banner.jpg\" alt=\"Tarjetaza\"></td>" +
                     "</tr>" +
                     "<tr>" +
                     "<td style=\"padding:20px 3% 20px 0;text-align:right;\">" + localDate.format(DateTimeFormatter.ofPattern("d ' de '  MMMM ' de ' yyyy", new Locale("es", "AR"))) + "</td>" +
@@ -187,7 +186,7 @@ public class RequestController {
 
             //requestService.changeStatus(requests, "c_requested");
 
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
 

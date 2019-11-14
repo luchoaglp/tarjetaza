@@ -17,18 +17,36 @@
 
             <div class="card card-cascade narrower shadow-sm">
 
-                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-4 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-2">Seleccionar Fecha Hasta para descargar el Archivo TARJCRED</a>
+                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-2 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-1">Seleccione el Periodo a Procesar (Archivo TARJCRED)</a>
                 </div>
 
                 <div class="card-body">
                     <form th:action="@{/bcra/download}" method="get">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="md-form">
-                                    <input placeholder="Fecha Hasta" type="text" th:value="${dateTo}" name="dateTo" id="dateTo" class="form-control datepicker">
-                                    <label for="dateTo">Fecha Hasta</label>
-                                </div>
+                            <div class="col-md-6">
+                                <select name="month" id="month" class="mdb-select colorful-select dropdown-info md-form">
+                                    <option value="01" selected>Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="year" id="year" class="mdb-select colorful-select dropdown-info md-form">
+                                    <option value="2019" selected>2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -46,11 +64,13 @@
 </div>
 
 <div th:replace="common/bottom :: body-bottom-scripts"/>
-<script th:src="@{/js/bootstrap-datepicker.es.js}"></script>
+<!--<script th:src="@{/js/bootstrap-datepicker.es.js}"></script>-->
 <script>
 $(function() {
     $(".button-collapse").sideNav();
-    $('#dateTo').pickadate();
+    $('#month').materialSelect();
+    $('#year').materialSelect();
+    //$('#dateTo').pickadate();
 });
 </script>
 

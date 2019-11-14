@@ -1,5 +1,6 @@
 package com.tarjetaza.controller.bcra;
 
+import com.tarjetaza.service.ConsumptionFileService;
 import com.tarjetaza.service.RequestService;
 import com.tarjetaza.utility.BCRAFile;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,9 +31,11 @@ public class BCRAController {
     private String path;
 
     private final RequestService requestService;
+    private final ConsumptionFileService consumptionFileService;
 
-    public BCRAController(RequestService requestService) {
+    public BCRAController(RequestService requestService, ConsumptionFileService consumptionFileService) {
         this.requestService = requestService;
+        this.consumptionFileService = consumptionFileService;
     }
 
     @GetMapping("/select-date")
@@ -44,14 +47,17 @@ public class BCRAController {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<ByteArrayResource> download(@RequestParam("dateTo") String dateToStr) throws IOException {
+    public ResponseEntity<ByteArrayResource> download(@RequestParam("year") String year,
+                                                      @RequestParam("month") String month) throws IOException {
 
 
-        LocalDate dateTo = LocalDate.parse(dateToStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate dateTo = LocalDate.parse(year + month + "01", DateTimeFormatter.ofPattern("yyyyMMdd"));
+        LocalDate dateFrom = dateTo.minusMonths(1);
 
         //date.with(TemporalAdjusters.firstDayOfMonth());
 
-        //System.out.println("FECHA HASTA: " + dateTo);
+        System.out.println("FECHA DESDE: " + dateFrom);
+        System.out.println("FECHA HASTA: " + dateTo);
 
         Integer cantTarjetas = requestService.findCountDeliveredCards(dateTo);
 
@@ -64,6 +70,8 @@ public class BCRAController {
         // for (String RITxx1xxxx : list) {
         //    System.out.println(RITxx1xxxx + "; " + RITxx1xxxx.length());
         // }
+
+        System.out.println("SUM: " + consumptionFileService.findConsumptionByDates(dateFrom, dateTo));
 
         String fileName = "TARJCRED.txt";
 

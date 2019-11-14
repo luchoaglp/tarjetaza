@@ -5,6 +5,7 @@ import com.tarjetaza.repository.CardRepository;
 import com.tarjetaza.service.CardService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,5 +25,17 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<Card> findByRequestVirtualId(Long virtualId) {
         return cardRepository.findByRequestVirtualId(virtualId);
+    }
+
+    @Override
+    public Card edit(Card enity, Card card) {
+
+        enity.setEntidad(card.getEntidad());
+        enity.setSucursal(card.getSucursal());
+        enity.setUsuario(card.getUsuario());
+        enity.setNumero(card.getNumero());
+        enity.setLastModifiedDate(LocalDateTime.now());
+
+        return save(card);
     }
 }

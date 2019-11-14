@@ -29,5 +29,5 @@ public interface RequestService {
 
     Request findByCardNumero(String numero);
 
-    Integer findCountDeliveredCards(LocalDate dateTo);
+    Integer findCountDeliveredCards(LocalDate date);
 }

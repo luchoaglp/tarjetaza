@@ -35,6 +35,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     @Query("SELECT COUNT(r) FROM Request r " +
             "WHERE r.requestState = 5 " +
-            "AND r.requestedCardDate < :dateTo")
-    Integer findCountDeliveredCards(@Param("dateTo") LocalDate dateTo);
+            "AND r.requestedCardDate < :date")
+    Integer findCountDeliveredCards(@Param("date") LocalDate date);
 }

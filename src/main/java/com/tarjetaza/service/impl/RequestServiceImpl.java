@@ -153,8 +153,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Integer findCountDeliveredCards(LocalDate dateTo) {
-        return requestRepository.findCountDeliveredCards(dateTo);
+    public Integer findCountDeliveredCards(LocalDate date) {
+        return requestRepository.findCountDeliveredCards(date);
     }
 
     private RequestState getRequestState(String op) {
@@ -168,6 +168,8 @@ public class RequestServiceImpl implements RequestService {
                 return SOLICITUD_RECHAZADA;
             case "c_requested":
                 return TARJETA_PEDIDA;
+            case "c_received":
+                return TARJETA_RECIBIDA;
             case "c_delivered":
                 return TARJETA_ENTREGADA;
             case "c_reject":

@@ -28,10 +28,19 @@ public class CardController {
     @GetMapping("/add/{requestId}")
     public String add(@PathVariable("requestId") Long requestId, Model model) {
 
-        Card card = new Card();
+        Card card;
 
-        card.setEntidad("462");
-        card.setSucursal("001");
+        Request request = requestService.findById(requestId);
+
+        if(request.getCard() != null) {
+            card = request.getCard();
+        } else {
+
+            card = new Card();
+
+            card.setEntidad("462");
+            card.setSucursal("001");
+        }
 
         model.addAttribute("card", card);
         model.addAttribute("requestId", requestId);
@@ -47,12 +56,20 @@ public class CardController {
         if(request.getCard() == null) {
 
             if(!card.getNumero().isEmpty()) {
-                request.setRequestState(TARJETA_RECIBIDA);
+                requestService.changeStatus(requestId, "c_received");
             }
 
             card.setRequest(request);
 
             cardService.save(card);
+
+        } else {
+
+            if(!card.getNumero().isEmpty()) {
+                requestService.changeStatus(requestId, "c_received");
+            }
+
+            cardService.edit(request.getCard(), card);
         }
 
         return "redirect:/requests/detail/" + requestId;

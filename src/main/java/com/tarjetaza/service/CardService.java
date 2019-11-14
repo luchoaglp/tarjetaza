@@ -9,4 +9,6 @@ public interface CardService {
     Card save(Card card);
 
     List<Card> findByRequestVirtualId(Long virtualId);
+
+    Card edit(Card enity, Card card);
 }

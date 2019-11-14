@@ -5,6 +5,7 @@ import com.tarjetaza.repository.ConsumptionFileRepository;
 import com.tarjetaza.service.ConsumptionFileService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,5 +30,10 @@ public class ConsumptionFileServiceImpl implements ConsumptionFileService {
     @Override
     public ConsumptionFile findById(Long id) {
         return consumptionFileRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Integer findConsumptionByDates(LocalDate dateFrom, LocalDate dateTo) {
+        return consumptionFileRepository.findConsumptionByDates(dateFrom, dateTo);
     }
 }

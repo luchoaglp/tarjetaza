@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,28 +57,36 @@ public class BCRAController {
 
         //date.with(TemporalAdjusters.firstDayOfMonth());
 
-        System.out.println("FECHA DESDE: " + dateFrom);
-        System.out.println("FECHA HASTA: " + dateTo);
+        //System.out.println("FECHA DESDE: " + dateFrom);
+        //System.out.println("FECHA HASTA: " + dateTo);
 
         Integer cantTarjetas = requestService.findCountDeliveredCards(dateTo);
+        Integer consumption = consumptionFileService.findConsumptionByDates(dateFrom, dateTo);
 
         //String sample = "320870271201911RIT006211000nnnnnnnnnnNbbbbbbbbbb";
 
-        List<String> list = BCRAFile.RITxx1xxxx(cantTarjetas, dateTo);
+        List<String> xxx = new ArrayList<>();
 
+        List<String> xx1 = BCRAFile.RITxx1xxxx(cantTarjetas, dateTo);
+        List<String> xx2 = BCRAFile.RITxx2xxxx(consumption, dateTo);
+        List<String> xx3 = BCRAFile.RITxx3xxxx(0, 0, dateTo);
+
+        xxx.addAll(xx1);
+        xxx.addAll(xx2);
+        xxx.addAll(xx3);
         // System.out.println("*** FILE ***");
         // System.out.println(sample + "; " + sample.length() + " (Example)");
         // for (String RITxx1xxxx : list) {
         //    System.out.println(RITxx1xxxx + "; " + RITxx1xxxx.length());
         // }
 
-        System.out.println("SUM: " + consumptionFileService.findConsumptionByDates(dateFrom, dateTo));
+        //System.out.println("SUM: " + consumptionFileService.findConsumptionByDates(dateFrom, dateTo));
 
         String fileName = "TARJCRED.txt";
 
         Path file = Paths.get(path + fileName);
 
-        Files.write(file, list, StandardCharsets.UTF_8);
+        Files.write(file, xxx, StandardCharsets.UTF_8);
 
         byte[] data = Files.readAllBytes(file);
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.validation.BindingResult;
@@ -76,6 +77,19 @@ public class RequestRestController {
             requestService.save(request);
 
             response.put("response", "Tus datos han sido guardados con éxito, en breve nos estaremos comunicando con vos.");
+
+            new Thread(() -> {
+
+                SimpleMailMessage msg = new SimpleMailMessage();
+
+                msg.setFrom("altas@tarjetaza.com");
+                msg.setTo("info@tarjetaza.com");
+                msg.setSubject("Proceso: [Solicitud] – Fecha: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                msg.setText(request.getApellido() + " " + request.getNombre());
+
+                javaMailSender.send(msg);
+
+            }).start();
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);

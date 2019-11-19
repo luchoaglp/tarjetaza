@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
@@ -61,6 +63,20 @@ public class CreditRestController {
         }
 
         Credit credit = creditService.save(new Credit(creditRequest.getAmount(), request));
+
+        new Thread(() -> {
+
+            SimpleMailMessage msg = new SimpleMailMessage();
+
+            msg.setFrom("altas@tarjetaza.com");
+            //msg.setTo("lucho_aglp@hotmail.com");
+            msg.setTo("info@tarjetaza.com");
+            msg.setSubject("Proceso: [Crédito] – Fecha: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            msg.setText(request.getApellido() + " " + request.getNombre() + ": $" + credit.getAmount());
+
+            javaMailSender.send(msg);
+
+        }).start();
 
         return new ResponseEntity<>(new CreditResponse(credit.getId(), "OK"), HttpStatus.OK);
     }

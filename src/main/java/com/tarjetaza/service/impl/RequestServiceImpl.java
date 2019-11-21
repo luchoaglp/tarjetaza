@@ -23,8 +23,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> findAllByOrderByIdAsc() {
-        return requestRepository.findAllByOrderByIdAsc();
+    public List<Request> findAllByOrderByIdDesc() {
+        return requestRepository.findAllByOrderByIdDesc();
     }
 
     @Override
@@ -43,8 +43,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> findInProcessOrderByIdAsc() {
-        return requestRepository.findInProcessOrderByIdAsc();
+    public List<Request> findInProcessOrderByIdDesc() {
+        return requestRepository.findInProcessOrderByIdDesc();
     }
 
     @Override

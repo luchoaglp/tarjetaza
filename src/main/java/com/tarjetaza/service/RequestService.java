@@ -8,8 +8,8 @@ import java.util.List;
 public interface RequestService {
 
     List<Request> findAll();
-    List<Request> findInProcessOrderByIdAsc();
-    List<Request> findAllByOrderByIdAsc();
+    List<Request> findInProcessOrderByIdDesc();
+    List<Request> findAllByOrderByIdDesc();
     List<Request> findWithCardOrderByIdAsc();
 
     Request findById(Long id);

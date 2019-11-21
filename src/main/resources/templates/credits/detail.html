@@ -38,6 +38,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">ID: <span th:text="${credit.id}" class="font-weight-bold"></span><span th:text="${credit.creditState.displayValue}" class="font-weight-bold light-green-text float-right"></span></li>
                                 <li class="list-group-item py-2">Cliente: <span th:text="${credit.request.apellido + ' ' + credit.request.nombre}" class="font-weight-bold"></span><a th:href="@{${'/requests/detail/' + credit.request.id}}" class="btn-floating btn-sm btn-mdb-color float-right m-0"><i class="fas fa-eye"></i></a></li>
+                                <li class="list-group-item">Usuario: <span th:text="${credit.request.card.usuario}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Tarjeta: <span th:text="${credit.request.card.numero}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Lote: <span th:if="${credit.batch}" th:text="${credit.batch.id}" class="font-weight-bold"></span></li>
                             </ul>

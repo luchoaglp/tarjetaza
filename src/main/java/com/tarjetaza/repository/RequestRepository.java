@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    List<Request> findAllByOrderByIdAsc();
+    List<Request> findAllByOrderByIdDesc();
 
     boolean existsByCuitCuil(String cuitCuil);
     boolean existsByVirtualId(Long virtualId);
@@ -24,7 +24,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
             "AND r.requestState != 6 " +
             "AND r.requestState != 7 " +
             "ORDER BY r.id DESC")
-    List<Request> findInProcessOrderByIdAsc();
+    List<Request> findInProcessOrderByIdDesc();
 
     @Query("FROM Request r " +
             "WHERE r.requestState = 5" +

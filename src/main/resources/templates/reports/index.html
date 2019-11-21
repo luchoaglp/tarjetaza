@@ -3,7 +3,7 @@
 
 <head>
     <div th:replace="common/head :: head"/>
-    <title>Tarjetaza | Parámetros</title>
+    <title>Tarjetaza | Reportes</title>
     <link th:href="@{/css/addons/datatables.min.css}" rel="stylesheet">
 </head>
 
@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="card card-cascade narrower shadow-sm">
                 <div class="view view-cascade gradient-card-header light-green narrower py-2 mx-2 d-flex justify-content-between align-items-center">
-                    <a href="#" class="white-text mx-1">Parámetros</a>
+                    <a href="#" class="white-text mx-1">Reportes</a>
                     <div>
                         <a th:href="@{/params/add}" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="popover-hover" data-content="Agregar Parámetro">
                             <i class="fas fa-plus"></i>
@@ -29,34 +29,23 @@
                         <table id="table" class="table table-sm table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <thead class="light-green text-white">
                                 <tr>
-                                    <th width="4%">ID</th>
-                                    <th>Descripción</th>
-                                    <th>Valor</th>
-                                    <th>Fecha</th>
-                                    <th width="13%">Alta</th>
-                                    <th width="13%">Actualizado</th>
+                                    <th>Reporte</th>
                                     <th width="4%"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="p : ${params}">
-                                    <td th:text="${p.id}"></td>
-                                    <td th:text="${p.description}"></td>
-                                    <td th:text="${p.value}"></td>
-                                    <td th:text="${#temporals.format(p.paramDate, 'yyyy/MM/dd')}"></td>
-                                    <td th:text="${#temporals.format(p.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
-                                    <td th:text="${#temporals.format(p.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
-                                    <td><a th:href="@{${'/params/edit/' + p.id}}" class="btn-floating btn-sm btn-warning m-0"><i class="fas fa-edit"></i></a></td>
+                                <tr>
+                                    <td>Solicitudes</td>
+                                    <td><a th:href="@{/reports/requests}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-file-excel"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Créditos</td>
+                                    <td><a th:href="@{/reports/credits}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-file-excel"></i></a></td>
                                 </tr>
                             </tbody>
                             <tfoot class="light-green text-white">
                                 <tr>
-                                    <th width="4%">ID</th>
-                                    <th>Descripción</th>
-                                    <th>Valor</th>
-                                    <th>Fecha</th>
-                                    <th width="13%">Alta</th>
-                                    <th width="13%">Actualizado</th>
+                                    <th>Reporte</th>
                                     <th width="4%"></th>
                                 </tr>
                             </tfoot>
@@ -71,7 +60,7 @@
 
 <div th:replace="common/bottom :: body-bottom-scripts"/>
 <script th:src="@{/js/addons/datatables.min.js}"></script>
-<script th:src="@{/js/params/index.js}"></script>
+<script th:src="@{/js/reports/index.js}"></script>
 
 </body>
 </html>

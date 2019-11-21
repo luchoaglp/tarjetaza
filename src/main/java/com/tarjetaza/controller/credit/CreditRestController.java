@@ -148,7 +148,7 @@ public class CreditRestController {
             helper.setText("Entidad: 462\nPresentación: " +
                     LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
                     "Casos: " + credits.length + "\n" +
-                    "Importe: " + total + ".000");
+                    "Importe: " + total + ".00");
 
             FileSystemResource file = new FileSystemResource(new File(path + fileName));
             helper.addAttachment(fileName, file);

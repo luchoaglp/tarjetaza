@@ -8,13 +8,13 @@ public interface CreditService {
 
     Credit save(Credit credit);
 
-    List<Credit> findAllByOrderByIdAsc();
+    List<Credit> findAllByOrderByIdDesc();
 
     Credit findById(Long id);
 
     Credit update(Credit credit);
 
-    List<Credit> findActiveOrderByIdAsc();
+    List<Credit> findActiveOrderByIdDesc();
 
     void changeStatus(Long[] ids, String op);
 }

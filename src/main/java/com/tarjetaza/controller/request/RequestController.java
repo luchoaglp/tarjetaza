@@ -47,9 +47,9 @@ public class RequestController {
         List<Request> requests = null;
 
         if(show == null) {
-            requests = requestService.findInProcessOrderByIdAsc();
+            requests = requestService.findInProcessOrderByIdDesc();
         } else if(show.equals("all")) {
-            requests = requestService.findAllByOrderByIdAsc();
+            requests = requestService.findAllByOrderByIdDesc();
         }
 
         model.addAttribute("requests", requests);

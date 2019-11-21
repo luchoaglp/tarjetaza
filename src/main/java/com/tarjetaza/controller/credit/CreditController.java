@@ -28,9 +28,9 @@ public class CreditController {
         List<Credit> credits = null;
 
         if(show == null) {
-            credits = creditService.findActiveOrderByIdAsc();
+            credits = creditService.findActiveOrderByIdDesc();
         } else if(show.equals("all")) {
-            credits = creditService.findAllByOrderByIdAsc();
+            credits = creditService.findAllByOrderByIdDesc();
         }
 
         model.addAttribute("credits", credits);

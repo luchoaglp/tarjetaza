@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CreditRepository extends JpaRepository<Credit, Long> {
 
-    List<Credit> findAllByOrderByIdAsc();
+    List<Credit> findAllByOrderByIdDesc();
 
-    @Query("FROM Credit c WHERE c.creditState = 0")
-    List<Credit> findActiveOrderByIdAsc();
+    @Query("FROM Credit c WHERE c.creditState = 0 ORDER BY c.id DESC")
+    List<Credit> findActiveOrderByIdDesc();
 }

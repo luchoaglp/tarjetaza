@@ -26,8 +26,8 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public List<Credit> findAllByOrderByIdAsc() {
-        return creditRepository.findAllByOrderByIdAsc();
+    public List<Credit> findAllByOrderByIdDesc() {
+        return creditRepository.findAllByOrderByIdDesc();
     }
 
     @Override
@@ -44,8 +44,8 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public List<Credit> findActiveOrderByIdAsc() {
-        return creditRepository.findActiveOrderByIdAsc();
+    public List<Credit> findActiveOrderByIdDesc() {
+        return creditRepository.findActiveOrderByIdDesc();
     }
 
     @Override

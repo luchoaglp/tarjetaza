@@ -31,7 +31,7 @@ public class ConsumptionFileController {
     @GetMapping
     public String credits(Model model) {
 
-        model.addAttribute("consumption", consumptionFileService.findAllByOrderByIdAsc());
+        model.addAttribute("consumption", consumptionFileService.findAllByOrderByIdDesc());
 
         return "consumption/index";
     }

@@ -15,7 +15,7 @@ public class ConsumptionFileRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "certificate_id")
+    @Column(name = "consumption_record_id")
     private Long id;
 
     @Column(name = "trx_id", nullable = false)
@@ -46,11 +46,15 @@ public class ConsumptionFileRecord {
 
     public String getStrSign() {
         if(sign.equals("1")) {
-            return "";
+            return "+";
         } else if(sign.equals("2")) {
             return "-";
         }
         return null;
+    }
+
+    public String getFormattedCard() {
+        return String.join("-", card.substring(0, 4), card.substring(4, 8), card.substring(8, 12), card.substring(12));
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ConsumptionFileRepository extends JpaRepository<ConsumptionFile, Long> {
 
-    List<ConsumptionFile> findAllByOrderByIdAsc();
+    List<ConsumptionFile> findAllByOrderByIdDesc();
 
     @Query("SELECT SUM(c.amount) FROM ConsumptionFile c " +
             "WHERE c.processDate < :dateTo " +

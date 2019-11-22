@@ -23,8 +23,8 @@ public class ConsumptionFileServiceImpl implements ConsumptionFileService {
     }
 
     @Override
-    public List<ConsumptionFile> findAllByOrderByIdAsc() {
-        return consumptionFileRepository.findAllByOrderByIdAsc();
+    public List<ConsumptionFile> findAllByOrderByIdDesc() {
+        return consumptionFileRepository.findAllByOrderByIdDesc();
     }
 
     @Override

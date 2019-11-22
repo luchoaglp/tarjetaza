@@ -10,7 +10,7 @@ public interface ConsumptionFileService {
 
     ConsumptionFile save(ConsumptionFile consumptionFile);
 
-    List<ConsumptionFile> findAllByOrderByIdAsc();
+    List<ConsumptionFile> findAllByOrderByIdDesc();
 
     ConsumptionFile findById(Long id);
 

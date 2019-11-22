@@ -1,8 +1,7 @@
 package com.tarjetaza.controller.report;
 
-import com.tarjetaza.domain.Card;
-import com.tarjetaza.domain.Credit;
-import com.tarjetaza.domain.Request;
+import com.tarjetaza.domain.*;
+import com.tarjetaza.service.ConsumptionFileService;
 import com.tarjetaza.service.CreditService;
 import com.tarjetaza.service.RequestService;
 import org.apache.poi.ss.usermodel.*;
@@ -24,10 +23,12 @@ public class ReportController {
 
     private final RequestService requestService;
     private final CreditService creditService;
+    private final ConsumptionFileService consumptionFileService;
 
-    public ReportController(RequestService requestService, CreditService creditService) {
+    public ReportController(RequestService requestService, CreditService creditService, ConsumptionFileService consumptionFileService) {
         this.requestService = requestService;
         this.creditService = creditService;
+        this.consumptionFileService = consumptionFileService;
     }
 
     @GetMapping
@@ -51,11 +52,201 @@ public class ReportController {
         generateCreditsXlsx(response, credits);
     }
 
-    private void generateCreditsXlsx(HttpServletResponse response, List<Credit> credits) throws IOException {
+    @GetMapping("/consumption")
+    public void consumption(HttpServletResponse response) throws Exception {
+
+        List<ConsumptionFile> consumptionFiles = consumptionFileService.findAllByOrderByIdDesc();
+
+        generateConsumptionXlsx(response, consumptionFiles);
+    }
+
+    private void generateConsumptionXlsx(HttpServletResponse response, List<ConsumptionFile> consumptionFiles) throws IOException {
 
         Workbook workbook = new XSSFWorkbook();
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        try {
+
+            Sheet sheet = workbook.createSheet("Consumos");
+            sheet.setColumnWidth(0, 2500);
+            sheet.setColumnWidth(1, 4000);
+            sheet.setColumnWidth(2, 3000);
+            sheet.setColumnWidth(3, 2500);
+            sheet.setColumnWidth(4, 3500);
+            sheet.setColumnWidth(5, 5000);
+            sheet.setColumnWidth(6, 2500);
+            sheet.setColumnWidth(7, 2000);
+            sheet.setColumnWidth(8, 3000);
+            sheet.setColumnWidth(9, 3000);
+            sheet.setColumnWidth(10, 3500);
+            sheet.setColumnWidth(11, 6500);
+            sheet.setColumnWidth(12, 6500);
+
+            Row header = sheet.createRow(0);
+
+            CellStyle headerStyle = workbook.createCellStyle();
+
+            headerStyle.setFillForegroundColor(IndexedColors.LIME.getIndex());
+            headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            XSSFFont headerFont = ((XSSFWorkbook) workbook).createFont();
+
+            headerFont.setFontName("Arial");
+            headerFont.setFontHeightInPoints((short) 10);
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setBold(true);
+
+            headerStyle.setFont(headerFont);
+
+            Cell headerCell = header.createCell(0);
+            headerCell.setCellValue("ID");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(1);
+            headerCell.setCellValue("Archivo");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(2);
+            headerCell.setCellValue("Monto");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(3);
+            headerCell.setCellValue("Registros");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(4);
+            headerCell.setCellValue("Proceso");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(5);
+            headerCell.setCellValue("Subido");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(6);
+            headerCell.setCellValue("Detalle ID");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(7);
+            headerCell.setCellValue("Signo");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(8);
+            headerCell.setCellValue("Detalle Monto");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(9);
+            headerCell.setCellValue("Transacción");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(10);
+            headerCell.setCellValue("Cupón");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(11);
+            headerCell.setCellValue("Tarjeta");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(12);
+            headerCell.setCellValue("Fecha-Hora Transacción");
+            headerCell.setCellStyle(headerStyle);
+
+            CellStyle style = workbook.createCellStyle();
+
+            XSSFFont font = ((XSSFWorkbook) workbook).createFont();
+
+            font.setFontName("Arial");
+            font.setFontHeightInPoints((short) 10);
+
+            style.setWrapText(true);
+            style.setFont(font);
+
+            Cell cell;
+            int rowIndex = 0;
+
+            for(int i = 0; i < consumptionFiles.size(); i++) {
+
+                ConsumptionFile consumptionFile = consumptionFiles.get(i);
+
+                Row row = sheet.createRow(rowIndex + 1);
+
+                cell = row.createCell(0);
+                cell.setCellValue(consumptionFile.getId());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(1);
+                cell.setCellValue(consumptionFile.getFileName());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(2);
+                cell.setCellValue(consumptionFile.getAmount());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(3);
+                cell.setCellValue(consumptionFile.getNumberOfRecords());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(4);
+                cell.setCellValue(consumptionFile.getProcessDate().format(dateFormatter));
+                cell.setCellStyle(style);
+
+                cell = row.createCell(5);
+                cell.setCellValue(consumptionFile.getCreatedDate().format(dateTimeFormatter));
+                cell.setCellStyle(style);
+
+                for(ConsumptionFileRecord record : consumptionFile.getConsumptionFileRecords()) {
+
+                    cell = row.createCell(6);
+                    cell.setCellValue(record.getId());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(7);
+                    cell.setCellValue(record.getStrSign());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(8);
+                    cell.setCellValue(record.getAmount());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(9);
+                    cell.setCellValue(record.getTrxId());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(10);
+                    cell.setCellValue(record.getCoupon());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(11);
+                    cell.setCellValue(record.getFormattedCard());
+                    cell.setCellStyle(style);
+
+                    cell = row.createCell(12);
+                    cell.setCellValue(record.getTrxDateTime().format(dateTimeFormatter));
+                    cell.setCellStyle(style);
+
+                    rowIndex++;
+
+                    row = sheet.createRow(rowIndex + 1);
+                }
+
+            }
+
+            response.setHeader("Content-disposition", "attachment; filename=Tarjetaza Consumos.xlsx");
+            workbook.write(response.getOutputStream());
+
+        } finally {
+            if (workbook != null) {
+                workbook.close();
+            }
+        }
+    }
+
+    private void generateCreditsXlsx(HttpServletResponse response, List<Credit> credits) throws IOException {
+
+        Workbook workbook = new XSSFWorkbook();
+
+        //DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         try {

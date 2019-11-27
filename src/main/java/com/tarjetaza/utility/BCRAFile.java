@@ -33,7 +33,7 @@ public class BCRAFile {
         return xx2;
     }
 
-    public static List<String> RITxx3xxxx(int min, int max, LocalDate processDate) {
+    public static List<String> RITxx3xxxx(String min, String max, LocalDate processDate) {
 
         List<String> xx3 = new ArrayList<>();
 
@@ -85,7 +85,7 @@ public class BCRAFile {
         return sb.toString();
     }
 
-    private static String RITxx3xxxx(String nroPartida, int min, int max, LocalDate processDate) {
+    private static String RITxx3xxxx(String nroPartida, String min, String max, LocalDate processDate) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -98,12 +98,14 @@ public class BCRAFile {
         sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
         sb.append(nroPartida); // Nro de Partida = 5 numeros (5)
 
-        /*
+        //sb.append("nnnnnnnnDDnnnnnnnnDD");
         sb.append(
-                StringUtils.leftPad(String.valueOf(cantTarjetas), 10, "0")
-        ); // Cantidad de tarjetas en calle = 10 numeros (10)
-        */
-        sb.append("nnnnnnnnDDnnnnnnnnDD");
+                StringUtils.leftPad(String.valueOf(min), 8, "0")
+        ).append("00"); // Min nnnnnnnnDD
+        sb.append(
+                StringUtils.leftPad(String.valueOf(max), 8, "0")
+        ).append("00"); // Max nnnnnnnnDD
+
         sb.append("N"); // Normal o Rectificativa = Siempre N de normal (1)
         //sb.append(StringUtils.rightPad("", 10)); // 10 espacios en blanco (10)
 

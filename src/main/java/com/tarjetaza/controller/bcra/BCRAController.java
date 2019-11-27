@@ -1,6 +1,7 @@
 package com.tarjetaza.controller.bcra;
 
 import com.tarjetaza.service.ConsumptionFileService;
+import com.tarjetaza.service.ParamService;
 import com.tarjetaza.service.RequestService;
 import com.tarjetaza.utility.BCRAFile;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,10 +34,12 @@ public class BCRAController {
 
     private final RequestService requestService;
     private final ConsumptionFileService consumptionFileService;
+    private final ParamService paramService;
 
-    public BCRAController(RequestService requestService, ConsumptionFileService consumptionFileService) {
+    public BCRAController(RequestService requestService, ConsumptionFileService consumptionFileService, ParamService paramService) {
         this.requestService = requestService;
         this.consumptionFileService = consumptionFileService;
+        this.paramService = paramService;
     }
 
     @GetMapping("/select-date")
@@ -69,7 +72,9 @@ public class BCRAController {
 
         List<String> xx1 = BCRAFile.RITxx1xxxx(cantTarjetas, dateTo);
         List<String> xx2 = BCRAFile.RITxx2xxxx(consumption, dateTo);
-        List<String> xx3 = BCRAFile.RITxx3xxxx(0, 0, dateTo);
+        List<String> xx3 = BCRAFile.RITxx3xxxx(paramService.findById(3L).getValue(),
+                paramService.findById(2L).getValue(),
+                dateTo);
 
         xxx.addAll(xx1);
         xxx.addAll(xx2);

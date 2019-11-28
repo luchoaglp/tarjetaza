@@ -33,13 +33,13 @@ public class BCRAFile {
         return xx2;
     }
 
-    public static List<String> RITxx3xxxx(String min, String max, LocalDate processDate) {
+    public static List<String> RITxx4xxxx(String min, String max, LocalDate processDate) {
 
-        List<String> xx3 = new ArrayList<>();
+        List<String> xx4 = new ArrayList<>();
 
-        xx3.add(RITxx3xxxx("41200", min, max, processDate));
+        xx4.add(RITxx4xxxx("41200", min, max, processDate));
 
-        return xx3;
+        return xx4;
 
     }
 
@@ -68,7 +68,7 @@ public class BCRAFile {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("3208"); // Diseño = 3208 (fijo) (4)
+        sb.append("3209"); // Diseño = 3209 (fijo) (4)
         sb.append("70271"); // Entidad = 70271 (fijo) (5)
         sb.append(
                 processDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
@@ -85,11 +85,11 @@ public class BCRAFile {
         return sb.toString();
     }
 
-    private static String RITxx3xxxx(String nroPartida, String min, String max, LocalDate processDate) {
+    private static String RITxx4xxxx(String nroPartida, String min, String max, LocalDate processDate) {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("3208"); // Diseño = 3208 (fijo) (4)
+        sb.append("3211"); // Diseño = 3208 (fijo) (4)
         sb.append("70271"); // Entidad = 70271 (fijo) (5)
         sb.append(
                 processDate.format(DateTimeFormatter.ofPattern("yyyyMM"))

@@ -37,6 +37,7 @@
                                 <tr>
                                     <th width="4%">ID</th>
                                     <th width="8%">Virtual ID</th>
+                                    <th>Usuario</th>
                                     <th>Nombres</th>
                                     <th>Apellido</th>
                                     <th width="4%"></th>
@@ -46,6 +47,7 @@
                                 <tr th:each="request : ${requests}">
                                     <td th:text="${request.id}"></td>
                                     <td th:text="${request.virtualId}"></td>
+                                    <td th:text="${request.card.usuario}"></td>
                                     <td th:text="${request.nombre}"></td>
                                     <td th:text="${request.apellido}"></td>
                                     <td><a th:href="@{${'/claims/add/' + request.id + '/1'}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-arrow-right"></i></a></td>
@@ -55,6 +57,7 @@
                                 <tr>
                                     <th width="4%">ID</th>
                                     <th width="8%">Virtual ID</th>
+                                    <th>Usuario</th>
                                     <th>Nombres</th>
                                     <th>Apellido</th>
                                     <th width="4%"></th>

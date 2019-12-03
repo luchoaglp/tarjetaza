@@ -38,6 +38,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">ID: <span th:text="${claim.id}" class="font-weight-bold"></span><span th:text="${claim.claimState.displayValue}" class="font-weight-bold light-green-text float-right"></span></li>
                                 <li class="list-group-item">Cliente: <span th:text="${claim.request.apellido + ' ' + claim.request.nombre}" class="font-weight-bold"></span></li>
+                                <li class="list-group-item">Usuario: <span th:text="${claim.request.card.usuario}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Tema: <span th:text="${claim.subjectConcept.claimSubject.code + ' - ' + claim.subjectConcept.claimSubject.subject}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Concepto: <span th:text="${claim.subjectConcept.code + ' - ' + claim.subjectConcept.concept}" class="font-weight-bold"></span></li>
                                 <li class="list-group-item">Observaciones: <span th:text="${claim.observations}" class="font-weight-bold"></span></li>

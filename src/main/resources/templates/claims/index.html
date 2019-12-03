@@ -34,6 +34,7 @@
                             <tr>
                                 <th width="4%">ID</th>
                                 <th>Cliente</th>
+                                <th>Usuario</th>
                                 <th>Concepto</th>
                                 <th width="13%">Alta</th>
                                 <th width="13%">Actualizado</th>
@@ -45,6 +46,7 @@
                             <tr th:each="claim : ${claims}">
                                 <td th:text="${claim.id}"></td>
                                 <td th:text="${claim.request.apellido + ' ' + claim.request.nombre}"></td>
+                                <td th:text="${claim.request.card.usuario}"></td>
                                 <td th:text="${claim.subjectConcept.code + ' - ' + claim.subjectConcept.concept}"></td>
                                 <td th:text="${#temporals.format(claim.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
                                 <td th:text="${#temporals.format(claim.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
@@ -56,6 +58,7 @@
                             <tr>
                                 <th width="4%">ID</th>
                                 <th>Cliente</th>
+                                <th>Usuario</th>
                                 <th>Concepto</th>
                                 <th width="13%">Alta</th>
                                 <th width="13%">Actualizado</th>

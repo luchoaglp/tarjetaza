@@ -9,48 +9,48 @@ import java.util.List;
 
 public class BCRAFile {
 
-    public static List<String> RITxx1xxxx(Integer cantTarjetas, LocalDate processDate) {
+    public static List<String> RITxx1xxxx(Integer cantTarjetas, LocalDate lastMonth) {
 
         List<String> xx1 = new ArrayList<>();
 
-        xx1.add(RITxx1xxxx("11000", cantTarjetas, processDate));
-        xx1.add(RITxx1xxxx("13100", cantTarjetas, processDate));
-        xx1.add(RITxx1xxxx("14200", cantTarjetas, processDate));
-        xx1.add(RITxx1xxxx("15200", cantTarjetas, processDate));
-        xx1.add(RITxx1xxxx("16100", cantTarjetas, processDate));
+        xx1.add(RITxx1xxxx("11000", cantTarjetas, lastMonth));
+        xx1.add(RITxx1xxxx("13100", cantTarjetas, lastMonth));
+        xx1.add(RITxx1xxxx("14200", cantTarjetas, lastMonth));
+        xx1.add(RITxx1xxxx("15200", cantTarjetas, lastMonth));
+        xx1.add(RITxx1xxxx("16100", cantTarjetas, lastMonth));
 
         return xx1;
     }
 
-    public static List<String> RITxx2xxxx(Integer consumption, LocalDate processDate) {
+    public static List<String> RITxx2xxxx(Integer consumption, LocalDate lastMonth) {
 
         List<String> xx2 = new ArrayList<>();
 
-        xx2.add(RITxx2xxxx("21100", consumption, processDate));
-        xx2.add(RITxx2xxxx("22100", 0, processDate));
-        xx2.add(RITxx2xxxx("23100", 0, processDate));
+        xx2.add(RITxx2xxxx("21100", consumption, lastMonth));
+        xx2.add(RITxx2xxxx("22100", 0, lastMonth));
+        xx2.add(RITxx2xxxx("23100", 0, lastMonth));
 
         return xx2;
     }
 
-    public static List<String> RITxx4xxxx(String min, String max, LocalDate processDate) {
+    public static List<String> RITxx4xxxx(String min, String max, LocalDate lastMonth) {
 
         List<String> xx4 = new ArrayList<>();
 
-        xx4.add(RITxx4xxxx("41200", min, max, processDate));
+        xx4.add(RITxx4xxxx("41200", min, max, lastMonth));
 
         return xx4;
 
     }
 
-    public static String RITxx1xxxx(String nroPartida, Integer cantTarjetas, LocalDate processDate) {
+    public static String RITxx1xxxx(String nroPartida, Integer cantTarjetas, LocalDate lastMonth) {
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("3208"); // Diseño = 3208 (fijo) (4)
         sb.append("70271"); // Entidad = 70271 (fijo) (5)
         sb.append(
-                processDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
+                lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
         sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
@@ -64,14 +64,14 @@ public class BCRAFile {
         return sb.toString();
     }
 
-    private static String RITxx2xxxx(String nroPartida, Integer consumption, LocalDate processDate) {
+    private static String RITxx2xxxx(String nroPartida, Integer consumption, LocalDate lastMonth) {
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("3209"); // Diseño = 3209 (fijo) (4)
         sb.append("70271"); // Entidad = 70271 (fijo) (5)
         sb.append(
-                processDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
+                lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
         sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
@@ -85,14 +85,14 @@ public class BCRAFile {
         return sb.toString();
     }
 
-    private static String RITxx4xxxx(String nroPartida, String min, String max, LocalDate processDate) {
+    private static String RITxx4xxxx(String nroPartida, String min, String max, LocalDate lastMonth) {
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("3211"); // Diseño = 3208 (fijo) (4)
         sb.append("70271"); // Entidad = 70271 (fijo) (5)
         sb.append(
-                processDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
+                lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
         sb.append("0062"); // xxxx = Código de Marca (fijo) (4)

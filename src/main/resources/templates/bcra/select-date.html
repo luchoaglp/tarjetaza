@@ -26,26 +26,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <select name="month" id="month" class="mdb-select colorful-select dropdown-info md-form">
-                                    <option value="01" selected>Enero</option>
-                                    <option value="02">Febrero</option>
-                                    <option value="03">Marzo</option>
-                                    <option value="04">Abril</option>
-                                    <option value="05">Mayo</option>
-                                    <option value="06">Junio</option>
-                                    <option value="07">Julio</option>
-                                    <option value="08">Agosto</option>
-                                    <option value="09">Septiembre</option>
-                                    <option value="10">Octubre</option>
-                                    <option value="11">Noviembre</option>
-                                    <option value="12">Diciembre</option>
+                                    <option value="01" th:selected="(${dateTo} == '01')">Enero</option>
+                                    <option value="02" th:selected="(${dateTo} == '02')">Febrero</option>
+                                    <option value="03" th:selected="(${dateTo} == '03')">Marzo</option>
+                                    <option value="04" th:selected="(${dateTo} == '04')">Abril</option>
+                                    <option value="05" th:selected="(${dateTo} == '05')">Mayo</option>
+                                    <option value="06" th:selected="(${dateTo} == '06')">Junio</option>
+                                    <option value="07" th:selected="(${dateTo} == '07')">Julio</option>
+                                    <option value="08" th:selected="(${dateTo} == '08')">Agosto</option>
+                                    <option value="09" th:selected="(${dateTo} == '09')">Septiembre</option>
+                                    <option value="10" th:selected="(${dateTo} == '10')">Octubre</option>
+                                    <option value="11" th:selected="(${dateTo} == '11')">Noviembre</option>
+                                    <option value="12" th:selected="(${dateTo} == '12')">Diciembre</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <select name="year" id="year" class="mdb-select colorful-select dropdown-info md-form">
-                                    <option value="2019" selected>2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
+                                    <option value="2019" th:selected="(${year} == '2019')">2019</option>
+                                    <option value="2020" th:selected="(${year} == '2020')">2020</option>
+                                    <option value="2021" th:selected="(${year} == '2021')">2021</option>
+                                    <option value="2022" th:selected="(${year} == '2022')">2022</option>
                                 </select>
                             </div>
                         </div>
@@ -70,7 +70,6 @@ $(function() {
     $(".button-collapse").sideNav();
     $('#month').materialSelect();
     $('#year').materialSelect();
-    //$('#dateTo').pickadate();
 });
 </script>
 

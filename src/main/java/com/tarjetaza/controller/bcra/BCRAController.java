@@ -45,7 +45,8 @@ public class BCRAController {
     @GetMapping("/select-date")
     public String users(Model model) {
 
-        model.addAttribute("dateTo", LocalDate.now());
+        model.addAttribute("dateTo", LocalDate.now().format(DateTimeFormatter.ofPattern("MM")));
+        model.addAttribute("year", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")));
 
         return "bcra/select-date";
     }
@@ -70,11 +71,11 @@ public class BCRAController {
 
         List<String> xxx = new ArrayList<>();
 
-        List<String> xx1 = BCRAFile.RITxx1xxxx(cantTarjetas, dateTo);
-        List<String> xx2 = BCRAFile.RITxx2xxxx(consumption, dateTo);
+        List<String> xx1 = BCRAFile.RITxx1xxxx(cantTarjetas, dateFrom);
+        List<String> xx2 = BCRAFile.RITxx2xxxx(consumption, dateFrom);
         List<String> xx4 = BCRAFile.RITxx4xxxx(paramService.findById(3L).getValue(),
                 paramService.findById(2L).getValue(),
-                dateTo);
+                dateFrom);
 
         xxx.addAll(xx1);
         xxx.addAll(xx2);

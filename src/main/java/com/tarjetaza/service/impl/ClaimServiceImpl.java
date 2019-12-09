@@ -25,6 +25,11 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
+    public List<Claim> findAllByOrderByIdDesc() {
+        return claimRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
     public Claim findById(Long id) {
         return claimRepository.findById(id).orElse(null);
     }
@@ -35,13 +40,8 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
-    public List<Claim> findAllByOrderByIdAsc() {
-        return claimRepository.findAllByOrderByIdAsc();
-    }
-
-    @Override
-    public List<Claim> findOpenOrderByIdAsc() {
-        return claimRepository.findOpenOrderByIdAsc();
+    public List<Claim> findOpenOrderByIdDesc() {
+        return claimRepository.findOpenOrderByIdDesc();
     }
 
     @Override

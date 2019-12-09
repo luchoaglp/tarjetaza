@@ -10,6 +10,8 @@ public interface ClaimRepository extends JpaRepository<Claim, Long> {
 
     List<Claim> findAllByOrderByIdAsc();
 
-    @Query("FROM Claim c WHERE c.claimState = 0")
-    List<Claim> findOpenOrderByIdAsc();
+    @Query("FROM Claim c WHERE c.claimState = 0 ORDER BY c.id DESC")
+    List<Claim> findOpenOrderByIdDesc();
+
+    List<Claim> findAllByOrderByIdDesc();
 }

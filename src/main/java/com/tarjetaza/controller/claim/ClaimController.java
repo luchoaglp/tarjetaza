@@ -35,9 +35,9 @@ public class ClaimController {
         List<Claim> claims = null;
 
         if(show == null) {
-            claims = claimService.findOpenOrderByIdAsc();
+            claims = claimService.findOpenOrderByIdDesc();
         } else if(show.equals("all")) {
-            claims = claimService.findAllByOrderByIdAsc();
+            claims = claimService.findAllByOrderByIdDesc();
         }
 
         model.addAttribute("claims", claims);

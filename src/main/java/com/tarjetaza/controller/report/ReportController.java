@@ -1,6 +1,11 @@
 package com.tarjetaza.controller.report;
 
 import com.tarjetaza.domain.*;
+import com.tarjetaza.domain.claim.Claim;
+import com.tarjetaza.domain.claim.ClaimInFavorOf;
+import com.tarjetaza.domain.claim.ClaimSubject;
+import com.tarjetaza.domain.claim.SubjectConcept;
+import com.tarjetaza.service.ClaimService;
 import com.tarjetaza.service.ConsumptionFileService;
 import com.tarjetaza.service.CreditService;
 import com.tarjetaza.service.RequestService;
@@ -24,11 +29,13 @@ public class ReportController {
     private final RequestService requestService;
     private final CreditService creditService;
     private final ConsumptionFileService consumptionFileService;
+    private final ClaimService claimService;
 
-    public ReportController(RequestService requestService, CreditService creditService, ConsumptionFileService consumptionFileService) {
+    public ReportController(RequestService requestService, CreditService creditService, ConsumptionFileService consumptionFileService, ClaimService claimService) {
         this.requestService = requestService;
         this.creditService = creditService;
         this.consumptionFileService = consumptionFileService;
+        this.claimService = claimService;
     }
 
     @GetMapping
@@ -58,6 +65,197 @@ public class ReportController {
         List<ConsumptionFile> consumptionFiles = consumptionFileService.findAllByOrderByIdDesc();
 
         generateConsumptionXlsx(response, consumptionFiles);
+    }
+
+    @GetMapping("/claims")
+    public void claims(HttpServletResponse response) throws Exception {
+
+        List<Claim> claims = claimService.findAllByOrderByIdDesc();
+
+        generateClaimsXlsx(response, claims);
+    }
+
+    private void generateClaimsXlsx(HttpServletResponse response, List<Claim> claims) throws IOException {
+
+        Workbook workbook = new XSSFWorkbook();
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        try {
+
+            Sheet sheet = workbook.createSheet("Reclamos");
+            sheet.setColumnWidth(0, 2500);
+            sheet.setColumnWidth(1, 4500);
+            sheet.setColumnWidth(2, 4500);
+            sheet.setColumnWidth(3, 3000);
+            sheet.setColumnWidth(4, 6500);
+            sheet.setColumnWidth(5, 6500);
+            sheet.setColumnWidth(6, 5500);
+            sheet.setColumnWidth(7, 3500);
+            sheet.setColumnWidth(8, 20000);
+            sheet.setColumnWidth(9, 20000);
+            sheet.setColumnWidth(10, 3500);
+            sheet.setColumnWidth(11, 4500);
+            sheet.setColumnWidth(12, 30000);
+
+            Row header = sheet.createRow(0);
+
+            CellStyle headerStyle = workbook.createCellStyle();
+
+            headerStyle.setFillForegroundColor(IndexedColors.LIME.getIndex());
+            headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            XSSFFont headerFont = ((XSSFWorkbook) workbook).createFont();
+
+            headerFont.setFontName("Arial");
+            headerFont.setFontHeightInPoints((short) 10);
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
+            headerFont.setBold(true);
+
+            headerStyle.setFont(headerFont);
+
+            Cell headerCell = header.createCell(0);
+            headerCell.setCellValue("ID");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(1);
+            headerCell.setCellValue("Creado");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(2);
+            headerCell.setCellValue("Actualizado");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(3);
+            headerCell.setCellValue("Virtual ID");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(4);
+            headerCell.setCellValue("Nombres");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(5);
+            headerCell.setCellValue("Apellido");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(6);
+            headerCell.setCellValue("Usuario");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(7);
+            headerCell.setCellValue("Estado");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(8);
+            headerCell.setCellValue("Tema");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(9);
+            headerCell.setCellValue("Concepto");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(10);
+            headerCell.setCellValue("Fecha");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(11);
+            headerCell.setCellValue("En favor de");
+            headerCell.setCellStyle(headerStyle);
+
+            headerCell = header.createCell(12);
+            headerCell.setCellValue("Observaciones");
+            headerCell.setCellStyle(headerStyle);
+
+            CellStyle style = workbook.createCellStyle();
+
+            XSSFFont font = ((XSSFWorkbook) workbook).createFont();
+
+            font.setFontName("Arial");
+            font.setFontHeightInPoints((short) 10);
+
+            style.setWrapText(true);
+            style.setFont(font);
+
+            Cell cell;
+
+            for(int i = 0; i < claims.size(); i++) {
+
+                Claim claim = claims.get(i);
+
+                Row row = sheet.createRow(i + 1);
+
+                cell = row.createCell(0);
+                cell.setCellValue(claim.getId());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(1);
+                cell.setCellValue(claim.getCreatedDate().format(dateTimeFormatter));
+                cell.setCellStyle(style);
+
+                cell = row.createCell(2);
+                cell.setCellValue(claim.getLastModifiedDate().format(dateTimeFormatter));
+                cell.setCellStyle(style);
+
+                Request request = claim.getRequest();
+
+                cell = row.createCell(3);
+                cell.setCellValue(request.getVirtualId());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(4);
+                cell.setCellValue(request.getNombre());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(5);
+                cell.setCellValue(request.getApellido());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(6);
+                cell.setCellValue(request.getCard().getUsuario());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(7);
+                cell.setCellValue(claim.getClaimState().getDisplayValue());
+                cell.setCellStyle(style);
+
+                SubjectConcept  subjectConcept = claim.getSubjectConcept();
+                ClaimSubject claimSubject = subjectConcept.getClaimSubject();
+
+                cell = row.createCell(8);
+                cell.setCellValue(claimSubject.getCode() + " - " + claimSubject.getSubject());
+                cell.setCellStyle(style);
+
+                cell = row.createCell(9);
+                cell.setCellValue(subjectConcept.getCode() + " - " + subjectConcept.getConcept());
+                cell.setCellStyle(style);
+
+                LocalDate claimDate = claim.getClaimDate();
+
+                cell = row.createCell(10);
+                cell.setCellValue(claimDate != null ? claimDate.format(dateFormatter) : "");
+                cell.setCellStyle(style);
+
+                ClaimInFavorOf claimInFavorOf = claim.getClaimInFavorOf();
+
+                cell = row.createCell(11);
+                cell.setCellValue(claimInFavorOf != null ? claimInFavorOf.getDisplayValue() : "");
+                cell.setCellStyle(style);
+
+                cell = row.createCell(12);
+                cell.setCellValue(claim.getObservations());
+                cell.setCellStyle(style);
+            }
+
+            response.setHeader("Content-disposition", "attachment; filename=Tarjetaza Reclamos.xlsx");
+            workbook.write(response.getOutputStream());
+
+        } finally {
+            if (workbook != null) {
+                workbook.close();
+            }
+        }
+
     }
 
     private void generateConsumptionXlsx(HttpServletResponse response, List<ConsumptionFile> consumptionFiles) throws IOException {
@@ -246,7 +444,6 @@ public class ReportController {
 
         Workbook workbook = new XSSFWorkbook();
 
-        //DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         try {

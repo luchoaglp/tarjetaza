@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="common/head :: head"/>
+    <title>Tarjetaza | Acceso denegado</title>
+</head>
+
+<body>
+
+<header th:replace="common/navbar :: navbar"/>
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+
+            <div class="card card-cascade narrower shadow-sm">
+
+                <div class="view view-cascade gradient-card-header light-green narrower py-3 mx-2 d-flex justify-content-between align-items-center">
+                    <a href="#" class="white-text mx-1">Acceso denegado</a>
+                </div>
+
+                <div class="card-body">
+                    <div class="text-center red-text py-4">
+                        <i class="fas fa-times-circle fa-3x mb-4 animated rotateIn"></i>
+                        <h2>Usted no tiene acceso a este módulo.</h2>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="common/bottom :: body-bottom-scripts"/>
+<script>
+$(function() {
+    $(".button-collapse").sideNav();
+});
+</script>
+
+</body>
+</html>

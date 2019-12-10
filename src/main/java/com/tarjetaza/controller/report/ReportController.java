@@ -12,6 +12,7 @@ import com.tarjetaza.service.RequestService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class ReportController {
         return "reports/index";
     }
 
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @GetMapping("/requests")
     public void requests(HttpServletResponse response) throws Exception {
 
@@ -51,6 +53,7 @@ public class ReportController {
         generateRequestsXlsx(response, requests);
     }
 
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @GetMapping("/credits")
     public void credits(HttpServletResponse response) throws Exception {
 
@@ -59,6 +62,7 @@ public class ReportController {
         generateCreditsXlsx(response, credits);
     }
 
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @GetMapping("/consumption")
     public void consumption(HttpServletResponse response) throws Exception {
 

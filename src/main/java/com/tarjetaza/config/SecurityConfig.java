@@ -46,7 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] OPERATOR_MATCHERS = {
-            "/claims/**"
+            "/claims/**",
+            "/reports/**"
     };
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -67,10 +68,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+                    .antMatchers(PUBLIC_MATCHERS).permitAll()
+                    .antMatchers(ADMIN_MATCHERS).hasRole("ADMIN")
+                    .antMatchers(USER_MATCHERS).hasAnyRole("ADMIN", "USER")
+                    .antMatchers(OPERATOR_MATCHERS).hasAnyRole("ADMIN", "USER", "OPERATOR")
+                /*
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers(ADMIN_MATCHERS).access("hasRole('ROLE_OPERATOR') and hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
                 .antMatchers(USER_MATCHERS).access("hasRole('ROLE_OPERATOR') and hasRole('ROLE_USER')")
                 .antMatchers(OPERATOR_MATCHERS).access("hasRole('ROLE_OPERATOR')")
+                 */
                 .anyRequest()
                 .authenticated();
 

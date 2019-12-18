@@ -14,10 +14,14 @@ public class BCRAFile {
         List<String> xx1 = new ArrayList<>();
 
         xx1.add(RITxx1xxxx("11000", cantTarjetas, lastMonth));
+        xx1.add(RITxx1xxxx("12000", cantTarjetas, lastMonth));
+
+        /*
         xx1.add(RITxx1xxxx("13100", cantTarjetas, lastMonth));
         xx1.add(RITxx1xxxx("14200", cantTarjetas, lastMonth));
         xx1.add(RITxx1xxxx("15200", cantTarjetas, lastMonth));
         xx1.add(RITxx1xxxx("16100", cantTarjetas, lastMonth));
+        */
 
         return xx1;
     }

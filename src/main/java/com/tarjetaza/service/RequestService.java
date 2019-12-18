@@ -4,6 +4,7 @@ import com.tarjetaza.domain.Request;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface RequestService {
 
@@ -30,4 +31,5 @@ public interface RequestService {
     Request findByCardNumero(String numero);
 
     Integer findCountDeliveredCards(LocalDate date);
+
 }

@@ -5,11 +5,13 @@ import com.tarjetaza.domain.Request;
 import com.tarjetaza.domain.RequestState;
 import com.tarjetaza.repository.RequestRepository;
 import com.tarjetaza.service.RequestService;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.tarjetaza.domain.RequestState.*;
 

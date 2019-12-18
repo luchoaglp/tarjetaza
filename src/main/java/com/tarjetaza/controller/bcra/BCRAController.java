@@ -73,13 +73,15 @@ public class BCRAController {
 
         List<String> xx1 = BCRAFile.RITxx1xxxx(cantTarjetas, dateFrom);
         List<String> xx2 = BCRAFile.RITxx2xxxx(consumption, dateFrom);
+        /*
         List<String> xx4 = BCRAFile.RITxx4xxxx(paramService.findById(3L).getValue(),
                 paramService.findById(2L).getValue(),
                 dateFrom);
+        */
 
         xxx.addAll(xx1);
         xxx.addAll(xx2);
-        xxx.addAll(xx4);
+        //xxx.addAll(xx4);
         // System.out.println("*** FILE ***");
         // System.out.println(sample + "; " + sample.length() + " (Example)");
         // for (String RITxx1xxxx : list) {

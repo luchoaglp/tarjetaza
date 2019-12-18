@@ -2,13 +2,14 @@ package com.tarjetaza.repository;
 
 import com.tarjetaza.domain.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface RequestRepository extends JpaRepository<Request, Long> {
+public interface RequestRepository extends JpaRepository<Request, Long>, JpaSpecificationExecutor {
 
     List<Request> findAllByOrderByIdDesc();
 

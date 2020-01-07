@@ -31,10 +31,20 @@ public class BCRAFile {
         List<String> xx2 = new ArrayList<>();
 
         xx2.add(RITxx2xxxx("21100", consumption, lastMonth));
-        xx2.add(RITxx2xxxx("22100", 0, lastMonth));
-        xx2.add(RITxx2xxxx("23100", 0, lastMonth));
+        // xx2.add(RITxx2xxxx("22100", 0, lastMonth));
+        // xx2.add(RITxx2xxxx("23100", 0, lastMonth));
 
         return xx2;
+    }
+
+    public static List<String> RITxx3xxxx(LocalDate dateFrom, String tasaMaxCompensatorio, String tasaMaxPunitorio) {
+
+        List<String> xx3 = new ArrayList<>();
+
+        xx3.add(RITxx3xxxx("32000", tasaMaxCompensatorio, dateFrom));
+        xx3.add(RITxx3xxxx("33000", tasaMaxPunitorio, dateFrom));
+
+        return xx3;
     }
 
     public static List<String> RITxx4xxxx(String min, String max, LocalDate lastMonth) {
@@ -44,7 +54,25 @@ public class BCRAFile {
         xx4.add(RITxx4xxxx("41200", min, max, lastMonth));
 
         return xx4;
+    }
 
+    private static String RITxx3xxxx(String nroPartida, String tasaMax, LocalDate dateFrom) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("3210"); // Diseño = 3208 (fijo) (4)
+        sb.append("70271"); // Entidad = 70271 (fijo) (5)
+        sb.append(
+                dateFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))
+        ); // Fecha (8)
+        sb.append("RIT"); // RIT = Fijo (3)
+        sb.append("0000"); // Fijo (4)
+        sb.append(nroPartida); // Nro de Partida = 5 numeros (5)
+        sb.append(tasaMax); // TasaMax  numeros (5)
+        sb.append("N"); // Normal o Rectificativa = Siempre N de normal (1)
+        sb.append(StringUtils.rightPad("", 15)); // 15 espacios en blanco (15)
+
+        return sb.toString();
     }
 
     public static String RITxx1xxxx(String nroPartida, Integer cantTarjetas, LocalDate lastMonth) {
@@ -57,7 +85,7 @@ public class BCRAFile {
                 lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
-        sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
+        sb.append("0006"); // xxxx = Código de Marca (fijo) (4)
         sb.append(nroPartida); // Nro de Partida = 5 numeros (5)
         sb.append(
                 StringUtils.leftPad(String.valueOf(cantTarjetas), 10, "0")
@@ -78,7 +106,7 @@ public class BCRAFile {
                 lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
-        sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
+        sb.append("0006"); // xxxx = Código de Marca (fijo) (4)
         sb.append(nroPartida); // Nro de Partida = 5 numeros (5)
         sb.append(
                 StringUtils.leftPad(String.valueOf(consumption), 12, "0")
@@ -99,7 +127,7 @@ public class BCRAFile {
                 lastMonth.format(DateTimeFormatter.ofPattern("yyyyMM"))
         ); // Fecha (8)
         sb.append("RIT"); // RIT = Fijo (3)
-        sb.append("0062"); // xxxx = Código de Marca (fijo) (4)
+        sb.append("0006"); // xxxx = Código de Marca (fijo) (4)
         sb.append(nroPartida); // Nro de Partida = 5 numeros (5)
 
         //sb.append("nnnnnnnnDDnnnnnnnnDD");

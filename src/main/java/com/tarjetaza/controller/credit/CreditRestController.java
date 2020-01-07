@@ -108,10 +108,11 @@ public class CreditRestController {
 
         // records.add("20000010000000001201906244620017010017   010000000001000000      6300        000");
 
-        String fileName = "COB" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")) +
-                ".txt";
+        char c = (char) (65 + batch.getId() % 26);
 
+        String fileName = "COB" +
+                LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + c +
+                ".txt";
 
         records.add(CreditMailFormat.formattedFooter(batch.getId(), credits.length, total));
         // records.add("9000001          201906244620000000012000000010800000                           ");

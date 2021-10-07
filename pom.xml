@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.tarjetaza</groupId>
 	<artifactId>Tarjetaza</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<name>Tarjetaza</name>
-	<description>Tarjetaza  App</description>
+	<description>Tarjetaza App</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -38,6 +38,7 @@ public class RequestMailFormat {
         sb.append("001"); // Código Sucursal Emisora (3)
         sb.append("0000000"); // Número de Usuario (7)
         sb.append("0000000000000000"); // Número de Tarjeta (16)
+        //sb.append("C"); // Código de Producto (1) "T | ???"
         sb.append("T"); // Código de Producto (1) "T | Tradicional"
         sb.append("01"); // Tipo de Cuenta (2) "01 | Cuenta Normal"
         sb.append(request.getDocumento()); // Número de Solicitud Interna (8)
@@ -56,7 +57,8 @@ public class RequestMailFormat {
         sb.append(request.getProvincia()); // Código de Provincia (2)
         sb.append(StringUtils.rightPad(request.getLocalidad(), 25)); // Localidad (25)
         sb.append("000000000000000"); // Teléfono (15)
-        sb.append(request.getCodigoDocumento()); // Código de Documento (1)
+        //sb.append(request.getCodigoDocumento()); // Código de Documento (1)
+        sb.append("1"); // Código de Documento (1)
         sb.append("000").append(request.getDocumento()); // Número de Documento(11)
         sb.append("0"); // Código Forma de Pago (1) "0 | Sin Debito o Credito"
         sb.append("0"); // Tipo de Modalidad de Pago (1) "0 | NO INFORMADO"
@@ -85,7 +87,8 @@ public class RequestMailFormat {
         sb.append("  "); // Codigo Motivo de Baja (2)
         sb.append(request.getDocumento()); // Numero de Control (8)
         sb.append("36"); // Duracion de Tarjeta (2)
-        sb.append("NO"); // Marca de LINK (2)
+        //sb.append("NO"); // Marca de LINK (2)
+        sb.append("SI"); // Marca de LINK (2)
         sb.append("01"); // Cantidad de Cuotas (2)
         sb.append("SI"); // Marca de Renovación (2)
         sb.append("01"); // Cía. De Seguros (2)

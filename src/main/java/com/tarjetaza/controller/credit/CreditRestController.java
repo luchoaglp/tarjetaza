@@ -142,7 +142,8 @@ public class CreditRestController {
             msg.setFrom(new InternetAddress("altas@tarjetaza.com", false));
 
             //helper.setTo("lucho_aglp@hotmail.com");
-            helper.setTo("soporte@cfsa.com.ar");
+            //helper.setTo("soporte@cfsa.com.ar");
+            helper.setTo("arielb@pvs.com.ar");
             helper.setBcc("info@tarjetaza.com");
 
             helper.setSubject("Entidad: 462 – Proceso: [Cobranzas] – Fecha de Presentación: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));

@@ -109,6 +109,7 @@ public class User {
                 .collect(Collectors.joining( ", " ));
     }
 
+    /*
     @Override
     public String toString() {
         return "User{" +
@@ -119,6 +120,19 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", createdDate=" + createdDate +
                 ", lastModifiedDate=" + lastModifiedDate +
+                '}';
+    }
+    */
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }

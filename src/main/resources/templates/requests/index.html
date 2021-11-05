@@ -46,19 +46,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="request : ${requests}">
-                                    <td th:text="${request.id}"></td>
-                                    <td th:text="${request.virtualId}"></td>
-                                    <td th:text="${request.nombre}"></td>
-                                    <td th:text="${request.apellido}"></td>
-                                    <td th:text="${request.getCuitCuilFormatted()}"></td>
-                                    <td th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm')}"></td>
-                                    <td th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td>
-                                    <td th:text="${request.requestState.displayValue}"></td>
-                                    <td><a th:href="@{${'/requests/detail/' + request.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td>
-                                    <td><div th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + request.id}"><label class="form-check-label" th:for="${'c' + request.id}"></label></div></td>
-                                </tr>
+                                <tr th:each="request : ${requests}"><td th:text="${request.id}"></td><td th:text="${request.virtualId}"></td><td th:text="${request.nombre}"></td><td th:text="${request.apellido}"></td><td th:text="${request.getCuitCuilFormatted()}"></td><td th:text="${#temporals.format(request.createdDate, 'yyyy/MM/dd HH:mm')}"></td><td th:text="${#temporals.format(request.lastModifiedDate, 'yyyy/MM/dd HH:mm')}"></td><td th:text="${request.requestState.displayValue}"></td><td><a th:href="@{${'/requests/detail/' + request.id}}" class="btn-floating btn-sm btn-mdb-color m-0"><i class="fas fa-eye"></i></a></td><td><div th:if="${request.requestState == T(com.tarjetaza.domain.RequestState).SOLICITUD_ACEPTADA}" class="form-check"><input type="checkbox" class="form-check-input" th:id="${'c' + request.id}"><label class="form-check-label" th:for="${'c' + request.id}"></label></div></td></tr>
                             </tbody>
+                            <!--
                             <tfoot class="light-green text-white">
                                 <tr>
                                     <th width="4%">ID</th>
@@ -73,6 +63,7 @@
                                     <th width="4%"></th>
                                 </tr>
                             </tfoot>
+                            -->
                         </table>
                     </div>
                 </div>

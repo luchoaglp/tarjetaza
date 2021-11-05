@@ -53,6 +53,37 @@ public class CreditRestController {
         this.javaMailSender = javaMailSender;
     }
 
+    /*
+    @PostMapping
+    public ResponseEntity<CreditResponse> create(@Valid @RequestBody CreditRequest creditRequest) {
+
+        Request request = requestService.findByCardNumero(creditRequest.getNumero());
+
+        if(request == null) {
+            return new ResponseEntity<>(new CreditResponse("Tarjeta inexistente"), HttpStatus.NOT_FOUND);
+        }
+
+        Credit credit = creditService.save(new Credit(creditRequest.getAmount(), request));
+
+
+        new Thread(() -> {
+
+            SimpleMailMessage msg = new SimpleMailMessage();
+
+            //msg.setFrom("altas@tarjetaza.com");
+            msg.setTo("lucho_aglp@hotmail.com");
+            //msg.setTo("info@tarjetaza.com");
+            msg.setSubject("Proceso: [Crédito] – Fecha: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            msg.setText(request.getApellido() + " " + request.getNombre() + ": $" + credit.getAmount());
+
+            javaMailSender.send(msg);
+
+        }).start();
+
+        return new ResponseEntity<>(new CreditResponse(credit.getId(), "OK"), HttpStatus.OK);
+    }
+    */
+
     @PostMapping
     public ResponseEntity<CreditResponse> create(@Valid @RequestBody CreditRequest creditRequest) {
 
@@ -77,6 +108,8 @@ public class CreditRestController {
             javaMailSender.send(msg);
 
         }).start();
+
+        process(new Long[] { credit.getId() });
 
         return new ResponseEntity<>(new CreditResponse(credit.getId(), "OK"), HttpStatus.OK);
     }
